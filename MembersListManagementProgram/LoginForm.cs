@@ -10,11 +10,19 @@ using System.Windows.Forms;
 
 namespace MembersListManagementProgram
 {
-    public partial class Form1 : Form
+    public partial class LoginForm : Form
     {
-        public Form1()
+        public LoginForm()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            using (var f = new MembersListManagementForm())
+            {
+                f.ShowDialog(this);
+            }
         }
     }
 }
