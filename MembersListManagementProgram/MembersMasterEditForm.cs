@@ -82,6 +82,11 @@ namespace MembersListManagementProgram
         // 新規登録
         private void registerButton_Click(object sender, EventArgs e)
         {
+            excuteSql(getSqlString());
+        }
+
+        private void excuteSql(string sql)
+        {
             OleDbConnection cn = new OleDbConnection();
             OleDbCommand com;
             // 接続文字列を設定して接続する
@@ -89,10 +94,10 @@ namespace MembersListManagementProgram
             try
             {
                 cn.Open();
-                com = new OleDbCommand(getSqlString(), cn);
+                com = new OleDbCommand(sql, cn);
                 com.ExecuteNonQuery();
                 cn.Close();
-                MessageBox.Show("追加しました。", "通知");
+                MessageBox.Show("正常に処理を完了しました", "通知");
                 this.Close();
             }
             catch (DbException ex)
@@ -119,17 +124,29 @@ namespace MembersListManagementProgram
         // SQL取得
         private string getSqlString()
         {
-            string sql = "INSERT INTO M_EMP VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', SYSDATE, '{13}', SYSDATE, 'Y')";
-            sql = String.Format(
-                sql, textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text,
-                textBox7.Text, textBox8.Text, textBox9.Text, textBox10.Text, textBox11.Text, textBox12.Text, "k_yoshida", "k_yoshida");
+            string sql = null;
+            if (this.editMode.Equals(CommonConstants.CREATE_MODE))
+            {
+                sql = "INSERT INTO M_EMP VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', SYSDATE, '{13}', SYSDATE, 'Y')";
+                sql = String.Format(
+                    sql, textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text,
+                    textBox7.Text, textBox8.Text, textBox9.Text, textBox10.Text, textBox11.Text, textBox12.Text, "k_yoshida", "k_yoshida");
+            }
+            else if (this.editMode.Equals(CommonConstants.UPDATE_MODE))
+            {
+                sql = "UPDATE M_EMP SET CD_CO='{0}', CD_EMP='{1}', NM_EMP='{2}', TXT_PASSWD='{3}', CD_DEPT='{4}', TXT_ZIP='{5}', TXT_ADDR1='{6}', TXT_ADDR2='{7}', TXT_ADDR3='{8}', TXT_TEL='{9}', TXT_FAX='{10}', TXT_REM='{11}', CD_UPDATE='{12}', DTM_UPDATE=SYSDATE, FLG_ACTIVE='Y' WHERE CD_CO='{13}' AND CD_EMP='{14}'";
+                // TODO: 
+                sql = String.Format(
+                    sql, textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text,
+                    textBox7.Text, textBox8.Text, textBox9.Text, textBox10.Text, textBox11.Text, textBox12.Text, "k_yoshida", "1", "1");
+            }
             return sql;
         }
 
         // 削除
         private void deleteButton_Click(object sender, EventArgs e)
         {
-
+            excuteSql(String.Format("UPDATE M_EMP DTM_UPDATE=SYSDATE, SET FLG_ACTIVE='N' WHERE CD_CO='{0}' AND CD_EMP='{1}'", "1", "1"));
         }
 
         // 終了

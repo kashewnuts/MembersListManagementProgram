@@ -55,7 +55,7 @@ namespace MembersListManagementProgram
             //{
             //    sql = "SELECT CD_CO, CD_EMP, NM_EMP, CD_DEPT, TXT_ZIP, TXT_ADDR1, TXT_ADDR2, TXT_ADDR3, TXT_TEL, TXT_FAX, TXT_REM FROM M_EMP";
             //}
-            sql = String.Format("SELECT * FROM {0}", tableString);
+            sql = String.Format("SELECT * FROM {0} WHERE FLG_ACTIVE='Y'", tableString);
             dAdp = new OleDbDataAdapter(sql, cn);
             dAdp.Fill(dSet, tableString);
 

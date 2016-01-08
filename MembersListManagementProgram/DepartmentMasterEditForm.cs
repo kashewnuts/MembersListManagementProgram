@@ -76,9 +76,10 @@ namespace MembersListManagementProgram
         // 削除
         private void deleteButton_Click(object sender, EventArgs e)
         {
-            excuteSql(String.Format("DELETE FROM M_DEPT WHERE CD_CO='{0}' AND CD_DEPT='{1}' ", "1", "1"));
+            excuteSql(String.Format("UPDATE M_DEPT SET DTM_UPDATE=SYSDATE, FLG_ACTIVE='N' WHERE CD_CO='{0}' AND CD_DEPT='{1}'", "1", "1"));
         }
 
+        // SQL実行
         private void excuteSql(string sql)
         {
             OleDbConnection cn = new OleDbConnection();
@@ -91,7 +92,7 @@ namespace MembersListManagementProgram
                 com = new OleDbCommand(sql, cn);
                 com.ExecuteNonQuery();
                 cn.Close();
-                MessageBox.Show("正常に終了しました。", "通知");
+                MessageBox.Show("正常に処理を完了しました。", "通知");
                 this.Close();
             }
             catch (DbException ex)
