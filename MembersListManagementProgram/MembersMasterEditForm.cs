@@ -16,7 +16,7 @@ namespace MembersListManagementProgram
     public partial class MembersMasterEditForm : Form
     {
         private string editMode { get; set; }
-        public MembersMasterEditForm(string editMode)
+        public MembersMasterEditForm(string editMode, params string[] args)
         {
             InitializeComponent();
             this.editMode = editMode;

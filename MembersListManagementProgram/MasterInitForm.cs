@@ -47,6 +47,7 @@ namespace MembersListManagementProgram
             // DataSetに取得する
             string sql = null;
             string tableString = this.InitId.Equals(CommonConstants.BUMON) ? "M_DEPT" : "M_EMP";
+            // TODO: 全項目ではなく、指定したい項目のみ表示
             //if (this.InitId.Equals(CommonConstants.BUMON))
             //{
             //    sql = "SELECT CD_CO, CD_DEPT, NM_DEPT, TXT_REM FROM M_DEPT";
@@ -73,28 +74,40 @@ namespace MembersListManagementProgram
         // 編集
         private void editButton_Click(object sender, EventArgs e)
         {
-            // TODO: 選択した行がわかるように情報渡す。
-            showDialog(CommonConstants.UPDATE_MODE);
+            if (this.dataGridView1.CurrentRow != null)
+            {
+                showDialog(CommonConstants.UPDATE_MODE, this.dataGridView1.CurrentRow.Cells[0].Value.ToString(), this.dataGridView1.CurrentRow.Cells[1].Value.ToString());
+            }
+            else
+            {
+                showDialog(CommonConstants.UPDATE_MODE);
+            }
         }
 
         // 参照
         private void viewButton_Click(object sender, EventArgs e)
         {
-            // TODO: 選択した行がわかるように情報渡す。
-            showDialog(CommonConstants.VIEW_MODE);
+            if (this.dataGridView1.CurrentRow != null)
+            {
+                showDialog(CommonConstants.VIEW_MODE, this.dataGridView1.CurrentRow.Cells[0].Value.ToString(), this.dataGridView1.CurrentRow.Cells[1].Value.ToString());
+            }
+            else
+            {
+                showDialog(CommonConstants.VIEW_MODE);
+            }
         }
 
         // Daiologを開く
-        private void showDialog(string mode)
+        private void showDialog(string mode, params string[] args)
         {
             if (this.InitId.Equals(CommonConstants.BUMON)) 
             {
-                DepartmentMasterEditForm f = new DepartmentMasterEditForm(mode);
+                DepartmentMasterEditForm f = new DepartmentMasterEditForm(mode, args);
                 f.ShowDialog(this);
             }
             else
             {
-                MembersMasterEditForm f = new MembersMasterEditForm(mode);
+                MembersMasterEditForm f = new MembersMasterEditForm(mode, args);
                 f.ShowDialog(this);
             }
         }
