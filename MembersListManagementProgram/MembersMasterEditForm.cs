@@ -43,22 +43,17 @@ namespace MembersListManagementProgram
         {
             if (this.editMode.Equals(CommonConstants.CREATE_MODE))
             {
-                this.Controls.Remove(this.button2);
+                this.Controls.Remove(this.deleteButton);
             }
             else if (this.editMode.Equals(CommonConstants.VIEW_MODE))
             {
-                this.Controls.Remove(this.button1);
-                this.Controls.Remove(this.button2);
+                this.Controls.Remove(this.registerButton);
+                this.Controls.Remove(this.deleteButton);
             }
         }
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         // 新規登録
-        private void button1_Click_1(object sender, EventArgs e)
+        private void registerButton_Click(object sender, EventArgs e)
         {
             OleDbConnection cn = new OleDbConnection();
             OleDbCommand com;
@@ -101,6 +96,18 @@ namespace MembersListManagementProgram
                 sql, textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text,
                 textBox7.Text, textBox8.Text, textBox9.Text, textBox10.Text, textBox11.Text, textBox12.Text, "k_yoshida", "k_yoshida");
             return sql;
+        }
+
+        // 削除
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        // 終了
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -22,6 +22,7 @@ namespace MembersListManagementProgram
             this.Text = getFormTitle();
         }
 
+        // Loadイベントハンドラ
         private void MembersMasterInitForm_Load(object sender, EventArgs e)
         {
         }
@@ -33,58 +34,46 @@ namespace MembersListManagementProgram
         }
 
         // 検索
-        private void button1_Click(object sender, EventArgs e)
+        private void searchButton_Click(object sender, EventArgs e)
         {
 
         }
 
         // 新規作成
-        private void button2_Click(object sender, EventArgs e)
+        private void createButton_Click(object sender, EventArgs e)
         {
-            if (this.InitId.Equals(CommonConstants.BUMON))
-            {
-                DepartmentMasterEditForm f = new DepartmentMasterEditForm(CommonConstants.CREATE_MODE);
-                f.ShowDialog(this);
-            }
-            else
-            {
-                MembersMasterEditForm f = new MembersMasterEditForm(CommonConstants.CREATE_MODE);
-                f.ShowDialog(this);
-            }
+            showDialog(CommonConstants.CREATE_MODE);
         }
 
         // 編集
-        private void button3_Click(object sender, EventArgs e)
+        private void editButton_Click(object sender, EventArgs e)
         {
-            if (this.InitId.Equals(CommonConstants.BUMON))
-            {
-                DepartmentMasterEditForm f = new DepartmentMasterEditForm(CommonConstants.UPDATE_MODE);
-                f.ShowDialog(this);
-            }
-            else
-            {
-                MembersMasterEditForm f = new MembersMasterEditForm(CommonConstants.UPDATE_MODE);
-                f.ShowDialog(this);
-            }
+            showDialog(CommonConstants.UPDATE_MODE);
         }
 
         // 参照
-        private void button4_Click(object sender, EventArgs e)
+        private void viewButton_Click(object sender, EventArgs e)
         {
-            if (this.InitId.Equals(CommonConstants.BUMON))
+            showDialog(CommonConstants.VIEW_MODE);
+        }
+
+        // Daiologを開く
+        private void showDialog(string mode)
+        {
+            if (this.InitId.Equals(CommonConstants.BUMON)) 
             {
-                DepartmentMasterEditForm f = new DepartmentMasterEditForm(CommonConstants.VIEW_MODE);
+                DepartmentMasterEditForm f = new DepartmentMasterEditForm(mode);
                 f.ShowDialog(this);
             }
             else
             {
-                MembersMasterEditForm f = new MembersMasterEditForm(CommonConstants.VIEW_MODE);
+                MembersMasterEditForm f = new MembersMasterEditForm(mode);
                 f.ShowDialog(this);
             }
         }
 
         // 終了
-        private void button5_Click(object sender, EventArgs e)
+        private void closeButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }
