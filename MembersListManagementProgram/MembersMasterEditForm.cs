@@ -3,13 +3,13 @@ using System.Configuration;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
 using System.Data.OleDb;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.Common;
 
 namespace MembersListManagementProgram
 {
@@ -47,8 +47,35 @@ namespace MembersListManagementProgram
             }
             else if (this.editMode.Equals(CommonConstants.VIEW_MODE))
             {
+                // ボタン処理
                 this.Controls.Remove(this.registerButton);
                 this.Controls.Remove(this.deleteButton);
+
+                // テキストボックス処理
+                this.textBox1.ReadOnly = true;
+                this.textBox1.Enabled = false;
+                this.textBox2.ReadOnly = true;
+                this.textBox2.Enabled = false;
+                this.textBox3.ReadOnly = true;
+                this.textBox3.Enabled = false;
+                this.textBox4.ReadOnly = true;
+                this.textBox4.Enabled = false;
+                this.textBox5.ReadOnly = true;
+                this.textBox5.Enabled = false;
+                this.textBox6.ReadOnly = true;
+                this.textBox6.Enabled = false;
+                this.textBox7.ReadOnly = true;
+                this.textBox7.Enabled = false;
+                this.textBox8.ReadOnly = true;
+                this.textBox8.Enabled = false;
+                this.textBox9.ReadOnly = true;
+                this.textBox9.Enabled = false;
+                this.textBox10.ReadOnly = true;
+                this.textBox10.Enabled = false;
+                this.textBox11.ReadOnly = true;
+                this.textBox11.Enabled = false;
+                this.textBox12.ReadOnly = true;
+                this.textBox12.Enabled = false;
             }
         }
 

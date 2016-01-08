@@ -49,6 +49,14 @@ namespace MembersListManagementProgram
             {
                 this.Controls.Remove(this.button1);
                 this.Controls.Remove(this.button4);
+                this.textBox1.ReadOnly = true;
+                this.textBox1.Enabled = false;
+                this.textBox2.ReadOnly = true;
+                this.textBox2.Enabled = false;
+                this.textBox3.ReadOnly = true;
+                this.textBox3.Enabled = false;
+                this.textBox4.ReadOnly = true;
+                this.textBox4.Enabled = false;
             }
         }
 
@@ -58,39 +66,51 @@ namespace MembersListManagementProgram
             this.Close();
         }
 
-        // 新規登録
+        // 登録
         private void button4_Click(object sender, EventArgs e)
         {
-            OleDbConnection cn = new OleDbConnection();
-            OleDbCommand com;
-            // 接続文字列を設定して接続する
-            cn.ConnectionString = ConfigurationManager.ConnectionStrings["MembersListManagementProgram.Properties.Settings.ConnectionString"].ConnectionString;
-            try
+            if (this.editMode.Equals(CommonConstants.CREATE_MODE))
             {
-                cn.Open();
-                com = new OleDbCommand(getSqlString(), cn);
-                com.ExecuteNonQuery();
-                MessageBox.Show("追加しました。", "通知");
-                this.Close();
-            }
-            catch (DbException ex)
-            {
-                if (ex.ErrorCode == -2147217873)    // ORA-00001: 一意性違反
+                // 新規登録
+                OleDbConnection cn = new OleDbConnection();
+                OleDbCommand com;
+                // 接続文字列を設定して接続する
+                cn.ConnectionString = ConfigurationManager.ConnectionStrings["MembersListManagementProgram.Properties.Settings.ConnectionString"].ConnectionString;
+                try
                 {
-                    MessageBox.Show("既に登録されています。別のデータを登録してください。", "通知");
+                    cn.Open();
+                    com = new OleDbCommand(getSqlString(), cn);
+                    com.ExecuteNonQuery();
+                    MessageBox.Show("追加しました。", "通知");
+                    this.Close();
                 }
-                else
+                catch (DbException ex)
                 {
-                    MessageBox.Show("エラーが発生しました。入力項目を見なおしてください。", "通知");
+                    if (ex.ErrorCode == -2147217873)    // ORA-00001: 一意性違反
+                    {
+                        MessageBox.Show("既に登録されています。別のデータを登録してください。", "通知");
+                    }
+                    else
+                    {
+                        MessageBox.Show("エラーが発生しました。入力項目を見なおしてください。", "通知");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "通知");
+                }
+                finally
+                {
+                    if (cn != null) cn.Close();
                 }
             }
-            catch (Exception ex)
+            else if (this.editMode.Equals(CommonConstants.UPDATE_MODE))
             {
-                MessageBox.Show(ex.Message, "通知");
-            }
-            finally
-            {
-                if (cn != null) cn.Close();
+                // 編集
+                //foreach (DataGridViewRow r in DataGridView1.SelectedRows)
+                //{
+                //    Console.WriteLine(r.Index);
+                //}
             }
         }
 
