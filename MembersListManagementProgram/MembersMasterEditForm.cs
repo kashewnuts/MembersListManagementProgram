@@ -15,9 +15,41 @@ namespace MembersListManagementProgram
 {
     public partial class MembersMasterEditForm : Form
     {
-        public MembersMasterEditForm()
+        private string editMode { get; set; }
+        public MembersMasterEditForm(string editMode)
         {
             InitializeComponent();
+            this.editMode = editMode;
+            this.Text = getFormTitle();
+        }
+
+
+        private void MembersMasterEditForm_Load(object sender, EventArgs e)
+        {
+            // ボタン表示・非表示切り替え
+            switchVisibleButton();
+        }
+
+        // タイトル取得
+        private string getFormTitle()
+        {
+            if (this.editMode.Equals(CommonConstants.CREATE_MODE)) return "社員マスタ新規作成画面";
+            else if (this.editMode.Equals(CommonConstants.UPDATE_MODE)) return "社員マスタ編集画面";
+            else return "社員マスタ参照画面";
+        }
+
+        // ボタン表示・非表示切替
+        private void switchVisibleButton()
+        {
+            if (this.editMode.Equals(CommonConstants.CREATE_MODE))
+            {
+                this.Controls.Remove(this.button2);
+            }
+            else if (this.editMode.Equals(CommonConstants.VIEW_MODE))
+            {
+                this.Controls.Remove(this.button1);
+                this.Controls.Remove(this.button2);
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)

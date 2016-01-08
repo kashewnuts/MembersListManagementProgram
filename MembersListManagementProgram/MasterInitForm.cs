@@ -14,10 +14,7 @@ namespace MembersListManagementProgram
 {
     public partial class MasterInitForm : Form
     {
-        const string BUMON = "1";
-        const string SYAIN = "2";
         public string InitId { get; set; }
-
         public MasterInitForm(string InitId)
         {
             InitializeComponent();
@@ -32,7 +29,7 @@ namespace MembersListManagementProgram
         // タイトル取得
         private string getFormTitle()
         {
-            return this.InitId.Equals(BUMON) ? "部門マスタ管理画面" : "社員マスタ管理画面";
+            return this.InitId.Equals(CommonConstants.BUMON) ? "部門マスタ管理画面" : "社員マスタ管理画面";
         }
 
         // 検索
@@ -44,14 +41,14 @@ namespace MembersListManagementProgram
         // 新規作成
         private void button2_Click(object sender, EventArgs e)
         {
-            if (this.InitId.Equals(BUMON))
+            if (this.InitId.Equals(CommonConstants.BUMON))
             {
-                DepartmentMasterEditForm f = new DepartmentMasterEditForm();
+                DepartmentMasterEditForm f = new DepartmentMasterEditForm(CommonConstants.CREATE_MODE);
                 f.ShowDialog(this);
             }
             else
             {
-                MembersMasterEditForm f = new MembersMasterEditForm();
+                MembersMasterEditForm f = new MembersMasterEditForm(CommonConstants.CREATE_MODE);
                 f.ShowDialog(this);
             }
         }
@@ -59,14 +56,14 @@ namespace MembersListManagementProgram
         // 編集
         private void button3_Click(object sender, EventArgs e)
         {
-            if (this.InitId.Equals(BUMON))
+            if (this.InitId.Equals(CommonConstants.BUMON))
             {
-                DepartmentMasterEditForm f = new DepartmentMasterEditForm();
+                DepartmentMasterEditForm f = new DepartmentMasterEditForm(CommonConstants.UPDATE_MODE);
                 f.ShowDialog(this);
             }
             else
             {
-                MembersMasterEditForm f = new MembersMasterEditForm();
+                MembersMasterEditForm f = new MembersMasterEditForm(CommonConstants.UPDATE_MODE);
                 f.ShowDialog(this);
             }
         }
@@ -74,14 +71,14 @@ namespace MembersListManagementProgram
         // 参照
         private void button4_Click(object sender, EventArgs e)
         {
-            if (this.InitId.Equals(BUMON))
+            if (this.InitId.Equals(CommonConstants.BUMON))
             {
-                DepartmentMasterEditForm f = new DepartmentMasterEditForm();
+                DepartmentMasterEditForm f = new DepartmentMasterEditForm(CommonConstants.VIEW_MODE);
                 f.ShowDialog(this);
             }
             else
             {
-                MembersMasterEditForm f = new MembersMasterEditForm();
+                MembersMasterEditForm f = new MembersMasterEditForm(CommonConstants.VIEW_MODE);
                 f.ShowDialog(this);
             }
         }
