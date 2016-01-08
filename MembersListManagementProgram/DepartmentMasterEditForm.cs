@@ -28,6 +28,7 @@ namespace MembersListManagementProgram
         {
             // ボタン表示・非表示切り替え
             switchVisibleButton();
+            // TODO: 編集、参照時データ取得処理実装
         }
 
         // タイトル取得
@@ -43,11 +44,11 @@ namespace MembersListManagementProgram
         {
             if (this.editMode.Equals(CommonConstants.CREATE_MODE))
             {
-                this.Controls.Remove(this.button1);
+                this.Controls.Remove(this.deleteButton);
             }
             else if (this.editMode.Equals(CommonConstants.VIEW_MODE))
             {
-                this.Controls.Remove(this.button1);
+                this.Controls.Remove(this.deleteButton);
                 this.Controls.Remove(this.button4);
                 this.textBox1.ReadOnly = true;
                 this.textBox1.Enabled = false;
@@ -69,56 +70,68 @@ namespace MembersListManagementProgram
         // 登録
         private void button4_Click(object sender, EventArgs e)
         {
-            if (this.editMode.Equals(CommonConstants.CREATE_MODE))
+            excuteSql(getSqlString());
+        }
+
+        // 削除
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            excuteSql(String.Format("DELETE FROM M_DEPT WHERE CD_CO='{0}' AND CD_DEPT='{1}' ", "1", "1"));
+        }
+
+        private void excuteSql(string sql)
+        {
+            OleDbConnection cn = new OleDbConnection();
+            OleDbCommand com;
+            // 接続文字列を設定して接続する
+            cn.ConnectionString = ConfigurationManager.ConnectionStrings["MembersListManagementProgram.Properties.Settings.ConnectionString"].ConnectionString;
+            try
             {
-                // 新規登録
-                OleDbConnection cn = new OleDbConnection();
-                OleDbCommand com;
-                // 接続文字列を設定して接続する
-                cn.ConnectionString = ConfigurationManager.ConnectionStrings["MembersListManagementProgram.Properties.Settings.ConnectionString"].ConnectionString;
-                try
+                cn.Open();
+                com = new OleDbCommand(sql, cn);
+                com.ExecuteNonQuery();
+                cn.Close();
+                MessageBox.Show("正常に終了しました。", "通知");
+                this.Close();
+            }
+            catch (DbException ex)
+            {
+                if (ex.ErrorCode == -2147217873)    // ORA-00001: 一意性違反
                 {
-                    cn.Open();
-                    com = new OleDbCommand(getSqlString(), cn);
-                    com.ExecuteNonQuery();
-                    MessageBox.Show("追加しました。", "通知");
-                    this.Close();
+                    cn.Close();
+                    MessageBox.Show("既に登録されています。別のデータを登録してください。", "通知");
                 }
-                catch (DbException ex)
+                else
                 {
-                    if (ex.ErrorCode == -2147217873)    // ORA-00001: 一意性違反
-                    {
-                        MessageBox.Show("既に登録されています。別のデータを登録してください。", "通知");
-                    }
-                    else
-                    {
-                        MessageBox.Show("エラーが発生しました。入力項目を見なおしてください。", "通知");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "通知");
-                }
-                finally
-                {
-                    if (cn != null) cn.Close();
+                    cn.Close();
+                    MessageBox.Show("エラーが発生しました。入力項目を見なおしてください。", "通知");
                 }
             }
-            else if (this.editMode.Equals(CommonConstants.UPDATE_MODE))
+            catch (Exception ex)
             {
-                // 編集
-                //foreach (DataGridViewRow r in DataGridView1.SelectedRows)
-                //{
-                //    Console.WriteLine(r.Index);
-                //}
+                cn.Close();
+                MessageBox.Show(ex.Message, "通知");
+            }
+            finally
+            {
+                if (cn != null) cn.Close();
             }
         }
 
         // SQL取得
         private string getSqlString()
         {
-            string sql = "INSERT INTO M_DEPT VALUES('{0}', '{1}', '{2}', '{3}', '{4}', SYSDATE, '{5}', SYSDATE, 'Y')";
-            sql = String.Format(sql, textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, "k_yoshida", "k_yoshida");
+            string sql = null;
+            if (this.editMode.Equals(CommonConstants.CREATE_MODE))
+            {
+                sql = "INSERT INTO M_DEPT VALUES('{0}', '{1}', '{2}', '{3}', '{4}', SYSDATE, '{5}', SYSDATE, 'Y')";
+                sql = String.Format(sql, textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, "k_yoshida", "k_yoshida");
+            }
+            else if (this.editMode.Equals(CommonConstants.UPDATE_MODE))
+            {
+                sql = "UPDATE M_DEPT SET CD_CO='{0}', CD_DEPT='{1}', NM_DEPT='{2}', TXT_REM='{3}', CD_UPDATE='{4}', DTM_UPDATE=SYSDATE, FLG_ACTIVE='Y' WHERE CD_CO='{5}' AND CD_DEPT='{6}'";
+                sql = String.Format(sql, textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, "k_yoshida", "1", "1");
+            }
             return sql;
         }
     }

@@ -91,6 +91,7 @@ namespace MembersListManagementProgram
                 cn.Open();
                 com = new OleDbCommand(getSqlString(), cn);
                 com.ExecuteNonQuery();
+                cn.Close();
                 MessageBox.Show("追加しました。", "通知");
                 this.Close();
             }
