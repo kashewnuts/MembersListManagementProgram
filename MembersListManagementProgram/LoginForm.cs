@@ -27,7 +27,24 @@ namespace MembersListManagementProgram
         // Login
         private void loginButton_Click(object sender, EventArgs e)
         {
-            this.DialogResult = (excuteSearch()) ? DialogResult.OK : DialogResult.Cancel;
+            if (excuteSearch())
+            {
+                using (MembersListManagementForm f = new MembersListManagementForm(textBox2.Text))
+                {
+                    // テキストボックスの値をクリア
+                    textBox1.Clear();
+                    textBox2.Clear();
+                    textBox3.Clear();
+                    // 管理画面へ遷移
+                    this.Hide();
+                    f.ShowDialog(this);
+                    this.Show();
+                }
+            }
+            else
+            {
+                MessageBox.Show("ログイン情報に誤りがあります。");
+            }
         }
 
         // 検索

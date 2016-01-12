@@ -60,6 +60,7 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Name = "MembersListManagementForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "社員名簿管理システム";
             this.Load += new System.EventHandler(this.MembersListManagementForm_Load);
             this.ResumeLayout(false);

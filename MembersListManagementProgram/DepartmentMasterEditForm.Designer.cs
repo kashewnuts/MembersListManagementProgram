@@ -166,6 +166,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "DepartmentMasterEditForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "部門マスタ新規作成画面";
             this.Load += new System.EventHandler(this.DepartmentMasterInitForm_Load);
             this.ResumeLayout(false);

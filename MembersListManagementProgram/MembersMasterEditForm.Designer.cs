@@ -275,6 +275,7 @@
             // 
             // registerButton
             // 
+            this.registerButton.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.registerButton.Location = new System.Drawing.Point(397, 407);
             this.registerButton.Name = "registerButton";
             this.registerButton.Size = new System.Drawing.Size(75, 23);
@@ -285,6 +286,7 @@
             // 
             // deleteButton
             // 
+            this.deleteButton.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.deleteButton.Location = new System.Drawing.Point(15, 406);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(75, 23);
@@ -326,6 +328,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "MembersMasterEditForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "社員新規作成画面";
             this.Load += new System.EventHandler(this.MembersMasterEditForm_Load);
             this.ResumeLayout(false);

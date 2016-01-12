@@ -16,17 +16,7 @@ namespace MembersListManagementProgram
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            LoginForm f = new LoginForm();
-            DialogResult result = f.ShowDialog();
-            if (DialogResult.OK == result)
-            {
-                Application.Run(new MembersListManagementForm());
-            }
-            else if (DialogResult.Cancel == result)
-            {
-                // TODO: これだと新しくLogin画面を開いて終わりになるので、画面はそのままでエラーメッセージを表示するようにしたい。
-                f.ShowDialog();
-            }
+            Application.Run(new LoginForm());
         }
     }
 }

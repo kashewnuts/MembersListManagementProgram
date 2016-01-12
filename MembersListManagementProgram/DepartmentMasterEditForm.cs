@@ -122,7 +122,6 @@ namespace MembersListManagementProgram
             }
             finally
             {
-                //if (dRead != null) dRead.Close();
                 if (cn != null) cn.Close();
             }
         }
@@ -142,6 +141,7 @@ namespace MembersListManagementProgram
                 cn.Close();
                 MessageBox.Show("正常に処理を完了しました。", "通知");
                 this.Close();
+                this.DialogResult = DialogResult.OK;
             }
             catch (DbException ex)
             {

@@ -15,6 +15,7 @@ namespace MembersListManagementProgram
 {
     public partial class MasterInitForm : Form
     {
+
         // プロパティ
         public string InitId { get; set; }
 
@@ -29,8 +30,9 @@ namespace MembersListManagementProgram
         }
 
         // Load Event Handler
-        private void MembersMasterInitForm_Load(object sender, EventArgs e)
+        private void MasterInitForm_Load(object sender, EventArgs e)
         {
+
         }
 
         // タイトル取得
@@ -81,33 +83,37 @@ namespace MembersListManagementProgram
         // 新規作成
         private void createButton_Click(object sender, EventArgs e)
         {
-            showDialog(CommonConstants.CREATE_MODE);
+            showDialog(CommonConstants.CREATE_MODE, sender, e);
         }
 
         // 編集
         private void editButton_Click(object sender, EventArgs e)
         {
-            showDialog(CommonConstants.UPDATE_MODE, this.dataGridView1.CurrentRow.Cells[0].Value.ToString(), this.dataGridView1.CurrentRow.Cells[1].Value.ToString());
+            showDialog(CommonConstants.UPDATE_MODE, sender, e, this.dataGridView1.CurrentRow.Cells[0].Value.ToString(), this.dataGridView1.CurrentRow.Cells[1].Value.ToString());
         }
 
         // 参照
         private void viewButton_Click(object sender, EventArgs e)
         {
-            showDialog(CommonConstants.VIEW_MODE, this.dataGridView1.CurrentRow.Cells[0].Value.ToString(), this.dataGridView1.CurrentRow.Cells[1].Value.ToString());
+            showDialog(CommonConstants.VIEW_MODE, sender, e, this.dataGridView1.CurrentRow.Cells[0].Value.ToString(), this.dataGridView1.CurrentRow.Cells[1].Value.ToString());
         }
 
         // Daiologを開く
-        private void showDialog(string mode, params string[] args)
+        private void showDialog(string mode, object sender, EventArgs e, params string[] args)
         {
             if (this.InitId.Equals(CommonConstants.BUMON)) 
             {
+                // 部門管理画面処理
                 DepartmentMasterEditForm f = new DepartmentMasterEditForm(mode, args);
                 f.ShowDialog(this);
+                if (f.DialogResult == DialogResult.OK && this.dataGridView1.RowCount != 0) searchButton_Click(sender, e);
             }
             else
             {
+                // 社員管理画面処理
                 MembersMasterEditForm f = new MembersMasterEditForm(mode, args);
                 f.ShowDialog(this);
+                if (f.DialogResult == DialogResult.OK && this.dataGridView1.RowCount != 0) searchButton_Click(sender, e);
             }
         }
 

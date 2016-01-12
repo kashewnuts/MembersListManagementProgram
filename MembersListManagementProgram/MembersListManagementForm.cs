@@ -13,12 +13,13 @@ namespace MembersListManagementProgram
     public partial class MembersListManagementForm : Form
     {
         // プロパティ
-        public int InitId { get; set; }
+        public string userId { get; set; }
 
         // 初期化処理
-        public MembersListManagementForm()
+        public MembersListManagementForm(string userId)
         {
             InitializeComponent();
+            this.userId = userId;
         }
 
         // Load Event Handler

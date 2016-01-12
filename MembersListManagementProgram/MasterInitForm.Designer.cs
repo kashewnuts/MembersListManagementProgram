@@ -132,6 +132,8 @@
             this.Controls.Add(this.createButton);
             this.Controls.Add(this.searchButton);
             this.Name = "MasterInitForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Load += new System.EventHandler(this.MasterInitForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
