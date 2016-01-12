@@ -16,7 +16,15 @@ namespace MembersListManagementProgram
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginForm());
+            LoginForm f = new LoginForm();
+            // TODO: ログイン処理の結果によって、処理を分ける。
+            // success→管理画面へ遷移する。
+            // fail→ログイン画面のままで、エラーメッセージを表示する。
+            if (DialogResult.OK == f.ShowDialog())
+            {
+                Application.Run(new MembersListManagementForm());
+            }
+            //else if (DialogResult.Cancel == )
         }
     }
 }

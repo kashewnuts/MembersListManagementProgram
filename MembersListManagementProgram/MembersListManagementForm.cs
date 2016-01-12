@@ -24,7 +24,6 @@ namespace MembersListManagementProgram
         // Load Event Handler
         private void MembersListManagementForm_Load(object sender, EventArgs e)
         {
-
         }
 
         // 部門マスタ管理画面へ遷移
