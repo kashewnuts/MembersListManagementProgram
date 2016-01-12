@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace MembersListManagementProgram
 {
-    public partial class MasterInitForm : xForm
+    public partial class MasterInitForm : Form
     {
 
         // プロパティ
