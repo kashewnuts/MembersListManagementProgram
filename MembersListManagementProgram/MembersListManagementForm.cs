@@ -12,12 +12,16 @@ namespace MembersListManagementProgram
 {
     public partial class MembersListManagementForm : Form
     {
+        // プロパティ
         public int InitId { get; set; }
+
+        // 初期化処理
         public MembersListManagementForm()
         {
             InitializeComponent();
         }
 
+        // Load Event Handler
         private void MembersListManagementForm_Load(object sender, EventArgs e)
         {
 

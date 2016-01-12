@@ -15,10 +15,12 @@ namespace MembersListManagementProgram
 {
     public partial class MembersMasterEditForm : Form
     {
+        // プロパティ
         private string editMode { get; set; }
         private string primaryKey1 { get; set; }
         private string primaryKey2 { get; set; }
 
+        // 初期化処理
         public MembersMasterEditForm(string editMode, params string[] args)
         {
             InitializeComponent();
@@ -31,12 +33,12 @@ namespace MembersListManagementProgram
             }
         }
 
-
+        // Load Event Handler
         private void MembersMasterEditForm_Load(object sender, EventArgs e)
         {
             // ボタン表示・非表示切り替え
             switchVisibleButton();
-            // TODO: 編集、参照時データ取得処理実装
+            // 編集、参照ボタン押下時時データ取得
             if (!this.editMode.Equals(CommonConstants.CREATE_MODE)) excuteSearch();
         }
 
@@ -89,12 +91,23 @@ namespace MembersListManagementProgram
             }
         }
 
-        // 新規登録
+        // 登録
         private void registerButton_Click(object sender, EventArgs e)
         {
             excuteSql(getSqlString());
         }
 
+        // 削除
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            excuteSql(String.Format("UPDATE M_EMP SET DTM_UPDATE=SYSDATE, FLG_ACTIVE='N' WHERE CD_CO='{0}' AND CD_EMP='{1}'", primaryKey1, primaryKey2));
+        }
+
+        // 終了
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
 
         // 検索
         private void excuteSearch()
@@ -118,13 +131,13 @@ namespace MembersListManagementProgram
                     this.textBox3.Text = dRead.GetString(2);
                     this.textBox4.Text = dRead.GetString(3);
                     this.textBox5.Text = dRead.GetString(4);
-                    this.textBox6.Text = dRead.GetString(5);
-                    this.textBox7.Text = dRead.GetString(6);
-                    this.textBox8.Text = dRead.GetString(7);
-                    this.textBox9.Text = dRead.GetString(8);
-                    this.textBox10.Text = dRead.GetString(9);
-                    this.textBox11.Text = dRead.GetString(10);
-                    this.textBox12.Text = dRead.GetString(11);
+                    this.textBox6.Text = dRead.IsDBNull(5) ? null : dRead.GetString(5);
+                    this.textBox7.Text = dRead.IsDBNull(6) ? null : dRead.GetString(6);
+                    this.textBox8.Text = dRead.IsDBNull(7) ? null : dRead.GetString(7);
+                    this.textBox9.Text = dRead.IsDBNull(8) ? null : dRead.GetString(8);
+                    this.textBox10.Text = dRead.IsDBNull(9) ? null : dRead.GetString(9);
+                    this.textBox11.Text = dRead.IsDBNull(10) ? null : dRead.GetString(10);
+                    this.textBox12.Text = dRead.IsDBNull(11) ? null : dRead.GetString(11);
                 }
                 dRead.Close();
                 cn.Close();
@@ -177,7 +190,7 @@ namespace MembersListManagementProgram
             }
         }
 
-        // SQL取得
+        // SQL文取得
         private string getSqlString()
         {
             string sql = null;
@@ -191,24 +204,11 @@ namespace MembersListManagementProgram
             else if (this.editMode.Equals(CommonConstants.UPDATE_MODE))
             {
                 sql = "UPDATE M_EMP SET CD_CO='{0}', CD_EMP='{1}', NM_EMP='{2}', TXT_PASSWD='{3}', CD_DEPT='{4}', TXT_ZIP='{5}', TXT_ADDR1='{6}', TXT_ADDR2='{7}', TXT_ADDR3='{8}', TXT_TEL='{9}', TXT_FAX='{10}', TXT_REM='{11}', CD_UPDATE='{12}', DTM_UPDATE=SYSDATE, FLG_ACTIVE='Y' WHERE CD_CO='{13}' AND CD_EMP='{14}'";
-                // TODO: 
                 sql = String.Format(
                     sql, textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text,
                     textBox7.Text, textBox8.Text, textBox9.Text, textBox10.Text, textBox11.Text, textBox12.Text, "k_yoshida", primaryKey1, primaryKey2);
             }
             return sql;
-        }
-
-        // 削除
-        private void deleteButton_Click(object sender, EventArgs e)
-        {
-            excuteSql(String.Format("UPDATE M_EMP SET DTM_UPDATE=SYSDATE, FLG_ACTIVE='N' WHERE CD_CO='{0}' AND CD_EMP='{1}'", primaryKey1, primaryKey2));
-        }
-
-        // 終了
-        private void cancelButton_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
     }
 }

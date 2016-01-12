@@ -15,15 +15,20 @@ namespace MembersListManagementProgram
 {
     public partial class MasterInitForm : Form
     {
+        // プロパティ
         public string InitId { get; set; }
+
+        // 初期化処理
         public MasterInitForm(string InitId)
         {
             InitializeComponent();
             this.InitId = InitId;
             this.Text = getFormTitle();
+            this.editButton.Enabled = false;
+            this.viewButton.Enabled = false;
         }
 
-        // Loadイベントハンドラ
+        // Load Event Handler
         private void MembersMasterInitForm_Load(object sender, EventArgs e)
         {
         }
@@ -63,8 +68,14 @@ namespace MembersListManagementProgram
 
             // 表示するレコードをDataViewに取得し、DataGridViewに関連付ける
             dView = new DataView(dSet.Tables[tableString], "", "", DataViewRowState.CurrentRows);
-            //this.dataGridView1.Rows.Clear();  // この一覧をクリアできません。
             this.dataGridView1.DataSource = dSet.Tables[tableString];
+
+            // ボタン活性化
+            if (this.dataGridView1.RowCount != 0)
+            {
+                this.editButton.Enabled = true;
+                this.viewButton.Enabled = true;
+            }
         }
 
         // 新規作成
@@ -76,27 +87,13 @@ namespace MembersListManagementProgram
         // 編集
         private void editButton_Click(object sender, EventArgs e)
         {
-            if (this.dataGridView1.CurrentRow != null)
-            {
-                showDialog(CommonConstants.UPDATE_MODE, this.dataGridView1.CurrentRow.Cells[0].Value.ToString(), this.dataGridView1.CurrentRow.Cells[1].Value.ToString());
-            }
-            else
-            {
-                showDialog(CommonConstants.UPDATE_MODE);
-            }
+            showDialog(CommonConstants.UPDATE_MODE, this.dataGridView1.CurrentRow.Cells[0].Value.ToString(), this.dataGridView1.CurrentRow.Cells[1].Value.ToString());
         }
 
         // 参照
         private void viewButton_Click(object sender, EventArgs e)
         {
-            if (this.dataGridView1.CurrentRow != null)
-            {
-                showDialog(CommonConstants.VIEW_MODE, this.dataGridView1.CurrentRow.Cells[0].Value.ToString(), this.dataGridView1.CurrentRow.Cells[1].Value.ToString());
-            }
-            else
-            {
-                showDialog(CommonConstants.VIEW_MODE);
-            }
+            showDialog(CommonConstants.VIEW_MODE, this.dataGridView1.CurrentRow.Cells[0].Value.ToString(), this.dataGridView1.CurrentRow.Cells[1].Value.ToString());
         }
 
         // Daiologを開く

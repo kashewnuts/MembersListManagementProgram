@@ -16,10 +16,12 @@ namespace MembersListManagementProgram
 {
     public partial class DepartmentMasterEditForm : Form
     {
+        // プロパティ
         private string editMode { get; set; }
         private string primaryKey1 { get; set; }
         private string primaryKey2 { get; set; }
 
+        // 初期化処理
         public DepartmentMasterEditForm(string editMode, params string[] args)
         {
             InitializeComponent();
@@ -32,11 +34,12 @@ namespace MembersListManagementProgram
             }
         }
 
+        // Load Event Handler
         private void DepartmentMasterInitForm_Load(object sender, EventArgs e)
         {
             // ボタン表示・非表示切り替え
             switchVisibleButton();
-            // TODO: 編集、参照時データ取得処理実装
+            // 編集、参照ボタン押下時時データ取得
             if (!this.editMode.Equals(CommonConstants.CREATE_MODE)) excuteSearch();
         }
 
@@ -70,12 +73,6 @@ namespace MembersListManagementProgram
             }
         }
 
-        // 終了
-        private void button2_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         // 登録
         private void button4_Click(object sender, EventArgs e)
         {
@@ -86,6 +83,12 @@ namespace MembersListManagementProgram
         private void deleteButton_Click(object sender, EventArgs e)
         {
             excuteSql(String.Format("UPDATE M_DEPT SET DTM_UPDATE=SYSDATE, FLG_ACTIVE='N' WHERE CD_CO='{0}' AND CD_DEPT='{1}'", primaryKey1, primaryKey2));
+        }
+
+        // 終了
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         // 検索
@@ -108,7 +111,7 @@ namespace MembersListManagementProgram
                     this.textBox1.Text = dRead.GetString(0);
                     this.textBox2.Text = dRead.GetString(1);
                     this.textBox3.Text = dRead.GetString(2);
-                    this.textBox4.Text = dRead.GetString(3);
+                    this.textBox4.Text = dRead.IsDBNull(3) ? null : dRead.GetString(3);
                 }
                 dRead.Close();
                 cn.Close();
@@ -164,7 +167,7 @@ namespace MembersListManagementProgram
             }
         }
 
-        // SQL取得
+        // SQL文取得
         private string getSqlString()
         {
             string sql = null;
