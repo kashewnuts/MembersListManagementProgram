@@ -85,7 +85,7 @@ namespace MembersListManagementProgram
         // 削除
         private void deleteButton_Click(object sender, EventArgs e)
         {
-            excuteSql(String.Format("UPDATE M_DEPT SET DTM_UPDATE=SYSDATE, FLG_ACTIVE='N' WHERE CD_CO='{0}' AND CD_DEPT='{1}'", "1", "1"));
+            excuteSql(String.Format("UPDATE M_DEPT SET DTM_UPDATE=SYSDATE, FLG_ACTIVE='N' WHERE CD_CO='{0}' AND CD_DEPT='{1}'", primaryKey1, primaryKey2));
         }
 
         // 検索
@@ -176,7 +176,7 @@ namespace MembersListManagementProgram
             else if (this.editMode.Equals(CommonConstants.UPDATE_MODE))
             {
                 sql = "UPDATE M_DEPT SET CD_CO='{0}', CD_DEPT='{1}', NM_DEPT='{2}', TXT_REM='{3}', CD_UPDATE='{4}', DTM_UPDATE=SYSDATE, FLG_ACTIVE='Y' WHERE CD_CO='{5}' AND CD_DEPT='{6}'";
-                sql = String.Format(sql, textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, "k_yoshida", "1", "1");
+                sql = String.Format(sql, textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, "k_yoshida", primaryKey1, primaryKey2);
             }
             return sql;
         }

@@ -40,6 +40,7 @@ namespace MembersListManagementProgram
             DataView dView;
             OleDbDataAdapter dAdp;
             DataSet dSet = new DataSet();
+            dSet.Clear();
             OleDbConnection cn = new OleDbConnection();
             // 接続文字列を設定して接続する
             cn.ConnectionString = ConfigurationManager.ConnectionStrings["MembersListManagementProgram.Properties.Settings.ConnectionString"].ConnectionString;
@@ -62,6 +63,7 @@ namespace MembersListManagementProgram
 
             // 表示するレコードをDataViewに取得し、DataGridViewに関連付ける
             dView = new DataView(dSet.Tables[tableString], "", "", DataViewRowState.CurrentRows);
+            //this.dataGridView1.Rows.Clear();  // この一覧をクリアできません。
             this.dataGridView1.DataSource = dSet.Tables[tableString];
         }
 
