@@ -17,14 +17,16 @@ namespace MembersListManagementProgram
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             LoginForm f = new LoginForm();
-            // TODO: ログイン処理の結果によって、処理を分ける。
-            // success→管理画面へ遷移する。
-            // fail→ログイン画面のままで、エラーメッセージを表示する。
-            if (DialogResult.OK == f.ShowDialog())
+            DialogResult result = f.ShowDialog();
+            if (DialogResult.OK == result)
             {
                 Application.Run(new MembersListManagementForm());
             }
-            //else if (DialogResult.Cancel == )
+            else if (DialogResult.Cancel == result)
+            {
+                // TODO: これだと新しくLogin画面を開いて終わりになるので、画面はそのままでエラーメッセージを表示するようにしたい。
+                f.ShowDialog();
+            }
         }
     }
 }

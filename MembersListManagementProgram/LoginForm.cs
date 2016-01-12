@@ -25,7 +25,7 @@ namespace MembersListManagementProgram
         }
 
         // Login
-        private void button1_Click(object sender, EventArgs e)
+        private void loginButton_Click(object sender, EventArgs e)
         {
             this.DialogResult = (excuteSearch()) ? DialogResult.OK : DialogResult.Cancel;
         }
@@ -42,7 +42,7 @@ namespace MembersListManagementProgram
             try
             {
                 cn.Open();
-                string sql = "SELECT * FROM M_EMP WHERE CD_CO='{0}' AND CD_EMP='{1}' AND TXT_PASSWD='{2}'";
+                string sql = "SELECT * FROM M_EMP WHERE CD_CO='{0}' AND CD_EMP='{1}' AND TXT_PASSWD='{2}' AND FLG_ACTIVE='Y'";
                 dAdp = new OleDbDataAdapter(String.Format(sql, textBox1.Text, textBox2.Text, textBox3.Text), cn);
                 dAdp.Fill(dSet, "M_EMP");
                 result = (dSet.Tables["M_EMP"].Rows.Count > 0) ? true : false;
@@ -54,7 +54,6 @@ namespace MembersListManagementProgram
             }
             finally
             {
-                //if (dRead != null) dRead.Close();
                 if (cn != null) cn.Close();
             }
             return result;

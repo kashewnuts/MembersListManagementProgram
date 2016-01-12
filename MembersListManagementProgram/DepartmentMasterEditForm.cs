@@ -61,7 +61,7 @@ namespace MembersListManagementProgram
             else if (this.editMode.Equals(CommonConstants.VIEW_MODE))
             {
                 this.Controls.Remove(this.deleteButton);
-                this.Controls.Remove(this.button4);
+                this.Controls.Remove(this.registerButton);
                 this.textBox1.ReadOnly = true;
                 this.textBox1.Enabled = false;
                 this.textBox2.ReadOnly = true;
@@ -74,7 +74,7 @@ namespace MembersListManagementProgram
         }
 
         // 登録
-        private void button4_Click(object sender, EventArgs e)
+        private void registerButton_Click(object sender, EventArgs e)
         {
             excuteSql(getSqlString());
         }
@@ -86,7 +86,7 @@ namespace MembersListManagementProgram
         }
 
         // 終了
-        private void button2_Click(object sender, EventArgs e)
+        private void canselButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }
