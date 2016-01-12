@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace MembersListManagementProgram
 {
-    public partial class MasterInitForm : Form
+    public partial class MasterInitForm : xForm
     {
 
         // プロパティ
@@ -25,6 +25,8 @@ namespace MembersListManagementProgram
             InitializeComponent();
             this.InitId = InitId;
             this.Text = getFormTitle();
+            LoginForm f = new LoginForm();
+            this.label1.Text = String.Format("ログインユーザー名：{0}", User.nm_emp);
             this.editButton.Enabled = false;
             this.viewButton.Enabled = false;
         }

@@ -35,6 +35,7 @@ namespace MembersListManagementProgram
                     textBox1.Clear();
                     textBox2.Clear();
                     textBox3.Clear();
+
                     // 管理画面へ遷移
                     this.Hide();
                     f.ShowDialog(this);
@@ -52,6 +53,7 @@ namespace MembersListManagementProgram
         {
             bool result = false;
             OleDbDataAdapter dAdp;
+            DataRow dRow;
             DataSet dSet = new DataSet();
             OleDbConnection cn = new OleDbConnection();
             // 接続文字列を設定して接続する
@@ -63,6 +65,10 @@ namespace MembersListManagementProgram
                 dAdp = new OleDbDataAdapter(String.Format(sql, textBox1.Text, textBox2.Text, textBox3.Text), cn);
                 dAdp.Fill(dSet, "M_EMP");
                 result = (dSet.Tables["M_EMP"].Rows.Count > 0) ? true : false;
+                // Userクラスに値セット
+                dRow = dSet.Tables["M_EMP"].Rows[0];
+                User.nm_emp = dRow["nm_emp"].ToString();
+
                 cn.Close();
             }
             catch (Exception ex)
