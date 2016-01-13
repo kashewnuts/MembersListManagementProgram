@@ -111,7 +111,7 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.ToolStripMenuItem finishToolStripMenuItem;
-        internal System.Windows.Forms.ToolStripTextBox userNameTextBox;
+        public System.Windows.Forms.ToolStripTextBox userNameTextBox;
     }
 }
 

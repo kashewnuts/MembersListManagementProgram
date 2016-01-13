@@ -8,9 +8,6 @@ namespace MembersListManagementProgram
 {
     public partial class LoginForm : Form
     {
-        public string m_strUserName { get; set; }
-        private string strUserName = null;
-
         /// <summary>
         /// 初期化処理
         /// </summary>
@@ -30,7 +27,6 @@ namespace MembersListManagementProgram
             {
                 // メニュー画面表示
                 MenuForm f = new MenuForm(textBox2.Text);
-                //this.m_strUserName = strUserName;
                 f.MdiParent = this.MdiParent;
                 f.Show();
             }
@@ -40,16 +36,11 @@ namespace MembersListManagementProgram
             }
         }
 
-        public string getUserName()
-        {
-            return strUserName;
-        }
-
         /// <summary>
         /// 検索
         /// </summary>
         /// <returns></returns>
-        private bool excuteSearch()
+        public bool excuteSearch()
         {
             bool bResult = false;
             OleDbDataAdapter da;
@@ -65,9 +56,12 @@ namespace MembersListManagementProgram
                 da = new OleDbDataAdapter(String.Format(strSql, textBox1.Text, textBox2.Text, textBox3.Text), conn);
                 da.Fill(ds, "M_EMP");
                 bResult = (ds.Tables["M_EMP"].Rows.Count > 0) ? true : false;
-                // ユーザー名表示
-                row = ds.Tables["M_EMP"].Rows[0];
-                strUserName = row["nm_emp"].ToString();
+                if (bResult)
+                {
+                    // ユーザー名表示
+                    row = ds.Tables["M_EMP"].Rows[0];
+                    User.nm_emp = row["nm_emp"].ToString();
+                }
             }
             catch (Exception ex)
             {

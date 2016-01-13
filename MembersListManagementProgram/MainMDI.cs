@@ -23,11 +23,7 @@ namespace MembersListManagementProgram
         public MainMDI()
         {
             InitializeComponent();
-            LoginForm f = new LoginForm();
-            f.MdiParent = this;
-            f.Show();
-            this.userNameTextBox.Text = f.m_strUserName;
-            //this.userNameTextBox.Text = f.getUserName();
+            login();
         }
 
         /// <summary>
@@ -45,11 +41,18 @@ namespace MembersListManagementProgram
             {
                 hMdiChild.Close();
             }
-
             // ログイン画面表示
-            LoginForm loginForm = new LoginForm();
-            loginForm.MdiParent = this;
-            loginForm.Show();
+            login();
+        }
+
+        /// <summary>
+        /// ログイン画面表示
+        /// </summary>
+        private void login()
+        {
+            LoginForm f = new LoginForm();
+            f.MdiParent = this;
+            f.Show();
         }
     }
 }
