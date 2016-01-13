@@ -12,7 +12,6 @@ namespace MembersListManagementProgram
         public LoginForm()
         {
             InitializeComponent();
-            this.ControlBox = false;
         }
 
         // Login

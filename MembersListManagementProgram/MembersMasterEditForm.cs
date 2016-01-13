@@ -25,13 +25,12 @@ namespace MembersListManagementProgram
                 this.m_strPrimaryKey1 = args[0];
                 this.m_strPrimaryKey2 = args[1];
             }
-            this.ControlBox = false;
-            this.WindowState = FormWindowState.Maximized;
         }
 
         // Load Event Handler
         private void MembersMasterEditForm_Load(object sender, EventArgs e)
         {
+            this.WindowState = FormWindowState.Maximized;
             // ボタン表示・非表示切り替え
             switchVisibleButton();
             // 編集、参照ボタン押下時時データ取得

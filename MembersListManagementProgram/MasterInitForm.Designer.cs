@@ -40,6 +40,7 @@
             // 
             // searchButton
             // 
+            this.searchButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.searchButton.Location = new System.Drawing.Point(13, 527);
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(75, 23);
@@ -50,6 +51,7 @@
             // 
             // createButton
             // 
+            this.createButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.createButton.Location = new System.Drawing.Point(191, 527);
             this.createButton.Name = "createButton";
             this.createButton.Size = new System.Drawing.Size(75, 23);
@@ -60,6 +62,7 @@
             // 
             // editButton
             // 
+            this.editButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.editButton.Location = new System.Drawing.Point(272, 527);
             this.editButton.Name = "editButton";
             this.editButton.Size = new System.Drawing.Size(75, 23);
@@ -70,6 +73,7 @@
             // 
             // viewButton
             // 
+            this.viewButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.viewButton.Location = new System.Drawing.Point(353, 527);
             this.viewButton.Name = "viewButton";
             this.viewButton.Size = new System.Drawing.Size(75, 23);
@@ -80,6 +84,7 @@
             // 
             // closeButton
             // 
+            this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.closeButton.Location = new System.Drawing.Point(697, 527);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(75, 23);
@@ -92,8 +97,9 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.Location = new System.Drawing.Point(13, 38);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
@@ -119,6 +125,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 562);
+            this.ControlBox = false;
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.closeButton);
@@ -126,8 +133,6 @@
             this.Controls.Add(this.editButton);
             this.Controls.Add(this.createButton);
             this.Controls.Add(this.searchButton);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "MasterInitForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.MasterInitForm_Load);

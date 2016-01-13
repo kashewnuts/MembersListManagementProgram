@@ -13,13 +13,12 @@ namespace MembersListManagementProgram
         {
             InitializeComponent();
             this.m_strUserId = strUserId;
-            this.ControlBox = false;
-            this.WindowState = FormWindowState.Maximized;
         }
 
         // Load Event Handler
         private void MembersListManagementForm_Load(object sender, EventArgs e)
         {
+            this.WindowState = FormWindowState.Maximized;
         }
 
         // 部門マスタ管理画面へ遷移

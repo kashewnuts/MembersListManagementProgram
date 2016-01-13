@@ -300,6 +300,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 442);
+            this.ControlBox = false;
             this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.registerButton);
             this.Controls.Add(this.cancelButton);
@@ -327,8 +328,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "MembersMasterEditForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "社員新規作成画面";
