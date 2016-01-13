@@ -1,6 +1,6 @@
 ﻿namespace MembersListManagementProgram
 {
-    partial class MDIParent
+    partial class MainMDI
     {
         /// <summary>
         /// 必要なデザイナー変数です。
@@ -40,7 +40,7 @@
             // 
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(632, 24);
+            this.menuStrip.Size = new System.Drawing.Size(1008, 24);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "MenuStrip";
             // 
@@ -48,9 +48,9 @@
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 395);
+            this.statusStrip.Location = new System.Drawing.Point(0, 707);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(632, 23);
+            this.statusStrip.Size = new System.Drawing.Size(1008, 23);
             this.statusStrip.TabIndex = 2;
             this.statusStrip.Text = "StatusStrip";
             // 
@@ -60,16 +60,17 @@
             this.toolStripStatusLabel.Size = new System.Drawing.Size(32, 18);
             this.toolStripStatusLabel.Text = "状態";
             // 
-            // MDIParent
+            // MainMDI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(632, 418);
+            this.ClientSize = new System.Drawing.Size(1008, 730);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip;
-            this.Name = "MDIParent";
+            this.Name = "MainMDI";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MDIParent";
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();

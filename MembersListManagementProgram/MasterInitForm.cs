@@ -100,14 +100,16 @@ namespace MembersListManagementProgram
             {
                 // 部門管理画面処理
                 DepartmentMasterEditForm f = new DepartmentMasterEditForm(mode, args);
-                f.ShowDialog(this);
+                f.MdiParent = this.MdiParent;
+                f.Show();
                 if (f.DialogResult == DialogResult.OK && this.dataGridView1.RowCount != 0) searchButton_Click(sender, e);
             }
             else
             {
                 // 社員管理画面処理
                 MembersMasterEditForm f = new MembersMasterEditForm(mode, args);
-                f.ShowDialog(this);
+                f.MdiParent = this.MdiParent;
+                f.Show();
                 if (f.DialogResult == DialogResult.OK && this.dataGridView1.RowCount != 0) searchButton_Click(sender, e);
             }
         }

@@ -17,7 +17,7 @@ namespace MembersListManagementProgram
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new LoginForm());
-            Application.Run(new MDIParent());
+            Application.Run(new MainMDI());
         }
     }
 }

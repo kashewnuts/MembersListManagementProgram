@@ -23,19 +23,17 @@ namespace MembersListManagementProgram
         // 部門マスタ管理画面へ遷移
         private void button1_Click(object sender, EventArgs e)
         {
-            using (var f = new MasterInitForm(CommonConstants.BUMON))
-            {
-                f.ShowDialog(this);
-            }
+            MasterInitForm f = new MasterInitForm(CommonConstants.BUMON);
+            f.MdiParent = this.MdiParent;
+            f.Show();
         }
 
         // 社員マスタ管理画面へ遷移
         private void button2_Click(object sender, EventArgs e)
         {
-            using (var f = new MasterInitForm(CommonConstants.SYAIN))
-            {
-                f.ShowDialog(this);
-            }
+            MasterInitForm f = new MasterInitForm(CommonConstants.SYAIN);
+            f.MdiParent = this.MdiParent;
+            f.Show();
         }
 
     }
