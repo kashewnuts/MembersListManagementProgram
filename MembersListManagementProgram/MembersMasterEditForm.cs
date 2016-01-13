@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Configuration;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Data.Common;
 using System.Data.OleDb;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MembersListManagementProgram
@@ -16,20 +10,20 @@ namespace MembersListManagementProgram
     public partial class MembersMasterEditForm : Form
     {
         // プロパティ
-        private string editMode { get; set; }
-        private string primaryKey1 { get; set; }
-        private string primaryKey2 { get; set; }
+        private string m_strEditMode { get; set; }
+        private string m_strPrimaryKey1 { get; set; }
+        private string m_strPrimaryKey2 { get; set; }
 
         // 初期化処理
-        public MembersMasterEditForm(string editMode, params string[] args)
+        public MembersMasterEditForm(string strEditMode, params string[] args)
         {
             InitializeComponent();
-            this.editMode = editMode;
+            this.m_strEditMode = strEditMode;
             this.Text = getFormTitle();
             if (args.Count() == 2)
             {
-                this.primaryKey1 = args[0];
-                this.primaryKey2 = args[1];
+                this.m_strPrimaryKey1 = args[0];
+                this.m_strPrimaryKey2 = args[1];
             }
         }
 
@@ -39,25 +33,25 @@ namespace MembersListManagementProgram
             // ボタン表示・非表示切り替え
             switchVisibleButton();
             // 編集、参照ボタン押下時時データ取得
-            if (!this.editMode.Equals(CommonConstants.CREATE_MODE)) excuteSearch();
+            if (!this.m_strEditMode.Equals(CommonConstants.CREATE_MODE)) excuteSearch();
         }
 
         // タイトル取得
         private string getFormTitle()
         {
-            if (this.editMode.Equals(CommonConstants.CREATE_MODE)) return "社員マスタ新規作成画面";
-            else if (this.editMode.Equals(CommonConstants.UPDATE_MODE)) return "社員マスタ編集画面";
+            if (this.m_strEditMode.Equals(CommonConstants.CREATE_MODE)) return "社員マスタ新規作成画面";
+            else if (this.m_strEditMode.Equals(CommonConstants.UPDATE_MODE)) return "社員マスタ編集画面";
             else return "社員マスタ参照画面";
         }
 
         // ボタン表示・非表示切替
         private void switchVisibleButton()
         {
-            if (this.editMode.Equals(CommonConstants.CREATE_MODE))
+            if (this.m_strEditMode.Equals(CommonConstants.CREATE_MODE))
             {
                 this.Controls.Remove(this.deleteButton);
             }
-            else if (this.editMode.Equals(CommonConstants.VIEW_MODE))
+            else if (this.m_strEditMode.Equals(CommonConstants.VIEW_MODE))
             {
                 // ボタン処理
                 this.Controls.Remove(this.registerButton);
@@ -100,7 +94,7 @@ namespace MembersListManagementProgram
         // 削除
         private void deleteButton_Click(object sender, EventArgs e)
         {
-            excuteSql(String.Format("UPDATE M_EMP SET DTM_UPDATE=SYSDATE, FLG_ACTIVE='N' WHERE CD_CO='{0}' AND CD_EMP='{1}'", primaryKey1, primaryKey2));
+            excuteSql(String.Format("UPDATE M_EMP SET DTM_UPDATE=SYSDATE, FLG_ACTIVE='N' WHERE CD_CO='{0}' AND CD_EMP='{1}'", m_strPrimaryKey1, m_strPrimaryKey2));
         }
 
         // 終了
@@ -112,35 +106,35 @@ namespace MembersListManagementProgram
         // 検索
         private void excuteSearch()
         {
-            OleDbDataReader dRead;
-            OleDbCommand com;
-            OleDbConnection cn = new OleDbConnection();
+            OleDbDataReader dr;
+            OleDbCommand cmd;
+            OleDbConnection conn = new OleDbConnection();
             // 接続文字列を設定して接続する
-            cn.ConnectionString = ConfigurationManager.ConnectionStrings["MembersListManagementProgram.Properties.Settings.ConnectionString"].ConnectionString;
+            conn.ConnectionString = ConfigurationManager.ConnectionStrings["MembersListManagementProgram.Properties.Settings.ConnectionString"].ConnectionString;
             try
             {
-                cn.Open();
-                string sql = "SELECT CD_CO, CD_EMP, NM_EMP, TXT_PASSWD, CD_DEPT, TXT_ZIP, TXT_ADDR1, TXT_ADDR2, TXT_ADDR3, TXT_TEL, TXT_FAX, TXT_REM FROM M_EMP WHERE CD_CO='{0}' AND CD_EMP='{1}'";
-                com = new OleDbCommand(String.Format(sql, primaryKey1, primaryKey2), cn);
-                dRead = com.ExecuteReader();
+                conn.Open();
+                string strSql = "SELECT CD_CO, CD_EMP, NM_EMP, TXT_PASSWD, CD_DEPT, TXT_ZIP, TXT_ADDR1, TXT_ADDR2, TXT_ADDR3, TXT_TEL, TXT_FAX, TXT_REM FROM M_EMP WHERE CD_CO='{0}' AND CD_EMP='{1}'";
+                cmd = new OleDbCommand(String.Format(strSql, m_strPrimaryKey1, m_strPrimaryKey2), conn);
+                dr = cmd.ExecuteReader();
 
-                while (dRead.Read())
+                while (dr.Read())
                 {
-                    this.textBox1.Text = dRead.GetString(0);
-                    this.textBox2.Text = dRead.GetString(1);
-                    this.textBox3.Text = dRead.GetString(2);
-                    this.textBox4.Text = dRead.GetString(3);
-                    this.textBox5.Text = dRead.GetString(4);
-                    this.textBox6.Text = dRead.IsDBNull(5) ? null : dRead.GetString(5);
-                    this.textBox7.Text = dRead.IsDBNull(6) ? null : dRead.GetString(6);
-                    this.textBox8.Text = dRead.IsDBNull(7) ? null : dRead.GetString(7);
-                    this.textBox9.Text = dRead.IsDBNull(8) ? null : dRead.GetString(8);
-                    this.textBox10.Text = dRead.IsDBNull(9) ? null : dRead.GetString(9);
-                    this.textBox11.Text = dRead.IsDBNull(10) ? null : dRead.GetString(10);
-                    this.textBox12.Text = dRead.IsDBNull(11) ? null : dRead.GetString(11);
+                    this.textBox1.Text = dr.GetString(0);
+                    this.textBox2.Text = dr.GetString(1);
+                    this.textBox3.Text = dr.GetString(2);
+                    this.textBox4.Text = dr.GetString(3);
+                    this.textBox5.Text = dr.GetString(4);
+                    this.textBox6.Text = dr.IsDBNull(5) ? null : dr.GetString(5);
+                    this.textBox7.Text = dr.IsDBNull(6) ? null : dr.GetString(6);
+                    this.textBox8.Text = dr.IsDBNull(7) ? null : dr.GetString(7);
+                    this.textBox9.Text = dr.IsDBNull(8) ? null : dr.GetString(8);
+                    this.textBox10.Text = dr.IsDBNull(9) ? null : dr.GetString(9);
+                    this.textBox11.Text = dr.IsDBNull(10) ? null : dr.GetString(10);
+                    this.textBox12.Text = dr.IsDBNull(11) ? null : dr.GetString(11);
                 }
-                dRead.Close();
-                cn.Close();
+                dr.Close();
+                conn.Close();
             }
             catch (Exception ex)
             {
@@ -148,24 +142,23 @@ namespace MembersListManagementProgram
             }
             finally
             {
-                //if (dRead != null) dRead.Close();
-                if (cn != null) cn.Close();
+                if (conn != null) conn.Close();
             }
         }
 
         // SQL実行
-        private void excuteSql(string sql)
+        private void excuteSql(string strSql)
         {
-            OleDbConnection cn = new OleDbConnection();
-            OleDbCommand com;
+            OleDbConnection conn = new OleDbConnection();
+            OleDbCommand cmd;
             // 接続文字列を設定して接続する
-            cn.ConnectionString = ConfigurationManager.ConnectionStrings["MembersListManagementProgram.Properties.Settings.ConnectionString"].ConnectionString;
+            conn.ConnectionString = ConfigurationManager.ConnectionStrings["MembersListManagementProgram.Properties.Settings.ConnectionString"].ConnectionString;
             try
             {
-                cn.Open();
-                com = new OleDbCommand(sql, cn);
-                com.ExecuteNonQuery();
-                cn.Close();
+                conn.Open();
+                cmd = new OleDbCommand(strSql, conn);
+                cmd.ExecuteNonQuery();
+                conn.Close();
                 MessageBox.Show("正常に処理を完了しました", "通知");
                 this.Close();
             }
@@ -186,29 +179,29 @@ namespace MembersListManagementProgram
             }
             finally
             {
-                if (cn != null) cn.Close();
+                if (conn != null) conn.Close();
             }
         }
 
         // SQL文取得
         private string getSqlString()
         {
-            string sql = null;
-            if (this.editMode.Equals(CommonConstants.CREATE_MODE))
+            string strSql = null;
+            if (this.m_strEditMode.Equals(CommonConstants.CREATE_MODE))
             {
-                sql = "INSERT INTO M_EMP VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', SYSDATE, '{13}', SYSDATE, 'Y')";
-                sql = String.Format(
-                    sql, textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text,
+                strSql = "INSERT INTO M_EMP VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', SYSDATE, '{13}', SYSDATE, 'Y')";
+                strSql = String.Format(
+                    strSql, textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text,
                     textBox7.Text, textBox8.Text, textBox9.Text, textBox10.Text, textBox11.Text, textBox12.Text, "k_yoshida", "k_yoshida");
             }
-            else if (this.editMode.Equals(CommonConstants.UPDATE_MODE))
+            else if (this.m_strEditMode.Equals(CommonConstants.UPDATE_MODE))
             {
-                sql = "UPDATE M_EMP SET CD_CO='{0}', CD_EMP='{1}', NM_EMP='{2}', TXT_PASSWD='{3}', CD_DEPT='{4}', TXT_ZIP='{5}', TXT_ADDR1='{6}', TXT_ADDR2='{7}', TXT_ADDR3='{8}', TXT_TEL='{9}', TXT_FAX='{10}', TXT_REM='{11}', CD_UPDATE='{12}', DTM_UPDATE=SYSDATE, FLG_ACTIVE='Y' WHERE CD_CO='{13}' AND CD_EMP='{14}'";
-                sql = String.Format(
-                    sql, textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text,
-                    textBox7.Text, textBox8.Text, textBox9.Text, textBox10.Text, textBox11.Text, textBox12.Text, "k_yoshida", primaryKey1, primaryKey2);
+                strSql = "UPDATE M_EMP SET CD_CO='{0}', CD_EMP='{1}', NM_EMP='{2}', TXT_PASSWD='{3}', CD_DEPT='{4}', TXT_ZIP='{5}', TXT_ADDR1='{6}', TXT_ADDR2='{7}', TXT_ADDR3='{8}', TXT_TEL='{9}', TXT_FAX='{10}', TXT_REM='{11}', CD_UPDATE='{12}', DTM_UPDATE=SYSDATE, FLG_ACTIVE='Y' WHERE CD_CO='{13}' AND CD_EMP='{14}'";
+                strSql = String.Format(
+                    strSql, textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text,
+                    textBox7.Text, textBox8.Text, textBox9.Text, textBox10.Text, textBox11.Text, textBox12.Text, "k_yoshida", m_strPrimaryKey1, m_strPrimaryKey2);
             }
-            return sql;
+            return strSql;
         }
     }
 }

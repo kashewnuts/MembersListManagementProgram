@@ -1,14 +1,7 @@
 ﻿using System;
 using System.Configuration;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.Common;
 using System.Data.OleDb;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MembersListManagementProgram
@@ -17,13 +10,13 @@ namespace MembersListManagementProgram
     {
 
         // プロパティ
-        public string InitId { get; set; }
+        public string m_strInitId { get; set; }
 
         // 初期化処理
-        public MasterInitForm(string InitId)
+        public MasterInitForm(string strInitId)
         {
             InitializeComponent();
-            this.InitId = InitId;
+            this.m_strInitId = strInitId;
             this.Text = getFormTitle();
             LoginForm f = new LoginForm();
             this.label1.Text = String.Format("ログインユーザー名：{0}", User.nm_emp);
@@ -40,23 +33,23 @@ namespace MembersListManagementProgram
         // タイトル取得
         private string getFormTitle()
         {
-            return this.InitId.Equals(CommonConstants.BUMON) ? "部門マスタ管理画面" : "社員マスタ管理画面";
+            return this.m_strInitId.Equals(CommonConstants.BUMON) ? "部門マスタ管理画面" : "社員マスタ管理画面";
         }
 
         // 検索
         private void searchButton_Click(object sender, EventArgs e)
         {
-            DataView dView;
-            OleDbDataAdapter dAdp;
-            DataSet dSet = new DataSet();
-            dSet.Clear();
-            OleDbConnection cn = new OleDbConnection();
+            DataView dv;
+            OleDbDataAdapter da;
+            DataSet ds = new DataSet();
+            ds.Clear();
+            OleDbConnection conn = new OleDbConnection();
             // 接続文字列を設定して接続する
-            cn.ConnectionString = ConfigurationManager.ConnectionStrings["MembersListManagementProgram.Properties.Settings.ConnectionString"].ConnectionString;
+            conn.ConnectionString = ConfigurationManager.ConnectionStrings["MembersListManagementProgram.Properties.Settings.ConnectionString"].ConnectionString;
 
             // DataSetに取得する
-            string sql = null;
-            string tableString = this.InitId.Equals(CommonConstants.BUMON) ? "M_DEPT" : "M_EMP";
+            string strSql = null;
+            string strTable = this.m_strInitId.Equals(CommonConstants.BUMON) ? "M_DEPT" : "M_EMP";
             // TODO: 全項目ではなく、指定したい項目のみ表示
             //if (this.InitId.Equals(CommonConstants.BUMON))
             //{
@@ -66,13 +59,13 @@ namespace MembersListManagementProgram
             //{
             //    sql = "SELECT CD_CO, CD_EMP, NM_EMP, CD_DEPT, TXT_ZIP, TXT_ADDR1, TXT_ADDR2, TXT_ADDR3, TXT_TEL, TXT_FAX, TXT_REM FROM M_EMP";
             //}
-            sql = String.Format("SELECT * FROM {0} WHERE FLG_ACTIVE='Y'", tableString);
-            dAdp = new OleDbDataAdapter(sql, cn);
-            dAdp.Fill(dSet, tableString);
+            strSql = String.Format("SELECT * FROM {0} WHERE FLG_ACTIVE='Y'", strTable);
+            da = new OleDbDataAdapter(strSql, conn);
+            da.Fill(ds, strTable);
 
             // 表示するレコードをDataViewに取得し、DataGridViewに関連付ける
-            dView = new DataView(dSet.Tables[tableString], "", "", DataViewRowState.CurrentRows);
-            this.dataGridView1.DataSource = dSet.Tables[tableString];
+            dv = new DataView(ds.Tables[strTable], "", "", DataViewRowState.CurrentRows);
+            this.dataGridView1.DataSource = ds.Tables[strTable];
 
             // ボタン活性化
             if (this.dataGridView1.RowCount != 0)
@@ -103,7 +96,7 @@ namespace MembersListManagementProgram
         // Daiologを開く
         private void showDialog(string mode, object sender, EventArgs e, params string[] args)
         {
-            if (this.InitId.Equals(CommonConstants.BUMON)) 
+            if (this.m_strInitId.Equals(CommonConstants.BUMON)) 
             {
                 // 部門管理画面処理
                 DepartmentMasterEditForm f = new DepartmentMasterEditForm(mode, args);

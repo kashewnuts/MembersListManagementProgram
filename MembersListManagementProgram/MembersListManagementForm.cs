@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MembersListManagementProgram
@@ -13,13 +6,13 @@ namespace MembersListManagementProgram
     public partial class MembersListManagementForm : Form
     {
         // プロパティ
-        public string userId { get; set; }
+        public string m_strUserId { get; set; }
 
         // 初期化処理
-        public MembersListManagementForm(string userId)
+        public MembersListManagementForm(string strUserId)
         {
             InitializeComponent();
-            this.userId = userId;
+            this.m_strUserId = strUserId;
         }
 
         // Load Event Handler
