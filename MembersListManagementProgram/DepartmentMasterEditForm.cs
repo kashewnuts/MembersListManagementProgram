@@ -138,7 +138,6 @@ namespace MembersListManagementProgram
                     this.textBox4.Text = dr.IsDBNull(3) ? null : dr.GetString(3);
                 }
                 dr.Close();
-                conn.Close();
             }
             catch (Exception ex)
             {
@@ -165,7 +164,6 @@ namespace MembersListManagementProgram
                 conn.Open();
                 cmd = new OleDbCommand(strSql, conn);
                 cmd.ExecuteNonQuery();
-                conn.Close();
                 MessageBox.Show("正常に処理を完了しました。", "通知");
                 this.Close();
                 this.DialogResult = DialogResult.OK;
@@ -174,18 +172,15 @@ namespace MembersListManagementProgram
             {
                 if (ex.ErrorCode == -2147217873)    // ORA-00001: 一意性違反
                 {
-                    conn.Close();
                     MessageBox.Show("既に登録されています。別のデータを登録してください。", "通知");
                 }
                 else
                 {
-                    conn.Close();
                     MessageBox.Show("エラーが発生しました。入力項目を見なおしてください。", "通知");
                 }
             }
             catch (Exception ex)
             {
-                conn.Close();
                 MessageBox.Show(ex.Message, "通知");
             }
             finally

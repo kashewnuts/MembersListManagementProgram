@@ -164,7 +164,6 @@ namespace MembersListManagementProgram
                     this.textBox12.Text = dr.IsDBNull(11) ? null : dr.GetString(11);
                 }
                 dr.Close();
-                conn.Close();
             }
             catch (Exception ex)
             {
@@ -191,7 +190,6 @@ namespace MembersListManagementProgram
                 conn.Open();
                 cmd = new OleDbCommand(strSql, conn);
                 cmd.ExecuteNonQuery();
-                conn.Close();
                 MessageBox.Show("正常に処理を完了しました", "通知");
                 this.Close();
             }

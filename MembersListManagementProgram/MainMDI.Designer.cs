@@ -31,10 +31,10 @@
             this.components = new System.ComponentModel.Container();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.finishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.userNameTextBox = new System.Windows.Forms.ToolStripTextBox();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.userNameTextBox = new System.Windows.Forms.ToolStripTextBox();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -57,6 +57,15 @@
             this.finishToolStripMenuItem.Text = "新規";
             this.finishToolStripMenuItem.Click += new System.EventHandler(this.finishToolStripMenuItem_Click);
             // 
+            // userNameTextBox
+            // 
+            this.userNameTextBox.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.userNameTextBox.Enabled = false;
+            this.userNameTextBox.Name = "userNameTextBox";
+            this.userNameTextBox.ReadOnly = true;
+            this.userNameTextBox.Size = new System.Drawing.Size(100, 25);
+            this.userNameTextBox.Text = "サインイン";
+            // 
             // statusStrip
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -72,15 +81,6 @@
             this.toolStripStatusLabel.Name = "toolStripStatusLabel";
             this.toolStripStatusLabel.Size = new System.Drawing.Size(32, 18);
             this.toolStripStatusLabel.Text = "状態";
-            // 
-            // userNameTextBox
-            // 
-            this.userNameTextBox.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.userNameTextBox.Enabled = false;
-            this.userNameTextBox.Name = "userNameTextBox";
-            this.userNameTextBox.ReadOnly = true;
-            this.userNameTextBox.Size = new System.Drawing.Size(100, 25);
-            this.userNameTextBox.Text = "サインイン";
             // 
             // MainMDI
             // 
@@ -111,7 +111,7 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.ToolStripMenuItem finishToolStripMenuItem;
-        private System.Windows.Forms.ToolStripTextBox userNameTextBox;
+        internal System.Windows.Forms.ToolStripTextBox userNameTextBox;
     }
 }
 

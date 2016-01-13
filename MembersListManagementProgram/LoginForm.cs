@@ -8,6 +8,9 @@ namespace MembersListManagementProgram
 {
     public partial class LoginForm : Form
     {
+        public string m_strUserName { get; set; }
+        private string strUserName = null;
+
         /// <summary>
         /// 初期化処理
         /// </summary>
@@ -27,14 +30,19 @@ namespace MembersListManagementProgram
             {
                 // メニュー画面表示
                 MenuForm f = new MenuForm(textBox2.Text);
+                //this.m_strUserName = strUserName;
                 f.MdiParent = this.MdiParent;
-                //f.MdiParent.
                 f.Show();
             }
             else
             {
                 MessageBox.Show("ログイン情報に誤りがあります。");
             }
+        }
+
+        public string getUserName()
+        {
+            return strUserName;
         }
 
         /// <summary>
@@ -59,9 +67,7 @@ namespace MembersListManagementProgram
                 bResult = (ds.Tables["M_EMP"].Rows.Count > 0) ? true : false;
                 // ユーザー名表示
                 row = ds.Tables["M_EMP"].Rows[0];
-                //this.MdiParent.
-                //User.nm_emp = row["nm_emp"].ToString();
-                conn.Close();
+                strUserName = row["nm_emp"].ToString();
             }
             catch (Exception ex)
             {

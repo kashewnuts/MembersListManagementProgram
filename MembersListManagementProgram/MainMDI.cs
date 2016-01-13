@@ -13,14 +13,21 @@ namespace MembersListManagementProgram
     public partial class MainMDI : Form
     {
         /// <summary>
+        /// プロパティ
+        /// </summary>
+        public string m_strUserName { get; set; }
+
+        /// <summary>
         /// 初期化処理
         /// </summary>
         public MainMDI()
         {
             InitializeComponent();
-            LoginForm loginForm = new LoginForm();
-            loginForm.MdiParent = this;
-            loginForm.Show();
+            LoginForm f = new LoginForm();
+            f.MdiParent = this;
+            f.Show();
+            this.userNameTextBox.Text = f.m_strUserName;
+            //this.userNameTextBox.Text = f.getUserName();
         }
 
         /// <summary>
@@ -37,7 +44,6 @@ namespace MembersListManagementProgram
             foreach (Form hMdiChild in hMdiChildren)
             {
                 hMdiChild.Close();
-                hMdiChild.Dispose();
             }
 
             // ログイン画面表示
