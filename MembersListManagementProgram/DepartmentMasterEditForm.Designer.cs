@@ -52,7 +52,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 88);
+            this.label2.Location = new System.Drawing.Point(9, 62);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 12);
             this.label2.TabIndex = 1;
@@ -61,7 +61,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 115);
+            this.label3.Location = new System.Drawing.Point(9, 87);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 12);
             this.label3.TabIndex = 2;
@@ -70,7 +70,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(11, 142);
+            this.label4.Location = new System.Drawing.Point(9, 116);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 3;
@@ -78,6 +78,7 @@
             // 
             // canselButton
             // 
+            this.canselButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.canselButton.Location = new System.Drawing.Point(477, 407);
             this.canselButton.Name = "canselButton";
             this.canselButton.Size = new System.Drawing.Size(75, 23);
@@ -88,6 +89,7 @@
             // 
             // registerButton
             // 
+            this.registerButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.registerButton.Location = new System.Drawing.Point(397, 407);
             this.registerButton.Name = "registerButton";
             this.registerButton.Size = new System.Drawing.Size(75, 23);
@@ -98,41 +100,41 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(94, 54);
+            this.textBox1.Location = new System.Drawing.Point(82, 26);
             this.textBox1.MaxLength = 30;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(461, 19);
+            this.textBox1.Size = new System.Drawing.Size(480, 19);
             this.textBox1.TabIndex = 10;
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(94, 83);
+            this.textBox2.Location = new System.Drawing.Point(82, 55);
             this.textBox2.MaxLength = 30;
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(461, 19);
+            this.textBox2.Size = new System.Drawing.Size(480, 19);
             this.textBox2.TabIndex = 11;
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(94, 112);
+            this.textBox3.Location = new System.Drawing.Point(82, 84);
             this.textBox3.MaxLength = 100;
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(461, 19);
+            this.textBox3.Size = new System.Drawing.Size(480, 19);
             this.textBox3.TabIndex = 12;
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(94, 141);
+            this.textBox4.Location = new System.Drawing.Point(82, 116);
             this.textBox4.MaxLength = 500;
             this.textBox4.Multiline = true;
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(461, 167);
+            this.textBox4.Size = new System.Drawing.Size(480, 200);
             this.textBox4.TabIndex = 13;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(11, 61);
+            this.label5.Location = new System.Drawing.Point(9, 33);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(56, 12);
             this.label5.TabIndex = 14;
@@ -140,6 +142,7 @@
             // 
             // deleteButton
             // 
+            this.deleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.deleteButton.Location = new System.Drawing.Point(13, 406);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(75, 23);

@@ -8,35 +8,48 @@ namespace MembersListManagementProgram
 {
     public partial class MasterInitForm : Form
     {
-
-        // プロパティ
+        /// <summary>
+        /// プロパティ
+        /// </summary>
         public string m_strInitId { get; set; }
 
-        // 初期化処理
+        /// <summary>
+        /// 初期化処理
+        /// </summary>
+        /// <param name="strInitId"></param>
         public MasterInitForm(string strInitId)
         {
             InitializeComponent();
             this.m_strInitId = strInitId;
             this.Text = getFormTitle();
-            LoginForm f = new LoginForm();
-            this.label1.Text = String.Format("ログインユーザー名：{0}", User.nm_emp);
             this.editButton.Enabled = false;
             this.viewButton.Enabled = false;
         }
 
-        // Load Event Handler
+        /// <summary>
+        /// Load Event Handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MasterInitForm_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
         }
 
-        // タイトル取得
+        /// <summary>
+        /// タイトル取得
+        /// </summary>
+        /// <returns></returns>
         private string getFormTitle()
         {
             return this.m_strInitId.Equals(CommonConstants.BUMON) ? "部門マスタ管理画面" : "社員マスタ管理画面";
         }
 
-        // 検索
+        /// <summary>
+        /// 検索
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void searchButton_Click(object sender, EventArgs e)
         {
             DataView dv;
@@ -75,25 +88,43 @@ namespace MembersListManagementProgram
             }
         }
 
-        // 新規作成
+        /// <summary>
+        /// 新規作成
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void createButton_Click(object sender, EventArgs e)
         {
             showDialog(CommonConstants.CREATE_MODE, sender, e);
         }
 
-        // 編集
+        /// <summary>
+        /// 編集
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void editButton_Click(object sender, EventArgs e)
         {
             showDialog(CommonConstants.UPDATE_MODE, sender, e, this.dataGridView1.CurrentRow.Cells[0].Value.ToString(), this.dataGridView1.CurrentRow.Cells[1].Value.ToString());
         }
 
-        // 参照
+        /// <summary>
+        /// 参照
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void viewButton_Click(object sender, EventArgs e)
         {
             showDialog(CommonConstants.VIEW_MODE, sender, e, this.dataGridView1.CurrentRow.Cells[0].Value.ToString(), this.dataGridView1.CurrentRow.Cells[1].Value.ToString());
         }
 
-        // Daiologを開く
+        /// <summary>
+        /// Daiologを開く
+        /// </summary>
+        /// <param name="mode"></param>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <param name="args"></param>
         private void showDialog(string mode, object sender, EventArgs e, params string[] args)
         {
             if (this.m_strInitId.Equals(CommonConstants.BUMON)) 
@@ -114,7 +145,11 @@ namespace MembersListManagementProgram
             }
         }
 
-        // 終了
+        /// <summary>
+        /// 終了
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void closeButton_Click(object sender, EventArgs e)
         {
             this.Close();

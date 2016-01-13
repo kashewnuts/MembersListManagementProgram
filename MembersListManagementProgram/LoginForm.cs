@@ -8,19 +8,27 @@ namespace MembersListManagementProgram
 {
     public partial class LoginForm : Form
     {
-        // 初期化処理
+        /// <summary>
+        /// 初期化処理
+        /// </summary>
         public LoginForm()
         {
             InitializeComponent();
         }
 
-        // Login
+        /// <summary>
+        /// Login
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void loginButton_Click(object sender, EventArgs e)
         {
             if (excuteSearch())
             {
+                // メニュー画面表示
                 MenuForm f = new MenuForm(textBox2.Text);
                 f.MdiParent = this.MdiParent;
+                //f.MdiParent.
                 f.Show();
             }
             else
@@ -29,7 +37,10 @@ namespace MembersListManagementProgram
             }
         }
 
-        // 検索
+        /// <summary>
+        /// 検索
+        /// </summary>
+        /// <returns></returns>
         private bool excuteSearch()
         {
             bool bResult = false;
@@ -46,10 +57,10 @@ namespace MembersListManagementProgram
                 da = new OleDbDataAdapter(String.Format(strSql, textBox1.Text, textBox2.Text, textBox3.Text), conn);
                 da.Fill(ds, "M_EMP");
                 bResult = (ds.Tables["M_EMP"].Rows.Count > 0) ? true : false;
-                // Userクラスに値セット
+                // ユーザー名表示
                 row = ds.Tables["M_EMP"].Rows[0];
-                User.nm_emp = row["nm_emp"].ToString();
-
+                //this.MdiParent.
+                //User.nm_emp = row["nm_emp"].ToString();
                 conn.Close();
             }
             catch (Exception ex)

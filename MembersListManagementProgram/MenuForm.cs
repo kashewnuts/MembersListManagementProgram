@@ -5,23 +5,36 @@ namespace MembersListManagementProgram
 {
     public partial class MenuForm : Form
     {
-        // プロパティ
+        /// <summary>
+        /// プロパティ
+        /// </summary>
         public string m_strUserId { get; set; }
 
-        // 初期化処理
+        /// <summary>
+        /// 初期化処理
+        /// </summary>
+        /// <param name="strUserId"></param>
         public MenuForm(string strUserId)
         {
             InitializeComponent();
             this.m_strUserId = strUserId;
         }
 
-        // Load Event Handler
+        /// <summary>
+        /// Load Event Handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MembersListManagementForm_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
         }
 
-        // 部門マスタ管理画面へ遷移
+        /// <summary>
+        /// 部門マスタ管理画面へ遷移
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
             MasterInitForm f = new MasterInitForm(CommonConstants.BUMON);
@@ -29,7 +42,11 @@ namespace MembersListManagementProgram
             f.Show();
         }
 
-        // 社員マスタ管理画面へ遷移
+        /// <summary>
+        /// 社員マスタ管理画面へ遷移
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
             MasterInitForm f = new MasterInitForm(CommonConstants.SYAIN);

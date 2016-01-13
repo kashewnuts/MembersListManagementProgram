@@ -9,12 +9,18 @@ namespace MembersListManagementProgram
 {
     public partial class MembersMasterEditForm : Form
     {
-        // プロパティ
+        /// <summary>
+        /// プロパティ
+        /// </summary>
         private string m_strEditMode { get; set; }
         private string m_strPrimaryKey1 { get; set; }
         private string m_strPrimaryKey2 { get; set; }
 
-        // 初期化処理
+        /// <summary>
+        /// 初期化処理
+        /// </summary>
+        /// <param name="strEditMode"></param>
+        /// <param name="args"></param>
         public MembersMasterEditForm(string strEditMode, params string[] args)
         {
             InitializeComponent();
@@ -27,7 +33,11 @@ namespace MembersListManagementProgram
             }
         }
 
-        // Load Event Handler
+        /// <summary>
+        /// Load Event Handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MembersMasterEditForm_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
@@ -37,7 +47,10 @@ namespace MembersListManagementProgram
             if (!this.m_strEditMode.Equals(CommonConstants.CREATE_MODE)) excuteSearch();
         }
 
-        // タイトル取得
+        /// <summary>
+        /// タイトル取得
+        /// </summary>
+        /// <returns></returns>
         private string getFormTitle()
         {
             if (this.m_strEditMode.Equals(CommonConstants.CREATE_MODE)) return "社員マスタ新規作成画面";
@@ -45,7 +58,9 @@ namespace MembersListManagementProgram
             else return "社員マスタ参照画面";
         }
 
-        // ボタン表示・非表示切替
+        /// <summary>
+        /// ボタン表示・非表示切替
+        /// </summary>
         private void switchVisibleButton()
         {
             if (this.m_strEditMode.Equals(CommonConstants.CREATE_MODE))
@@ -86,25 +101,39 @@ namespace MembersListManagementProgram
             }
         }
 
-        // 登録
+        /// <summary>
+        /// 登録
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void registerButton_Click(object sender, EventArgs e)
         {
             excuteSql(getSqlString());
         }
 
-        // 削除
+        /// <summary>
+        /// 削除
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void deleteButton_Click(object sender, EventArgs e)
         {
             excuteSql(String.Format("UPDATE M_EMP SET DTM_UPDATE=SYSDATE, FLG_ACTIVE='N' WHERE CD_CO='{0}' AND CD_EMP='{1}'", m_strPrimaryKey1, m_strPrimaryKey2));
         }
 
-        // 終了
+        /// <summary>
+        /// 終了
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        // 検索
+        /// <summary>
+        /// 検索
+        /// </summary>
         private void excuteSearch()
         {
             OleDbDataReader dr;
@@ -147,7 +176,10 @@ namespace MembersListManagementProgram
             }
         }
 
-        // SQL実行
+        /// <summary>
+        /// SQL実行
+        /// </summary>
+        /// <param name="strSql"></param>
         private void excuteSql(string strSql)
         {
             OleDbConnection conn = new OleDbConnection();
@@ -184,7 +216,10 @@ namespace MembersListManagementProgram
             }
         }
 
-        // SQL文取得
+        /// <summary>
+        /// SQL文取得
+        /// </summary>
+        /// <returns></returns>
         private string getSqlString()
         {
             string strSql = null;

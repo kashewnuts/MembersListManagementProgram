@@ -34,7 +34,6 @@
             this.viewButton = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -100,25 +99,13 @@
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.Location = new System.Drawing.Point(13, 38);
+            this.dataGridView1.Location = new System.Drawing.Point(13, 12);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 21;
-            this.dataGridView1.Size = new System.Drawing.Size(759, 471);
+            this.dataGridView1.Size = new System.Drawing.Size(759, 497);
             this.dataGridView1.TabIndex = 5;
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoEllipsis = true;
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(661, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(111, 12);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "ログインユーザー名：{0}";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // MasterInitForm
             // 
@@ -126,7 +113,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 562);
             this.ControlBox = false;
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.closeButton);
             this.Controls.Add(this.viewButton);
@@ -138,7 +124,6 @@
             this.Load += new System.EventHandler(this.MasterInitForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -150,6 +135,5 @@
         private System.Windows.Forms.Button viewButton;
         private System.Windows.Forms.Button closeButton;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Label label1;
     }
 }
