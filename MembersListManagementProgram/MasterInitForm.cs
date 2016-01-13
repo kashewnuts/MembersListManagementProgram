@@ -22,6 +22,8 @@ namespace MembersListManagementProgram
             this.label1.Text = String.Format("ログインユーザー名：{0}", User.nm_emp);
             this.editButton.Enabled = false;
             this.viewButton.Enabled = false;
+            this.ControlBox = false;
+            this.WindowState = FormWindowState.Maximized;
         }
 
         // Load Event Handler

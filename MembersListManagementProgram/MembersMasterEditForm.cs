@@ -25,6 +25,8 @@ namespace MembersListManagementProgram
                 this.m_strPrimaryKey1 = args[0];
                 this.m_strPrimaryKey2 = args[1];
             }
+            this.ControlBox = false;
+            this.WindowState = FormWindowState.Maximized;
         }
 
         // Load Event Handler

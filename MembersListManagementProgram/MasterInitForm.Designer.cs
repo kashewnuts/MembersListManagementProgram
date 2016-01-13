@@ -126,6 +126,8 @@
             this.Controls.Add(this.editButton);
             this.Controls.Add(this.createButton);
             this.Controls.Add(this.searchButton);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "MasterInitForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.MasterInitForm_Load);

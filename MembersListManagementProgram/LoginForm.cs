@@ -12,6 +12,7 @@ namespace MembersListManagementProgram
         public LoginForm()
         {
             InitializeComponent();
+            this.ControlBox = false;
         }
 
         // Login
@@ -19,25 +20,9 @@ namespace MembersListManagementProgram
         {
             if (excuteSearch())
             {
-                MembersListManagementForm f = new MembersListManagementForm(textBox2.Text);
-                //this.Hide();
+                MenuForm f = new MenuForm(textBox2.Text);
                 f.MdiParent = this.MdiParent;
                 f.Show();
-                //this.Show();
-                //using (MembersListManagementForm f = new MembersListManagementForm(textBox2.Text))
-                //{
-                //    // テキストボックスの値をクリア
-                //    textBox1.Clear();
-                //    textBox2.Clear();
-                //    textBox3.Clear();
-
-                //    // 管理画面へ遷移
-                //    //this.Hide();
-                //    f.MdiParent = this.MdiParent;
-                //    f.Show();
-                //    //f.ShowDialog();
-                //    //this.Show();
-                //}
             }
             else
             {

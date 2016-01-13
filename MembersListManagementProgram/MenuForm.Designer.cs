@@ -1,6 +1,6 @@
 ﻿namespace MembersListManagementProgram
 {
-    partial class MembersListManagementForm
+    partial class MenuForm
     {
         /// <summary>
         /// Required designer variable.
@@ -52,16 +52,18 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // MembersListManagementForm
+            // MenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Name = "MembersListManagementForm";
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "MenuForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "社員名簿管理システム";
+            this.Text = "メニュー";
             this.Load += new System.EventHandler(this.MembersListManagementForm_Load);
             this.ResumeLayout(false);
 

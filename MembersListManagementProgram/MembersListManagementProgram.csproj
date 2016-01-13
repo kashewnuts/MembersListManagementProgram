@@ -70,11 +70,11 @@
     <Compile Include="MainMDI.Designer.cs">
       <DependentUpon>MainMDI.cs</DependentUpon>
     </Compile>
-    <Compile Include="MembersListManagementForm.cs">
+    <Compile Include="MenuForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MembersListManagementForm.Designer.cs">
-      <DependentUpon>MembersListManagementForm.cs</DependentUpon>
+    <Compile Include="MenuForm.Designer.cs">
+      <DependentUpon>MenuForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MembersMasterEditForm.cs">
       <SubType>Form</SubType>
@@ -100,8 +100,8 @@
     <EmbeddedResource Include="MainMDI.resx">
       <DependentUpon>MainMDI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MembersListManagementForm.resx">
-      <DependentUpon>MembersListManagementForm.cs</DependentUpon>
+    <EmbeddedResource Include="MenuForm.resx">
+      <DependentUpon>MenuForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MembersMasterEditForm.resx">
       <DependentUpon>MembersMasterEditForm.cs</DependentUpon>

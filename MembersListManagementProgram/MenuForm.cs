@@ -3,16 +3,18 @@ using System.Windows.Forms;
 
 namespace MembersListManagementProgram
 {
-    public partial class MembersListManagementForm : Form
+    public partial class MenuForm : Form
     {
         // プロパティ
         public string m_strUserId { get; set; }
 
         // 初期化処理
-        public MembersListManagementForm(string strUserId)
+        public MenuForm(string strUserId)
         {
             InitializeComponent();
             this.m_strUserId = strUserId;
+            this.ControlBox = false;
+            this.WindowState = FormWindowState.Maximized;
         }
 
         // Load Event Handler
