@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Data;
+using System.Data.Common;
 using System.Data.OleDb;
 using System.Windows.Forms;
 
@@ -111,7 +112,8 @@ namespace MembersListManagementProgram
         /// <param name="e"></param>
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            showDialog(CommonConstants.UPDATE_MODE, sender, e, this.dgv.CurrentRow.Cells[0].Value.ToString(), this.dgv.CurrentRow.Cells[1].Value.ToString());
+            string[] args = makeParams();
+            showDialog(CommonConstants.UPDATE_MODE, sender, e, args[0], args[1]);
         }
 
         /// <summary>
@@ -121,7 +123,31 @@ namespace MembersListManagementProgram
         /// <param name="e"></param>
         private void btnView_Click(object sender, EventArgs e)
         {
-            showDialog(CommonConstants.VIEW_MODE, sender, e, this.dgv.CurrentRow.Cells[0].Value.ToString(), this.dgv.CurrentRow.Cells[1].Value.ToString());
+            string[] args = makeParams();
+            showDialog(CommonConstants.VIEW_MODE, sender, e, args[0], args[1]);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private string[] makeParams()
+        {
+            BindingManagerBase bm = dgv.BindingContext[dgv.DataSource, dgv.DataMember];
+            DataRowView drv = (DataRowView)bm.Current;
+            DataRow row = drv.Row;
+
+            string[] args = new string[2];
+            args[0] = row["CD_CO", DataRowVersion.Original].ToString();
+            if (this.m_strInitId.Equals(CommonConstants.BUMON))
+            {
+                args[1] = (row["CD_DEPT", DataRowVersion.Original] != null) ? row["CD_DEPT", DataRowVersion.Original].ToString() : null;
+            }
+            else
+            {
+                args[1] = (row["CD_EMP", DataRowVersion.Original] != null) ? row["CD_EMP", DataRowVersion.Original].ToString() : null;
+            }
+            return args;
         }
 
         /// <summary>
@@ -168,15 +194,89 @@ namespace MembersListManagementProgram
         /// <param name="e"></param>
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            DataTable tbl;
-            tbl = (DataTable)this.dgv.DataSource;
+            string strSql = null;
+            string cd_co, cd_dept, cd_emp;
+            MainMDI f = (MainMDI)this.MdiParent;
+            DataTable tbl = (DataTable)this.dgv.DataSource;
             // 編集された行をコミットする
             foreach (DataRow row in tbl.Rows)
             {
                 if (row.RowState != DataRowState.Unchanged)
                 {
-                    row.AcceptChanges();
+                    cd_co = row["CD_CO", DataRowVersion.Original].ToString();
+                    if (this.m_strInitId.Equals(CommonConstants.BUMON))
+                    {
+                        cd_dept = (row["CD_DEPT", DataRowVersion.Original] != null) ? row["CD_DEPT", DataRowVersion.Original].ToString() : null;
+                        strSql = "UPDATE M_DEPT SET CD_CO='{0}', CD_DEPT='{1}', NM_DEPT='{2}', TXT_REM='{3}', CD_UPDATE='{4}', DTM_UPDATE=SYSDATE, FLG_ACTIVE='Y' WHERE CD_CO='{5}' AND CD_DEPT='{6}'";
+                        strSql = String.Format(
+                            strSql,
+                            this.dgv.CurrentRow.Cells[0].Value.ToString(), 
+                            this.dgv.CurrentRow.Cells[1].Value.ToString(), 
+                            this.dgv.CurrentRow.Cells[2].Value.ToString(), 
+                            this.dgv.CurrentRow.Cells[3].Value.ToString(),
+                            f.txtUserName.Text, cd_co, cd_dept);
+                    }
+                    else
+                    {
+                        cd_emp = (row["CD_EMP", DataRowVersion.Original] != null) ? row["CD_EMP", DataRowVersion.Original].ToString() : null;
+                        strSql = "UPDATE M_EMP SET CD_CO='{0}', CD_EMP='{1}', NM_EMP='{2}', TXT_PASSWD='{3}', CD_DEPT='{4}', TXT_ZIP='{5}', TXT_ADDR1='{6}', TXT_ADDR2='{7}', TXT_ADDR3='{8}', TXT_TEL='{9}', TXT_FAX='{10}', TXT_REM='{11}', CD_UPDATE='{12}', DTM_UPDATE=SYSDATE, FLG_ACTIVE='Y' WHERE CD_CO='{13}' AND CD_EMP='{14}'";
+                        strSql = String.Format(
+                            strSql,
+                            this.dgv.CurrentRow.Cells[0].Value.ToString(),
+                            this.dgv.CurrentRow.Cells[1].Value.ToString(),
+                            this.dgv.CurrentRow.Cells[2].Value.ToString(),
+                            this.dgv.CurrentRow.Cells[3].Value.ToString(),
+                            this.dgv.CurrentRow.Cells[4].Value.ToString(),
+                            this.dgv.CurrentRow.Cells[5].Value.ToString(),
+                            this.dgv.CurrentRow.Cells[6].Value.ToString(),
+                            this.dgv.CurrentRow.Cells[7].Value.ToString(),
+                            this.dgv.CurrentRow.Cells[8].Value.ToString(),
+                            this.dgv.CurrentRow.Cells[9].Value.ToString(),
+                            this.dgv.CurrentRow.Cells[10].Value.ToString(),
+                            this.dgv.CurrentRow.Cells[11].Value.ToString(),
+                            this.dgv.CurrentRow.Cells[12].Value.ToString(),
+                            f.txtUserName.Text, cd_co, cd_emp);
+                    }
+                    excuteSql(strSql);
                 }
+            }
+        }
+
+        /// <summary>
+        /// SQL実行
+        /// </summary>
+        /// <param name="strSql"></param>
+        private void excuteSql(string strSql)
+        {
+            OleDbConnection conn = new OleDbConnection();
+            OleDbCommand cmd;
+            // 接続文字列を設定して接続する
+            conn.ConnectionString = ConfigurationManager.ConnectionStrings["MembersListManagementProgram.Properties.Settings.ConnectionString"].ConnectionString;
+            try
+            {
+                conn.Open();
+                cmd = new OleDbCommand(strSql, conn);
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("正常に処理を完了しました。", "通知");
+            }
+            catch (DbException ex)
+            {
+                if (ex.ErrorCode == -2147217873)    // ORA-00001: 一意性違反
+                {
+                    MessageBox.Show("既に登録されています。別のデータを登録してください。", "通知");
+                }
+                else
+                {
+                    MessageBox.Show("エラーが発生しました。入力項目を見なおしてください。", "通知");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "通知");
+            }
+            finally
+            {
+                if (conn != null) conn.Close();
             }
         }
     }
