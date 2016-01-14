@@ -22,8 +22,8 @@ namespace MembersListManagementProgram
             InitializeComponent();
             this.m_strInitId = strInitId;
             this.Text = getFormTitle();
-            this.editButton.Enabled = false;
-            this.viewButton.Enabled = false;
+            this.btnEdit.Enabled = false;
+            this.btnView.Enabled = false;
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void searchButton_Click(object sender, EventArgs e)
+        private void btnSearch_Click(object sender, EventArgs e)
         {
             DataView dv;
             OleDbDataAdapter da;
@@ -78,13 +78,13 @@ namespace MembersListManagementProgram
 
             // 表示するレコードをDataViewに取得し、DataGridViewに関連付ける
             dv = new DataView(ds.Tables[strTable], "", "", DataViewRowState.CurrentRows);
-            this.dataGridView1.DataSource = ds.Tables[strTable];
+            this.dgv.DataSource = ds.Tables[strTable];
 
             // ボタン活性化
-            if (this.dataGridView1.RowCount != 0)
+            if (this.dgv.RowCount != 0)
             {
-                this.editButton.Enabled = true;
-                this.viewButton.Enabled = true;
+                this.btnEdit.Enabled = true;
+                this.btnView.Enabled = true;
             }
         }
 
@@ -93,7 +93,7 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void createButton_Click(object sender, EventArgs e)
+        private void btnCreate_Click(object sender, EventArgs e)
         {
             showDialog(CommonConstants.CREATE_MODE, sender, e);
         }
@@ -103,9 +103,9 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void editButton_Click(object sender, EventArgs e)
+        private void btnEdit_Click(object sender, EventArgs e)
         {
-            showDialog(CommonConstants.UPDATE_MODE, sender, e, this.dataGridView1.CurrentRow.Cells[0].Value.ToString(), this.dataGridView1.CurrentRow.Cells[1].Value.ToString());
+            showDialog(CommonConstants.UPDATE_MODE, sender, e, this.dgv.CurrentRow.Cells[0].Value.ToString(), this.dgv.CurrentRow.Cells[1].Value.ToString());
         }
 
         /// <summary>
@@ -113,9 +113,9 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void viewButton_Click(object sender, EventArgs e)
+        private void btnView_Click(object sender, EventArgs e)
         {
-            showDialog(CommonConstants.VIEW_MODE, sender, e, this.dataGridView1.CurrentRow.Cells[0].Value.ToString(), this.dataGridView1.CurrentRow.Cells[1].Value.ToString());
+            showDialog(CommonConstants.VIEW_MODE, sender, e, this.dgv.CurrentRow.Cells[0].Value.ToString(), this.dgv.CurrentRow.Cells[1].Value.ToString());
         }
 
         /// <summary>
@@ -133,7 +133,7 @@ namespace MembersListManagementProgram
                 DepartmentMasterEditForm f = new DepartmentMasterEditForm(mode, args);
                 f.MdiParent = this.MdiParent;
                 f.Show();
-                if (f.DialogResult == DialogResult.OK && this.dataGridView1.RowCount != 0) searchButton_Click(sender, e);
+                if (f.DialogResult == DialogResult.OK && this.dgv.RowCount != 0) btnSearch_Click(sender, e);
             }
             else
             {
@@ -141,7 +141,7 @@ namespace MembersListManagementProgram
                 MembersMasterEditForm f = new MembersMasterEditForm(mode, args);
                 f.MdiParent = this.MdiParent;
                 f.Show();
-                if (f.DialogResult == DialogResult.OK && this.dataGridView1.RowCount != 0) searchButton_Click(sender, e);
+                if (f.DialogResult == DialogResult.OK && this.dgv.RowCount != 0) btnSearch_Click(sender, e);
             }
         }
 
@@ -150,7 +150,7 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void closeButton_Click(object sender, EventArgs e)
+        private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }

@@ -16,6 +16,7 @@ namespace MembersListManagementProgram
         /// プロパティ
         /// </summary>
         public string m_strUserName { get; set; }
+        public static string strUserName;
 
         /// <summary>
         /// 初期化処理
@@ -53,6 +54,7 @@ namespace MembersListManagementProgram
             LoginForm f = new LoginForm();
             f.MdiParent = this;
             f.Show();
+            //this.userNameTextBox = getHoge();
         }
     }
 }

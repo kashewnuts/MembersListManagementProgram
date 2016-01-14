@@ -65,39 +65,39 @@ namespace MembersListManagementProgram
         {
             if (this.m_strEditMode.Equals(CommonConstants.CREATE_MODE))
             {
-                this.Controls.Remove(this.deleteButton);
+                this.Controls.Remove(this.btnDelete);
             }
             else if (this.m_strEditMode.Equals(CommonConstants.VIEW_MODE))
             {
                 // ボタン処理
-                this.Controls.Remove(this.registerButton);
-                this.Controls.Remove(this.deleteButton);
+                this.Controls.Remove(this.btnRegister);
+                this.Controls.Remove(this.btnDelete);
 
                 // テキストボックス処理
-                this.textBox1.ReadOnly = true;
-                this.textBox1.Enabled = false;
-                this.textBox2.ReadOnly = true;
-                this.textBox2.Enabled = false;
-                this.textBox3.ReadOnly = true;
-                this.textBox3.Enabled = false;
-                this.textBox4.ReadOnly = true;
-                this.textBox4.Enabled = false;
-                this.textBox5.ReadOnly = true;
-                this.textBox5.Enabled = false;
-                this.textBox6.ReadOnly = true;
-                this.textBox6.Enabled = false;
-                this.textBox7.ReadOnly = true;
-                this.textBox7.Enabled = false;
-                this.textBox8.ReadOnly = true;
-                this.textBox8.Enabled = false;
-                this.textBox9.ReadOnly = true;
-                this.textBox9.Enabled = false;
-                this.textBox10.ReadOnly = true;
-                this.textBox10.Enabled = false;
-                this.textBox11.ReadOnly = true;
-                this.textBox11.Enabled = false;
-                this.textBox12.ReadOnly = true;
-                this.textBox12.Enabled = false;
+                this.txtCd_Co.ReadOnly = true;
+                this.txtCd_Co.Enabled = false;
+                this.txtCd_Emp.ReadOnly = true;
+                this.txtCd_Emp.Enabled = false;
+                this.txtNm_Emp.ReadOnly = true;
+                this.txtNm_Emp.Enabled = false;
+                this.txtTxt_Passwd.ReadOnly = true;
+                this.txtTxt_Passwd.Enabled = false;
+                this.txtCd_Dept.ReadOnly = true;
+                this.txtCd_Dept.Enabled = false;
+                this.txtTxt_Zip.ReadOnly = true;
+                this.txtTxt_Zip.Enabled = false;
+                this.txtTxt_Addr1.ReadOnly = true;
+                this.txtTxt_Addr1.Enabled = false;
+                this.txtTxt_Addr2.ReadOnly = true;
+                this.txtTxt_Addr2.Enabled = false;
+                this.txtTxt_Addr3.ReadOnly = true;
+                this.txtTxt_Addr3.Enabled = false;
+                this.txtTxt_Tel.ReadOnly = true;
+                this.txtTxt_Tel.Enabled = false;
+                this.txtTxt_Fax.ReadOnly = true;
+                this.txtTxt_Fax.Enabled = false;
+                this.txtTxt_Rem.ReadOnly = true;
+                this.txtTxt_Rem.Enabled = false;
             }
         }
 
@@ -106,7 +106,7 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void registerButton_Click(object sender, EventArgs e)
+        private void btnRegister_Click(object sender, EventArgs e)
         {
             excuteSql(getSqlString());
         }
@@ -116,7 +116,7 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void deleteButton_Click(object sender, EventArgs e)
+        private void btnDelete_Click(object sender, EventArgs e)
         {
             excuteSql(String.Format("UPDATE M_EMP SET DTM_UPDATE=SYSDATE, FLG_ACTIVE='N' WHERE CD_CO='{0}' AND CD_EMP='{1}'", m_strPrimaryKey1, m_strPrimaryKey2));
         }
@@ -126,7 +126,7 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cancelButton_Click(object sender, EventArgs e)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
         }
@@ -150,18 +150,18 @@ namespace MembersListManagementProgram
 
                 while (dr.Read())
                 {
-                    this.textBox1.Text = dr.GetString(0);
-                    this.textBox2.Text = dr.GetString(1);
-                    this.textBox3.Text = dr.GetString(2);
-                    this.textBox4.Text = dr.GetString(3);
-                    this.textBox5.Text = dr.GetString(4);
-                    this.textBox6.Text = dr.IsDBNull(5) ? null : dr.GetString(5);
-                    this.textBox7.Text = dr.IsDBNull(6) ? null : dr.GetString(6);
-                    this.textBox8.Text = dr.IsDBNull(7) ? null : dr.GetString(7);
-                    this.textBox9.Text = dr.IsDBNull(8) ? null : dr.GetString(8);
-                    this.textBox10.Text = dr.IsDBNull(9) ? null : dr.GetString(9);
-                    this.textBox11.Text = dr.IsDBNull(10) ? null : dr.GetString(10);
-                    this.textBox12.Text = dr.IsDBNull(11) ? null : dr.GetString(11);
+                    this.txtCd_Co.Text = dr.GetString(0);
+                    this.txtCd_Emp.Text = dr.GetString(1);
+                    this.txtNm_Emp.Text = dr.GetString(2);
+                    this.txtTxt_Passwd.Text = dr.GetString(3);
+                    this.txtCd_Dept.Text = dr.GetString(4);
+                    this.txtTxt_Zip.Text = dr.IsDBNull(5) ? null : dr.GetString(5);
+                    this.txtTxt_Addr1.Text = dr.IsDBNull(6) ? null : dr.GetString(6);
+                    this.txtTxt_Addr2.Text = dr.IsDBNull(7) ? null : dr.GetString(7);
+                    this.txtTxt_Addr3.Text = dr.IsDBNull(8) ? null : dr.GetString(8);
+                    this.txtTxt_Tel.Text = dr.IsDBNull(9) ? null : dr.GetString(9);
+                    this.txtTxt_Fax.Text = dr.IsDBNull(10) ? null : dr.GetString(10);
+                    this.txtTxt_Rem.Text = dr.IsDBNull(11) ? null : dr.GetString(11);
                 }
                 dr.Close();
             }
@@ -225,15 +225,15 @@ namespace MembersListManagementProgram
             {
                 strSql = "INSERT INTO M_EMP VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', SYSDATE, '{13}', SYSDATE, 'Y')";
                 strSql = String.Format(
-                    strSql, textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text,
-                    textBox7.Text, textBox8.Text, textBox9.Text, textBox10.Text, textBox11.Text, textBox12.Text, "k_yoshida", "k_yoshida");
+                    strSql, txtCd_Co.Text, txtCd_Emp.Text, txtNm_Emp.Text, txtTxt_Passwd.Text, txtCd_Dept.Text, txtTxt_Zip.Text,
+                    txtTxt_Addr1.Text, txtTxt_Addr2.Text, txtTxt_Addr3.Text, txtTxt_Tel.Text, txtTxt_Fax.Text, txtTxt_Rem.Text, "k_yoshida", "k_yoshida");
             }
             else if (this.m_strEditMode.Equals(CommonConstants.UPDATE_MODE))
             {
                 strSql = "UPDATE M_EMP SET CD_CO='{0}', CD_EMP='{1}', NM_EMP='{2}', TXT_PASSWD='{3}', CD_DEPT='{4}', TXT_ZIP='{5}', TXT_ADDR1='{6}', TXT_ADDR2='{7}', TXT_ADDR3='{8}', TXT_TEL='{9}', TXT_FAX='{10}', TXT_REM='{11}', CD_UPDATE='{12}', DTM_UPDATE=SYSDATE, FLG_ACTIVE='Y' WHERE CD_CO='{13}' AND CD_EMP='{14}'";
                 strSql = String.Format(
-                    strSql, textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text,
-                    textBox7.Text, textBox8.Text, textBox9.Text, textBox10.Text, textBox11.Text, textBox12.Text, "k_yoshida", m_strPrimaryKey1, m_strPrimaryKey2);
+                    strSql, txtCd_Co.Text, txtCd_Emp.Text, txtNm_Emp.Text, txtTxt_Passwd.Text, txtCd_Dept.Text, txtTxt_Zip.Text,
+                    txtTxt_Addr1.Text, txtTxt_Addr2.Text, txtTxt_Addr3.Text, txtTxt_Tel.Text, txtTxt_Fax.Text, txtTxt_Rem.Text, "k_yoshida", m_strPrimaryKey1, m_strPrimaryKey2);
             }
             return strSql;
         }

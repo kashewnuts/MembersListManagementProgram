@@ -66,20 +66,20 @@ namespace MembersListManagementProgram
         {
             if (this.m_strEditMode.Equals(CommonConstants.CREATE_MODE))
             {
-                this.Controls.Remove(this.deleteButton);
+                this.Controls.Remove(this.btnDelete);
             }
             else if (this.m_strEditMode.Equals(CommonConstants.VIEW_MODE))
             {
-                this.Controls.Remove(this.deleteButton);
-                this.Controls.Remove(this.registerButton);
-                this.textBox1.ReadOnly = true;
-                this.textBox1.Enabled = false;
-                this.textBox2.ReadOnly = true;
-                this.textBox2.Enabled = false;
-                this.textBox3.ReadOnly = true;
-                this.textBox3.Enabled = false;
-                this.textBox4.ReadOnly = true;
-                this.textBox4.Enabled = false;
+                this.Controls.Remove(this.btnDelete);
+                this.Controls.Remove(this.btnRegister);
+                this.txtCd_Co.ReadOnly = true;
+                this.txtCd_Co.Enabled = false;
+                this.txtCd_Dept.ReadOnly = true;
+                this.txtCd_Dept.Enabled = false;
+                this.txtNm_Dept.ReadOnly = true;
+                this.txtNm_Dept.Enabled = false;
+                this.txtTxt_Rem.ReadOnly = true;
+                this.txtTxt_Rem.Enabled = false;
             }
         }
 
@@ -88,7 +88,7 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void registerButton_Click(object sender, EventArgs e)
+        private void btnRegister_Click(object sender, EventArgs e)
         {
             excuteSql(getSqlString());
         }
@@ -98,7 +98,7 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void deleteButton_Click(object sender, EventArgs e)
+        private void btnDelete_Click(object sender, EventArgs e)
         {
             excuteSql(String.Format("UPDATE M_DEPT SET DTM_UPDATE=SYSDATE, FLG_ACTIVE='N' WHERE CD_CO='{0}' AND CD_DEPT='{1}'", m_strPrimaryKey1, m_strPrimaryKey2));
         }
@@ -132,10 +132,10 @@ namespace MembersListManagementProgram
 
                 while (dr.Read())
                 {
-                    this.textBox1.Text = dr.GetString(0);
-                    this.textBox2.Text = dr.GetString(1);
-                    this.textBox3.Text = dr.GetString(2);
-                    this.textBox4.Text = dr.IsDBNull(3) ? null : dr.GetString(3);
+                    this.txtCd_Co.Text = dr.GetString(0);
+                    this.txtCd_Dept.Text = dr.GetString(1);
+                    this.txtNm_Dept.Text = dr.GetString(2);
+                    this.txtTxt_Rem.Text = dr.IsDBNull(3) ? null : dr.GetString(3);
                 }
                 dr.Close();
             }
@@ -199,12 +199,12 @@ namespace MembersListManagementProgram
             if (this.m_strEditMode.Equals(CommonConstants.CREATE_MODE))
             {
                 strSql = "INSERT INTO M_DEPT VALUES('{0}', '{1}', '{2}', '{3}', '{4}', SYSDATE, '{5}', SYSDATE, 'Y')";
-                strSql = String.Format(strSql, textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, "k_yoshida", "k_yoshida");
+                strSql = String.Format(strSql, txtCd_Co.Text, txtCd_Dept.Text, txtNm_Dept.Text, txtTxt_Rem.Text, "k_yoshida", "k_yoshida");
             }
             else if (this.m_strEditMode.Equals(CommonConstants.UPDATE_MODE))
             {
                 strSql = "UPDATE M_DEPT SET CD_CO='{0}', CD_DEPT='{1}', NM_DEPT='{2}', TXT_REM='{3}', CD_UPDATE='{4}', DTM_UPDATE=SYSDATE, FLG_ACTIVE='Y' WHERE CD_CO='{5}' AND CD_DEPT='{6}'";
-                strSql = String.Format(strSql, textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, "k_yoshida", m_strPrimaryKey1, m_strPrimaryKey2);
+                strSql = String.Format(strSql, txtCd_Co.Text, txtCd_Dept.Text, txtNm_Dept.Text, txtTxt_Rem.Text, "k_yoshida", m_strPrimaryKey1, m_strPrimaryKey2);
             }
             return strSql;
         }

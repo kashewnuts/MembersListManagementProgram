@@ -28,128 +28,120 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.canselButton = new System.Windows.Forms.Button();
-            this.registerButton = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.deleteButton = new System.Windows.Forms.Button();
+            this.lblCd_Dept = new System.Windows.Forms.Label();
+            this.lblNm_Dept = new System.Windows.Forms.Label();
+            this.lblTxt_Rem = new System.Windows.Forms.Label();
+            this.btnCansel = new System.Windows.Forms.Button();
+            this.btnRegister = new System.Windows.Forms.Button();
+            this.txtCd_Co = new System.Windows.Forms.TextBox();
+            this.txtCd_Dept = new System.Windows.Forms.TextBox();
+            this.txtNm_Dept = new System.Windows.Forms.TextBox();
+            this.txtTxt_Rem = new System.Windows.Forms.TextBox();
+            this.lblCd_Co = new System.Windows.Forms.Label();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // label1
+            // lblCd_Dept
             // 
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(100, 23);
-            this.label1.TabIndex = 13;
+            this.lblCd_Dept.AutoSize = true;
+            this.lblCd_Dept.Location = new System.Drawing.Point(9, 62);
+            this.lblCd_Dept.Name = "lblCd_Dept";
+            this.lblCd_Dept.Size = new System.Drawing.Size(56, 12);
+            this.lblCd_Dept.TabIndex = 1;
+            this.lblCd_Dept.Text = "部門コード";
             // 
-            // label2
+            // lblNm_Dept
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 62);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(56, 12);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "部門コード";
+            this.lblNm_Dept.AutoSize = true;
+            this.lblNm_Dept.Location = new System.Drawing.Point(9, 87);
+            this.lblNm_Dept.Name = "lblNm_Dept";
+            this.lblNm_Dept.Size = new System.Drawing.Size(41, 12);
+            this.lblNm_Dept.TabIndex = 2;
+            this.lblNm_Dept.Text = "部門名";
             // 
-            // label3
+            // lblTxt_Rem
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 87);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 12);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "部門名";
+            this.lblTxt_Rem.AutoSize = true;
+            this.lblTxt_Rem.Location = new System.Drawing.Point(9, 116);
+            this.lblTxt_Rem.Name = "lblTxt_Rem";
+            this.lblTxt_Rem.Size = new System.Drawing.Size(29, 12);
+            this.lblTxt_Rem.TabIndex = 3;
+            this.lblTxt_Rem.Text = "備考";
             // 
-            // label4
+            // btnCansel
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 116);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 12);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "備考";
+            this.btnCansel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCansel.Location = new System.Drawing.Point(477, 407);
+            this.btnCansel.Name = "btnCansel";
+            this.btnCansel.Size = new System.Drawing.Size(75, 23);
+            this.btnCansel.TabIndex = 16;
+            this.btnCansel.Text = "キャンセル";
+            this.btnCansel.UseVisualStyleBackColor = true;
+            this.btnCansel.Click += new System.EventHandler(this.canselButton_Click);
             // 
-            // canselButton
+            // btnRegister
             // 
-            this.canselButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.canselButton.Location = new System.Drawing.Point(477, 407);
-            this.canselButton.Name = "canselButton";
-            this.canselButton.Size = new System.Drawing.Size(75, 23);
-            this.canselButton.TabIndex = 16;
-            this.canselButton.Text = "キャンセル";
-            this.canselButton.UseVisualStyleBackColor = true;
-            this.canselButton.Click += new System.EventHandler(this.canselButton_Click);
+            this.btnRegister.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRegister.Location = new System.Drawing.Point(397, 407);
+            this.btnRegister.Name = "btnRegister";
+            this.btnRegister.Size = new System.Drawing.Size(75, 23);
+            this.btnRegister.TabIndex = 15;
+            this.btnRegister.Text = "登録";
+            this.btnRegister.UseVisualStyleBackColor = true;
+            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
-            // registerButton
+            // txtCd_Co
             // 
-            this.registerButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.registerButton.Location = new System.Drawing.Point(397, 407);
-            this.registerButton.Name = "registerButton";
-            this.registerButton.Size = new System.Drawing.Size(75, 23);
-            this.registerButton.TabIndex = 15;
-            this.registerButton.Text = "登録";
-            this.registerButton.UseVisualStyleBackColor = true;
-            this.registerButton.Click += new System.EventHandler(this.registerButton_Click);
+            this.txtCd_Co.Location = new System.Drawing.Point(82, 26);
+            this.txtCd_Co.MaxLength = 30;
+            this.txtCd_Co.Name = "txtCd_Co";
+            this.txtCd_Co.Size = new System.Drawing.Size(480, 19);
+            this.txtCd_Co.TabIndex = 10;
             // 
-            // textBox1
+            // txtCd_Dept
             // 
-            this.textBox1.Location = new System.Drawing.Point(82, 26);
-            this.textBox1.MaxLength = 30;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(480, 19);
-            this.textBox1.TabIndex = 10;
+            this.txtCd_Dept.Location = new System.Drawing.Point(82, 55);
+            this.txtCd_Dept.MaxLength = 30;
+            this.txtCd_Dept.Name = "txtCd_Dept";
+            this.txtCd_Dept.Size = new System.Drawing.Size(480, 19);
+            this.txtCd_Dept.TabIndex = 11;
             // 
-            // textBox2
+            // txtNm_Dept
             // 
-            this.textBox2.Location = new System.Drawing.Point(82, 55);
-            this.textBox2.MaxLength = 30;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(480, 19);
-            this.textBox2.TabIndex = 11;
+            this.txtNm_Dept.Location = new System.Drawing.Point(82, 84);
+            this.txtNm_Dept.MaxLength = 100;
+            this.txtNm_Dept.Name = "txtNm_Dept";
+            this.txtNm_Dept.Size = new System.Drawing.Size(480, 19);
+            this.txtNm_Dept.TabIndex = 12;
             // 
-            // textBox3
+            // txtTxt_Rem
             // 
-            this.textBox3.Location = new System.Drawing.Point(82, 84);
-            this.textBox3.MaxLength = 100;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(480, 19);
-            this.textBox3.TabIndex = 12;
+            this.txtTxt_Rem.Location = new System.Drawing.Point(82, 116);
+            this.txtTxt_Rem.MaxLength = 500;
+            this.txtTxt_Rem.Multiline = true;
+            this.txtTxt_Rem.Name = "txtTxt_Rem";
+            this.txtTxt_Rem.Size = new System.Drawing.Size(480, 200);
+            this.txtTxt_Rem.TabIndex = 13;
             // 
-            // textBox4
+            // lblCd_Co
             // 
-            this.textBox4.Location = new System.Drawing.Point(82, 116);
-            this.textBox4.MaxLength = 500;
-            this.textBox4.Multiline = true;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(480, 200);
-            this.textBox4.TabIndex = 13;
+            this.lblCd_Co.AutoSize = true;
+            this.lblCd_Co.Location = new System.Drawing.Point(9, 33);
+            this.lblCd_Co.Name = "lblCd_Co";
+            this.lblCd_Co.Size = new System.Drawing.Size(56, 12);
+            this.lblCd_Co.TabIndex = 14;
+            this.lblCd_Co.Text = "会社コード";
             // 
-            // label5
+            // btnDelete
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 33);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(56, 12);
-            this.label5.TabIndex = 14;
-            this.label5.Text = "会社コード";
-            // 
-            // deleteButton
-            // 
-            this.deleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.deleteButton.Location = new System.Drawing.Point(13, 406);
-            this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(75, 23);
-            this.deleteButton.TabIndex = 14;
-            this.deleteButton.Text = "削除";
-            this.deleteButton.UseVisualStyleBackColor = true;
-            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnDelete.Location = new System.Drawing.Point(13, 406);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.TabIndex = 14;
+            this.btnDelete.Text = "削除";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // DepartmentMasterEditForm
             // 
@@ -157,18 +149,17 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 442);
             this.ControlBox = false;
-            this.Controls.Add(this.deleteButton);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.registerButton);
-            this.Controls.Add(this.canselButton);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnDelete);
+            this.Controls.Add(this.lblCd_Co);
+            this.Controls.Add(this.txtTxt_Rem);
+            this.Controls.Add(this.txtNm_Dept);
+            this.Controls.Add(this.txtCd_Dept);
+            this.Controls.Add(this.txtCd_Co);
+            this.Controls.Add(this.btnRegister);
+            this.Controls.Add(this.btnCansel);
+            this.Controls.Add(this.lblTxt_Rem);
+            this.Controls.Add(this.lblNm_Dept);
+            this.Controls.Add(this.lblCd_Dept);
             this.Name = "DepartmentMasterEditForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "部門マスタ新規作成画面";
@@ -180,17 +171,16 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button canselButton;
-        private System.Windows.Forms.Button registerButton;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button deleteButton;
+        private System.Windows.Forms.Label lblCd_Dept;
+        private System.Windows.Forms.Label lblNm_Dept;
+        private System.Windows.Forms.Label lblTxt_Rem;
+        private System.Windows.Forms.Button btnCansel;
+        private System.Windows.Forms.Button btnRegister;
+        private System.Windows.Forms.TextBox txtCd_Co;
+        private System.Windows.Forms.TextBox txtCd_Dept;
+        private System.Windows.Forms.TextBox txtNm_Dept;
+        private System.Windows.Forms.TextBox txtTxt_Rem;
+        private System.Windows.Forms.Label lblCd_Co;
+        private System.Windows.Forms.Button btnDelete;
     }
 }

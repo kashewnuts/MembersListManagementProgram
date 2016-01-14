@@ -21,12 +21,15 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void loginButton_Click(object sender, EventArgs e)
+        private void btnLlogin_Click(object sender, EventArgs e)
         {
             if (excuteSearch())
             {
                 // メニュー画面表示
-                MenuForm f = new MenuForm(textBox2.Text);
+                MenuForm f = new MenuForm(txtCd_Emp.Text);
+                // TODO: ここで？MDIフォームにログインユーザー名をセット
+                 //(MenuForm)MdiParent
+                //this.MdiParent.Menu.MenuItems
                 f.MdiParent = this.MdiParent;
                 f.Show();
             }
@@ -53,12 +56,12 @@ namespace MembersListManagementProgram
             {
                 conn.Open();
                 string strSql = "SELECT * FROM M_EMP WHERE CD_CO='{0}' AND CD_EMP='{1}' AND TXT_PASSWD='{2}' AND FLG_ACTIVE='Y'";
-                da = new OleDbDataAdapter(String.Format(strSql, textBox1.Text, textBox2.Text, textBox3.Text), conn);
+                da = new OleDbDataAdapter(String.Format(strSql, txtCd_Co.Text, txtCd_Emp.Text, txtTxt_Passwd.Text), conn);
                 da.Fill(ds, "M_EMP");
                 bResult = (ds.Tables["M_EMP"].Rows.Count > 0) ? true : false;
                 if (bResult)
                 {
-                    // ユーザー名表示
+                    // TODO: ユーザー名表示
                     row = ds.Tables["M_EMP"].Rows[0];
                     User.nm_emp = row["nm_emp"].ToString();
                 }

@@ -28,76 +28,76 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.loginButton = new System.Windows.Forms.Button();
+            this.lblCd_Emp = new System.Windows.Forms.Label();
+            this.lblTxt_Passwd = new System.Windows.Forms.Label();
+            this.lblCd_Co = new System.Windows.Forms.Label();
+            this.txtCd_Co = new System.Windows.Forms.TextBox();
+            this.txtCd_Emp = new System.Windows.Forms.TextBox();
+            this.txtTxt_Passwd = new System.Windows.Forms.TextBox();
+            this.btnLogin = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // label1
+            // lblCd_Emp
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(29, 65);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "社員コード";
+            this.lblCd_Emp.AutoSize = true;
+            this.lblCd_Emp.Location = new System.Drawing.Point(29, 65);
+            this.lblCd_Emp.Name = "lblCd_Emp";
+            this.lblCd_Emp.Size = new System.Drawing.Size(56, 12);
+            this.lblCd_Emp.TabIndex = 0;
+            this.lblCd_Emp.Text = "社員コード";
             // 
-            // label2
+            // lblTxt_Passwd
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(29, 93);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(52, 12);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "パスワード";
+            this.lblTxt_Passwd.AutoSize = true;
+            this.lblTxt_Passwd.Location = new System.Drawing.Point(29, 93);
+            this.lblTxt_Passwd.Name = "lblTxt_Passwd";
+            this.lblTxt_Passwd.Size = new System.Drawing.Size(52, 12);
+            this.lblTxt_Passwd.TabIndex = 1;
+            this.lblTxt_Passwd.Text = "パスワード";
             // 
-            // label3
+            // lblCd_Co
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(29, 37);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 12);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "会社コード";
+            this.lblCd_Co.AutoSize = true;
+            this.lblCd_Co.Location = new System.Drawing.Point(29, 37);
+            this.lblCd_Co.Name = "lblCd_Co";
+            this.lblCd_Co.Size = new System.Drawing.Size(56, 12);
+            this.lblCd_Co.TabIndex = 2;
+            this.lblCd_Co.Text = "会社コード";
             // 
-            // textBox1
+            // txtCd_Co
             // 
-            this.textBox1.Location = new System.Drawing.Point(91, 34);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(193, 19);
-            this.textBox1.TabIndex = 3;
+            this.txtCd_Co.Location = new System.Drawing.Point(91, 34);
+            this.txtCd_Co.Name = "txtCd_Co";
+            this.txtCd_Co.Size = new System.Drawing.Size(193, 19);
+            this.txtCd_Co.TabIndex = 3;
             // 
-            // textBox2
+            // txtCd_Emp
             // 
-            this.textBox2.Location = new System.Drawing.Point(91, 62);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(193, 19);
-            this.textBox2.TabIndex = 4;
+            this.txtCd_Emp.Location = new System.Drawing.Point(91, 62);
+            this.txtCd_Emp.Name = "txtCd_Emp";
+            this.txtCd_Emp.Size = new System.Drawing.Size(193, 19);
+            this.txtCd_Emp.TabIndex = 4;
             // 
-            // textBox3
+            // txtTxt_Passwd
             // 
-            this.textBox3.Location = new System.Drawing.Point(91, 90);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.PasswordChar = '*';
-            this.textBox3.Size = new System.Drawing.Size(193, 19);
-            this.textBox3.TabIndex = 5;
+            this.txtTxt_Passwd.Location = new System.Drawing.Point(91, 90);
+            this.txtTxt_Passwd.Name = "txtTxt_Passwd";
+            this.txtTxt_Passwd.PasswordChar = '*';
+            this.txtTxt_Passwd.Size = new System.Drawing.Size(193, 19);
+            this.txtTxt_Passwd.TabIndex = 5;
             // 
-            // loginButton
+            // btnLogin
             // 
-            this.loginButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.btnLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.loginButton.Location = new System.Drawing.Point(133, 153);
-            this.loginButton.Name = "loginButton";
-            this.loginButton.Size = new System.Drawing.Size(75, 23);
-            this.loginButton.TabIndex = 6;
-            this.loginButton.Text = "ログイン";
-            this.loginButton.UseVisualStyleBackColor = true;
-            this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
+            this.btnLogin.Location = new System.Drawing.Point(133, 153);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(75, 23);
+            this.btnLogin.TabIndex = 6;
+            this.btnLogin.Text = "ログイン";
+            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLlogin_Click);
             // 
             // LoginForm
             // 
@@ -105,13 +105,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(344, 212);
             this.ControlBox = false;
-            this.Controls.Add(this.loginButton);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnLogin);
+            this.Controls.Add(this.txtTxt_Passwd);
+            this.Controls.Add(this.txtCd_Emp);
+            this.Controls.Add(this.txtCd_Co);
+            this.Controls.Add(this.lblCd_Co);
+            this.Controls.Add(this.lblTxt_Passwd);
+            this.Controls.Add(this.lblCd_Emp);
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
@@ -122,12 +122,12 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button loginButton;
-        internal System.Windows.Forms.TextBox textBox1;
-        internal System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label lblCd_Emp;
+        private System.Windows.Forms.Label lblTxt_Passwd;
+        private System.Windows.Forms.Label lblCd_Co;
+        private System.Windows.Forms.TextBox txtTxt_Passwd;
+        private System.Windows.Forms.Button btnLogin;
+        internal System.Windows.Forms.TextBox txtCd_Co;
+        internal System.Windows.Forms.TextBox txtCd_Emp;
     }
 }
