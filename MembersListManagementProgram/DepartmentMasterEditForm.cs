@@ -196,15 +196,16 @@ namespace MembersListManagementProgram
         private string getSqlString()
         {
             string strSql = null;
+            MainMDI f = (MainMDI)this.MdiParent;
             if (this.m_strEditMode.Equals(CommonConstants.CREATE_MODE))
             {
                 strSql = "INSERT INTO M_DEPT VALUES('{0}', '{1}', '{2}', '{3}', '{4}', SYSDATE, '{5}', SYSDATE, 'Y')";
-                strSql = String.Format(strSql, txtCd_Co.Text, txtCd_Dept.Text, txtNm_Dept.Text, txtTxt_Rem.Text, "k_yoshida", "k_yoshida");
+                strSql = String.Format(strSql, txtCd_Co.Text, txtCd_Dept.Text, txtNm_Dept.Text, txtTxt_Rem.Text, f.txtUserName.Text, f.txtUserName.Text);
             }
             else if (this.m_strEditMode.Equals(CommonConstants.UPDATE_MODE))
             {
                 strSql = "UPDATE M_DEPT SET CD_CO='{0}', CD_DEPT='{1}', NM_DEPT='{2}', TXT_REM='{3}', CD_UPDATE='{4}', DTM_UPDATE=SYSDATE, FLG_ACTIVE='Y' WHERE CD_CO='{5}' AND CD_DEPT='{6}'";
-                strSql = String.Format(strSql, txtCd_Co.Text, txtCd_Dept.Text, txtNm_Dept.Text, txtTxt_Rem.Text, "k_yoshida", m_strPrimaryKey1, m_strPrimaryKey2);
+                strSql = String.Format(strSql, txtCd_Co.Text, txtCd_Dept.Text, txtNm_Dept.Text, txtTxt_Rem.Text, f.txtUserName.Text, m_strPrimaryKey1, m_strPrimaryKey2);
             }
             return strSql;
         }

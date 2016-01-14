@@ -221,19 +221,20 @@ namespace MembersListManagementProgram
         private string getSqlString()
         {
             string strSql = null;
+            MainMDI f = (MainMDI)this.MdiParent;
             if (this.m_strEditMode.Equals(CommonConstants.CREATE_MODE))
             {
                 strSql = "INSERT INTO M_EMP VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', SYSDATE, '{13}', SYSDATE, 'Y')";
                 strSql = String.Format(
                     strSql, txtCd_Co.Text, txtCd_Emp.Text, txtNm_Emp.Text, txtTxt_Passwd.Text, txtCd_Dept.Text, txtTxt_Zip.Text,
-                    txtTxt_Addr1.Text, txtTxt_Addr2.Text, txtTxt_Addr3.Text, txtTxt_Tel.Text, txtTxt_Fax.Text, txtTxt_Rem.Text, "k_yoshida", "k_yoshida");
+                    txtTxt_Addr1.Text, txtTxt_Addr2.Text, txtTxt_Addr3.Text, txtTxt_Tel.Text, txtTxt_Fax.Text, txtTxt_Rem.Text, f.txtUserName.Text, f.txtUserName.Text);
             }
             else if (this.m_strEditMode.Equals(CommonConstants.UPDATE_MODE))
             {
                 strSql = "UPDATE M_EMP SET CD_CO='{0}', CD_EMP='{1}', NM_EMP='{2}', TXT_PASSWD='{3}', CD_DEPT='{4}', TXT_ZIP='{5}', TXT_ADDR1='{6}', TXT_ADDR2='{7}', TXT_ADDR3='{8}', TXT_TEL='{9}', TXT_FAX='{10}', TXT_REM='{11}', CD_UPDATE='{12}', DTM_UPDATE=SYSDATE, FLG_ACTIVE='Y' WHERE CD_CO='{13}' AND CD_EMP='{14}'";
                 strSql = String.Format(
                     strSql, txtCd_Co.Text, txtCd_Emp.Text, txtNm_Emp.Text, txtTxt_Passwd.Text, txtCd_Dept.Text, txtTxt_Zip.Text,
-                    txtTxt_Addr1.Text, txtTxt_Addr2.Text, txtTxt_Addr3.Text, txtTxt_Tel.Text, txtTxt_Fax.Text, txtTxt_Rem.Text, "k_yoshida", m_strPrimaryKey1, m_strPrimaryKey2);
+                    txtTxt_Addr1.Text, txtTxt_Addr2.Text, txtTxt_Addr3.Text, txtTxt_Tel.Text, txtTxt_Fax.Text, txtTxt_Rem.Text, f.txtUserName.Text, m_strPrimaryKey1, m_strPrimaryKey2);
             }
             return strSql;
         }

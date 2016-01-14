@@ -34,6 +34,7 @@
             this.btnView = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.dgv = new System.Windows.Forms.DataGridView();
+            this.btnUpdate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
             // 
@@ -102,10 +103,20 @@
             this.dgv.Location = new System.Drawing.Point(13, 12);
             this.dgv.MultiSelect = false;
             this.dgv.Name = "dgv";
-            this.dgv.ReadOnly = true;
             this.dgv.RowTemplate.Height = 21;
             this.dgv.Size = new System.Drawing.Size(759, 497);
             this.dgv.TabIndex = 5;
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnUpdate.Location = new System.Drawing.Point(435, 526);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdate.TabIndex = 6;
+            this.btnUpdate.Text = "更新";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // MasterInitForm
             // 
@@ -113,6 +124,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 562);
             this.ControlBox = false;
+            this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.dgv);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnView);
@@ -135,5 +147,6 @@
         private System.Windows.Forms.Button btnView;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.DataGridView dgv;
+        private System.Windows.Forms.Button btnUpdate;
     }
 }

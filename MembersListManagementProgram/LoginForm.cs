@@ -8,6 +8,9 @@ namespace MembersListManagementProgram
 {
     public partial class LoginForm : Form
     {
+        // メンバ変数
+        private string strUserName;
+
         /// <summary>
         /// 初期化処理
         /// </summary>
@@ -25,11 +28,11 @@ namespace MembersListManagementProgram
         {
             if (excuteSearch())
             {
+                // 親フォーム(MDIフォーム)にログインユーザー名をセット
+                MainMDI parentForm = (MainMDI)this.MdiParent;
+                parentForm.txtUserName.Text = strUserName;
                 // メニュー画面表示
                 MenuForm f = new MenuForm(txtCd_Emp.Text);
-                // TODO: ここで？MDIフォームにログインユーザー名をセット
-                 //(MenuForm)MdiParent
-                //this.MdiParent.Menu.MenuItems
                 f.MdiParent = this.MdiParent;
                 f.Show();
             }
@@ -61,9 +64,9 @@ namespace MembersListManagementProgram
                 bResult = (ds.Tables["M_EMP"].Rows.Count > 0) ? true : false;
                 if (bResult)
                 {
-                    // TODO: ユーザー名表示
+                    // ユーザー名表示
                     row = ds.Tables["M_EMP"].Rows[0];
-                    User.nm_emp = row["nm_emp"].ToString();
+                    strUserName = row["nm_emp"].ToString();
                 }
             }
             catch (Exception ex)

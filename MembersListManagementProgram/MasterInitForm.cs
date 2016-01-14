@@ -22,8 +22,8 @@ namespace MembersListManagementProgram
             InitializeComponent();
             this.m_strInitId = strInitId;
             this.Text = getFormTitle();
-            this.btnEdit.Enabled = false;
-            this.btnView.Enabled = false;
+            // ボタン表示切り替え
+            switchButtonView(false);
         }
 
         /// <summary>
@@ -43,6 +43,16 @@ namespace MembersListManagementProgram
         private string getFormTitle()
         {
             return this.m_strInitId.Equals(CommonConstants.BUMON) ? "部門マスタ管理画面" : "社員マスタ管理画面";
+        }
+
+        /// <summary>
+        /// ボタン表示・非表示切替
+        /// </summary>
+        private void switchButtonView(bool flg)
+        {
+            this.btnEdit.Enabled = flg;
+            this.btnView.Enabled = flg;
+            this.btnUpdate.Enabled = flg;
         }
 
         /// <summary>
@@ -81,11 +91,7 @@ namespace MembersListManagementProgram
             this.dgv.DataSource = ds.Tables[strTable];
 
             // ボタン活性化
-            if (this.dgv.RowCount != 0)
-            {
-                this.btnEdit.Enabled = true;
-                this.btnView.Enabled = true;
-            }
+            if (this.dgv.RowCount != 0) switchButtonView(true);
         }
 
         /// <summary>
@@ -127,7 +133,7 @@ namespace MembersListManagementProgram
         /// <param name="args"></param>
         private void showDialog(string mode, object sender, EventArgs e, params string[] args)
         {
-            if (this.m_strInitId.Equals(CommonConstants.BUMON)) 
+            if (this.m_strInitId.Equals(CommonConstants.BUMON))
             {
                 // 部門管理画面処理
                 DepartmentMasterEditForm f = new DepartmentMasterEditForm(mode, args);
@@ -153,6 +159,25 @@ namespace MembersListManagementProgram
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        /// <summary>
+        /// 更新
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            DataTable tbl;
+            tbl = (DataTable)this.dgv.DataSource;
+            // 編集された行をコミットする
+            foreach (DataRow row in tbl.Rows)
+            {
+                if (row.RowState != DataRowState.Unchanged)
+                {
+                    row.AcceptChanges();
+                }
+            }
         }
     }
 }
