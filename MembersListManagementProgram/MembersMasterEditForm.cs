@@ -122,7 +122,7 @@ namespace MembersListManagementProgram
         {
             MainMDI parentForm = (MainMDI)this.MdiParent;
             ExcuteSql(
-                String.Format("UPDATE M_EMP SET SET CD_UPDATE='{0}', DTM_UPDATE=SYSDATE, FLG_ACTIVE='N' WHERE CD_CO='{1}' AND CD_EMP='{2}'",
+                String.Format("UPDATE M_EMP SET CD_UPDATE='{0}', DTM_UPDATE=SYSDATE, FLG_ACTIVE='N' WHERE CD_CO='{1}' AND CD_EMP='{2}'",
                 parentForm.txtUserName.Text, m_strPrimaryKey1, m_strPrimaryKey2));
         }
 
