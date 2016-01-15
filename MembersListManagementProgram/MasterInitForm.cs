@@ -74,25 +74,47 @@ namespace MembersListManagementProgram
             // DataSetに取得する
             string strSql = null;
             string strTable = this.m_strInitId.Equals(CommonConstants.BUMON) ? "M_DEPT" : "M_EMP";
-            // TODO: 全項目ではなく、指定したい項目のみ表示
-            //if (this.InitId.Equals(CommonConstants.BUMON))
-            //{
-            //    sql = "SELECT CD_CO, CD_DEPT, NM_DEPT, TXT_REM FROM M_DEPT";
-            //}
-            //else
-            //{
-            //    sql = "SELECT CD_CO, CD_EMP, NM_EMP, CD_DEPT, TXT_ZIP, TXT_ADDR1, TXT_ADDR2, TXT_ADDR3, TXT_TEL, TXT_FAX, TXT_REM FROM M_EMP";
-            //}
             strSql = String.Format("SELECT * FROM {0} WHERE FLG_ACTIVE='Y'", strTable);
             da = new OleDbDataAdapter(strSql, conn);
             da.Fill(ds, strTable);
 
             // 表示するレコードをDataViewに取得し、DataGridViewに関連付ける
             dv = new DataView(ds.Tables[strTable], "", "", DataViewRowState.CurrentRows);
-            this.dgv.DataSource = ds.Tables[strTable];
+            this.dgv.DataSource = dv;
+            setDgvHeaderText(dgv);
 
             // ボタン活性化
             if (this.dgv.RowCount != 0) switchButtonView(true);
+        }
+
+        private void setDgvHeaderText(DataGridView dgv)
+        {
+            int i = 0;
+            this.dgv.Columns[i++].HeaderText = "会社コード";
+            if (this.m_strInitId.Equals(CommonConstants.BUMON))
+            {
+                this.dgv.Columns[i++].HeaderText = "部門コード";
+                this.dgv.Columns[i++].HeaderText = "部門名";
+            }
+            else
+            {
+                this.dgv.Columns[i++].HeaderText = "社員コード";
+                this.dgv.Columns[i++].HeaderText = "社員名";
+                this.dgv.Columns[i++].HeaderText = "パスワード";
+                this.dgv.Columns[i++].HeaderText = "部門コード";
+                this.dgv.Columns[i++].HeaderText = "郵便番号";
+                this.dgv.Columns[i++].HeaderText = "住所1";
+                this.dgv.Columns[i++].HeaderText = "住所2";
+                this.dgv.Columns[i++].HeaderText = "住所3";
+                this.dgv.Columns[i++].HeaderText = "TEL";
+                this.dgv.Columns[i++].HeaderText = "FAX";
+            }
+            this.dgv.Columns[i++].HeaderText = "備考";
+            this.dgv.Columns[i++].HeaderText = "作成者";
+            this.dgv.Columns[i++].HeaderText = "作成日";
+            this.dgv.Columns[i++].HeaderText = "最終更新者";
+            this.dgv.Columns[i++].HeaderText = "最終更新日";
+            this.dgv.Columns[i++].HeaderText = "有効フラグ";
         }
 
         /// <summary>
