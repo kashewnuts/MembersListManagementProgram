@@ -101,7 +101,10 @@ namespace MembersListManagementProgram
         /// <param name="e"></param>
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            excuteSql(String.Format("UPDATE M_DEPT SET DTM_UPDATE=SYSDATE, FLG_ACTIVE='N' WHERE CD_CO='{0}' AND CD_DEPT='{1}'", m_strPrimaryKey1, m_strPrimaryKey2));
+            MainMDI parentForm = (MainMDI)this.MdiParent;
+            excuteSql(
+                String.Format("UPDATE M_DEPT SET CD_UPDATE='{0}', DTM_UPDATE=SYSDATE, FLG_ACTIVE='N' WHERE CD_CO='{1}' AND CD_DEPT='{2}'",
+                parentForm.txtUserName.Text, m_strPrimaryKey1, m_strPrimaryKey2));
         }
 
         /// <summary>
