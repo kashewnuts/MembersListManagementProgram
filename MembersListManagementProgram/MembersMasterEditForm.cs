@@ -142,8 +142,11 @@ namespace MembersListManagementProgram
             try
             {
                 db.connect();
+                db.beginTransaction();
                 string strSql = "SELECT CD_CO, CD_EMP, NM_EMP, TXT_PASSWD, CD_DEPT, TXT_ZIP, TXT_ADDR1, TXT_ADDR2, TXT_ADDR3, TXT_TEL, TXT_FAX, TXT_REM FROM M_EMP WHERE CD_CO='{0}' AND CD_EMP='{1}'";
                 DataTable tbl = db.executeSql(String.Format(strSql, this.m_strPrimaryKey1, this.m_strPrimaryKey2));
+                db.commitTransaction();
+
                 int i = 0;
                 this.txtCd_Co.Text = tbl.Rows[0][i++].ToString();
                 this.txtCd_Emp.Text = tbl.Rows[0][i++].ToString();

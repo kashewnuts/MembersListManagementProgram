@@ -123,8 +123,11 @@ namespace MembersListManagementProgram
             try
             {
                 db.connect();
+                db.beginTransaction();
                 string strSql = "SELECT CD_CO, CD_DEPT, NM_DEPT, TXT_REM FROM M_DEPT WHERE CD_CO='{0}' AND CD_DEPT='{1}'";
                 DataTable tbl = db.executeSql(String.Format(strSql, this.m_strPrimaryKey1, this.m_strPrimaryKey2));
+                db.commitTransaction();
+
                 int i = 0;
                 this.txtCd_Co.Text = tbl.Rows[0][i++].ToString();
                 this.txtCd_Dept.Text = tbl.Rows[0][i++].ToString();
@@ -147,7 +150,9 @@ namespace MembersListManagementProgram
             try
             {
                 db.connect();
+                db.beginTransaction();
                 db.executeSql(strSql);
+                db.commitTransaction();
                 this.Close();
             }
             finally

@@ -89,14 +89,17 @@ namespace MembersListManagementProgram
         private void setDgvHeaderText(DataGridView dgv)
         {
             int i = 0;
+            this.dgv.Columns[i].ReadOnly = true;
             this.dgv.Columns[i++].HeaderText = "会社コード";
             if (this.m_strInitId.Equals(CommonConstants.BUMON))
             {
+                this.dgv.Columns[i].ReadOnly = true;
                 this.dgv.Columns[i++].HeaderText = "部門コード";
                 this.dgv.Columns[i++].HeaderText = "部門名";
             }
             else
             {
+                this.dgv.Columns[i].ReadOnly = true;
                 this.dgv.Columns[i++].HeaderText = "社員コード";
                 this.dgv.Columns[i++].HeaderText = "社員名";
                 this.dgv.Columns[i++].HeaderText = "パスワード";
@@ -109,10 +112,15 @@ namespace MembersListManagementProgram
                 this.dgv.Columns[i++].HeaderText = "FAX";
             }
             this.dgv.Columns[i++].HeaderText = "備考";
+            this.dgv.Columns[i].ReadOnly = true;
             this.dgv.Columns[i++].HeaderText = "作成者";
+            this.dgv.Columns[i].ReadOnly = true;
             this.dgv.Columns[i++].HeaderText = "作成日";
+            this.dgv.Columns[i].ReadOnly = true;
             this.dgv.Columns[i++].HeaderText = "最終更新者";
+            this.dgv.Columns[i].ReadOnly = true;
             this.dgv.Columns[i++].HeaderText = "最終更新日";
+            this.dgv.Columns[i].ReadOnly = true;
             this.dgv.Columns[i++].HeaderText = "有効フラグ";
         }
 
@@ -222,7 +230,7 @@ namespace MembersListManagementProgram
                 string cd_co, cd_dept, cd_emp;
                 MainMDI f = (MainMDI)this.MdiParent;
                 DataTable tbl = (DataTable)this.dgv.DataSource;
-                db.connect();
+                List<string> lst = new List<string>();
 
                 // 編集された行をコミットする
                 foreach (DataRow row in tbl.Rows)
@@ -263,9 +271,17 @@ namespace MembersListManagementProgram
                                 row["CD_UPDATE", DataRowVersion.Current].ToString(),
                                 f.txtUserName.Text, cd_co, cd_emp);
                         }
-                        db.executeSql(strSql);
+                        lst.Add(strSql);
                     }
                 }
+                // SQL実行
+                db.connect();
+                db.beginTransaction();
+                foreach (string s in lst)
+                {
+                    db.executeSql(strSql);
+                }
+                db.commitTransaction();
             }
             finally
             {
