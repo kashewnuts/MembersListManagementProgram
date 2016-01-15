@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Data;
 using System.Data.Common;
 using System.Data.OleDb;
 using System.Linq;
@@ -118,34 +119,21 @@ namespace MembersListManagementProgram
         /// </summary>
         private void excuteSearch()
         {
-            OleDbDataReader dr;
-            OleDbCommand cmd;
-            OleDbConnection conn = new OleDbConnection();
-            // 接続文字列を設定して接続する
-            conn.ConnectionString = ConfigurationManager.ConnectionStrings["MembersListManagementProgram.Properties.Settings.ConnectionString"].ConnectionString;
+            OleDbIf db = new OleDbIf();
             try
             {
-                conn.Open();
+                db.connect();
                 string strSql = "SELECT CD_CO, CD_DEPT, NM_DEPT, TXT_REM FROM M_DEPT WHERE CD_CO='{0}' AND CD_DEPT='{1}'";
-                cmd = new OleDbCommand(String.Format(strSql, this.m_strPrimaryKey1, this.m_strPrimaryKey2), conn);
-                dr = cmd.ExecuteReader();
-
-                while (dr.Read())
-                {
-                    this.txtCd_Co.Text = dr.GetString(0);
-                    this.txtCd_Dept.Text = dr.GetString(1);
-                    this.txtNm_Dept.Text = dr.GetString(2);
-                    this.txtTxt_Rem.Text = dr.IsDBNull(3) ? null : dr.GetString(3);
-                }
-                dr.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "通知");
+                DataTable tbl = db.executeSql(String.Format(strSql, this.m_strPrimaryKey1, this.m_strPrimaryKey2));
+                int i = 0;
+                this.txtCd_Co.Text = tbl.Rows[0][i++].ToString();
+                this.txtCd_Dept.Text = tbl.Rows[0][i++].ToString();
+                this.txtNm_Dept.Text = tbl.Rows[0][i++].ToString();
+                this.txtTxt_Rem.Text = (tbl.Rows[0][i] == null) ? null : tbl.Rows[0][i++].ToString();
             }
             finally
             {
-                if (conn != null) conn.Close();
+                db.disconnect();
             }
         }
 
@@ -155,37 +143,16 @@ namespace MembersListManagementProgram
         /// <param name="strSql"></param>
         private void excuteSql(string strSql)
         {
-            OleDbConnection conn = new OleDbConnection();
-            OleDbCommand cmd;
-            // 接続文字列を設定して接続する
-            conn.ConnectionString = ConfigurationManager.ConnectionStrings["MembersListManagementProgram.Properties.Settings.ConnectionString"].ConnectionString;
+            OleDbIf db = new OleDbIf();
             try
             {
-                conn.Open();
-                cmd = new OleDbCommand(strSql, conn);
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("正常に処理を完了しました。", "通知");
+                db.connect();
+                db.executeSql(strSql);
                 this.Close();
-                this.DialogResult = DialogResult.OK;
-            }
-            catch (DbException ex)
-            {
-                if (ex.ErrorCode == -2147217873)    // ORA-00001: 一意性違反
-                {
-                    MessageBox.Show("既に登録されています。別のデータを登録してください。", "通知");
-                }
-                else
-                {
-                    MessageBox.Show("エラーが発生しました。入力項目を見なおしてください。", "通知");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "通知");
             }
             finally
             {
-                if (conn != null) conn.Close();
+                db.disconnect();
             }
         }
 

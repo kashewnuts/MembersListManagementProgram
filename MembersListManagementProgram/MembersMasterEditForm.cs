@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.Common;
 using System.Data.OleDb;
 using System.Linq;
@@ -137,65 +138,29 @@ namespace MembersListManagementProgram
         /// </summary>
         private void excuteSearch()
         {
-        //    SqlDbIf db = new SqlDbIf();
-        //    db.connect();
-        //    string strSql = "SELECT CD_CO, CD_EMP, NM_EMP, TXT_PASSWD, CD_DEPT, TXT_ZIP, TXT_ADDR1, TXT_ADDR2, TXT_ADDR3, TXT_TEL, TXT_FAX, TXT_REM FROM M_EMP WHERE CD_CO='{0}' AND CD_EMP='{1}'";
-        //    List<object> records = db.searchSql(String.Format(strSql, m_strPrimaryKey1, m_strPrimaryKey2));
-
-        //    foreach (List<string> r in records)
-        //    {
-        //        this.txtCd_Co.Text = "";
-        //        //this.txtCd_Co.Text = r.ToArray.GetString(0);
-        //        //this.txtCd_Emp.Text = r.GetString(1);
-        //        //this.txtNm_Emp.Text = r.GetString(2);
-        //        //this.txtTxt_Passwd.Text = dr.GetString(3);
-        //        //this.txtCd_Dept.Text = dr.GetString(4);
-        //        //this.txtTxt_Zip.Text = dr.IsDBNull(5) ? null : dr.GetString(5);
-        //        //this.txtTxt_Addr1.Text = dr.IsDBNull(6) ? null : dr.GetString(6);
-        //        //this.txtTxt_Addr2.Text = dr.IsDBNull(7) ? null : dr.GetString(7);
-        //        //this.txtTxt_Addr3.Text = dr.IsDBNull(8) ? null : dr.GetString(8);
-        //        //this.txtTxt_Tel.Text = dr.IsDBNull(9) ? null : dr.GetString(9);
-        //        //this.txtTxt_Fax.Text = dr.IsDBNull(10) ? null : dr.GetString(10);
-        //        //this.txtTxt_Rem.Text = dr.IsDBNull(11) ? null : dr.GetString(11);
-        //    }
-        //}
-
-            OleDbDataReader dr;
-            OleDbCommand cmd;
-            OleDbConnection conn = new OleDbConnection();
-            // 接続文字列を設定して接続する
-            conn.ConnectionString = ConfigurationManager.ConnectionStrings["MembersListManagementProgram.Properties.Settings.ConnectionString"].ConnectionString;
+            OleDbIf db = new OleDbIf();
             try
             {
-                conn.Open();
+                db.connect();
                 string strSql = "SELECT CD_CO, CD_EMP, NM_EMP, TXT_PASSWD, CD_DEPT, TXT_ZIP, TXT_ADDR1, TXT_ADDR2, TXT_ADDR3, TXT_TEL, TXT_FAX, TXT_REM FROM M_EMP WHERE CD_CO='{0}' AND CD_EMP='{1}'";
-                cmd = new OleDbCommand(String.Format(strSql, m_strPrimaryKey1, m_strPrimaryKey2), conn);
-                dr = cmd.ExecuteReader();
-
-                while (dr.Read())
-                {
-                    this.txtCd_Co.Text = dr.GetString(0);
-                    this.txtCd_Emp.Text = dr.GetString(1);
-                    this.txtNm_Emp.Text = dr.GetString(2);
-                    this.txtTxt_Passwd.Text = dr.GetString(3);
-                    this.txtCd_Dept.Text = dr.GetString(4);
-                    this.txtTxt_Zip.Text = dr.IsDBNull(5) ? null : dr.GetString(5);
-                    this.txtTxt_Addr1.Text = dr.IsDBNull(6) ? null : dr.GetString(6);
-                    this.txtTxt_Addr2.Text = dr.IsDBNull(7) ? null : dr.GetString(7);
-                    this.txtTxt_Addr3.Text = dr.IsDBNull(8) ? null : dr.GetString(8);
-                    this.txtTxt_Tel.Text = dr.IsDBNull(9) ? null : dr.GetString(9);
-                    this.txtTxt_Fax.Text = dr.IsDBNull(10) ? null : dr.GetString(10);
-                    this.txtTxt_Rem.Text = dr.IsDBNull(11) ? null : dr.GetString(11);
-                }
-                dr.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "通知");
+                DataTable tbl = db.executeSql(String.Format(strSql, this.m_strPrimaryKey1, this.m_strPrimaryKey2));
+                int i = 0;
+                this.txtCd_Co.Text = tbl.Rows[0][i++].ToString();
+                this.txtCd_Emp.Text = tbl.Rows[0][i++].ToString();
+                this.txtNm_Emp.Text = tbl.Rows[0][i++].ToString();
+                this.txtTxt_Passwd.Text = tbl.Rows[0][i++].ToString();
+                this.txtCd_Dept.Text = tbl.Rows[0][i++].ToString();
+                this.txtTxt_Zip.Text = (tbl.Rows[0][i] == null) ? null : tbl.Rows[0][i++].ToString();
+                this.txtTxt_Addr1.Text = (tbl.Rows[0][i] == null) ? null : tbl.Rows[0][i++].ToString();
+                this.txtTxt_Addr2.Text = (tbl.Rows[0][i] == null) ? null : tbl.Rows[0][i++].ToString();
+                this.txtTxt_Addr3.Text = (tbl.Rows[0][i] == null) ? null : tbl.Rows[0][i++].ToString();
+                this.txtTxt_Tel.Text = (tbl.Rows[0][i] == null) ? null : tbl.Rows[0][i++].ToString();
+                this.txtTxt_Fax.Text = (tbl.Rows[0][i] == null) ? null : tbl.Rows[0][i++].ToString();
+                this.txtTxt_Rem.Text = (tbl.Rows[0][i] == null) ? null : tbl.Rows[0][i++].ToString();
             }
             finally
             {
-                if (conn != null) conn.Close();
+                db.disconnect();
             }
         }
 
@@ -205,36 +170,16 @@ namespace MembersListManagementProgram
         /// <param name="strSql"></param>
         private void excuteSql(string strSql)
         {
-            OleDbConnection conn = new OleDbConnection();
-            OleDbCommand cmd;
-            // 接続文字列を設定して接続する
-            conn.ConnectionString = ConfigurationManager.ConnectionStrings["MembersListManagementProgram.Properties.Settings.ConnectionString"].ConnectionString;
+            OleDbIf db = new OleDbIf();
             try
             {
-                conn.Open();
-                cmd = new OleDbCommand(strSql, conn);
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("正常に処理を完了しました", "通知");
+                db.connect();
+                db.executeSql(strSql);
                 this.Close();
-            }
-            catch (DbException ex)
-            {
-                if (ex.ErrorCode == -2147217873)    // ORA-00001: 一意性違反
-                {
-                    MessageBox.Show("既に登録されています。別のデータを登録してください。", "通知");
-                }
-                else
-                {
-                    MessageBox.Show("エラーが発生しました。入力項目を見なおしてください。", "通知");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "通知");
             }
             finally
             {
-                if (conn != null) conn.Close();
+                db.disconnect();
             }
         }
 

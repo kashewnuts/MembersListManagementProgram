@@ -51,17 +51,22 @@ namespace MembersListManagementProgram
         {
             bool bResult = false;
             OleDbIf db = new OleDbIf();
-            DataTable tbl;
 
-            db.connect();
-            string strSql = "SELECT * FROM M_EMP WHERE CD_CO='{0}' AND CD_EMP='{1}' AND TXT_PASSWD='{2}' AND FLG_ACTIVE='Y'";
-            tbl = db.executeSql(String.Format(strSql, txtCd_Co.Text, txtCd_Emp.Text, txtTxt_Passwd.Text));
-            bResult = (tbl.Rows.Count > 0) ? true : false;
-            if (bResult)
+            try
             {
-                strUserName = tbl.Rows[0]["nm_emp"].ToString();
+                db.connect();
+                string strSql = "SELECT * FROM M_EMP WHERE CD_CO='{0}' AND CD_EMP='{1}' AND TXT_PASSWD='{2}' AND FLG_ACTIVE='Y'";
+                DataTable tbl = db.executeSql(String.Format(strSql, txtCd_Co.Text, txtCd_Emp.Text, txtTxt_Passwd.Text));
+                bResult = (tbl.Rows.Count > 0) ? true : false;
+                if (bResult)
+                {
+                    strUserName = tbl.Rows[0]["nm_emp"].ToString();
+                }
             }
-            db.disconnect();
+            finally
+            {
+                db.disconnect();
+            }
             return bResult;
         }
     }
