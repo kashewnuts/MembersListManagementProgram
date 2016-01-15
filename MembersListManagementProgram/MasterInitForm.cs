@@ -23,9 +23,9 @@ namespace MembersListManagementProgram
         {
             InitializeComponent();
             this.m_strInitId = strInitId;
-            this.Text = getFormTitle();
+            this.Text = GetFormTitle();
             // ボタン表示切り替え
-            switchButtonView(false);
+            SwitchButtonView(false);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace MembersListManagementProgram
         /// タイトル取得
         /// </summary>
         /// <returns></returns>
-        private string getFormTitle()
+        private string GetFormTitle()
         {
             return this.m_strInitId.Equals(CommonConstants.BUMON) ? "部門マスタ管理画面" : "社員マスタ管理画面";
         }
@@ -50,7 +50,7 @@ namespace MembersListManagementProgram
         /// <summary>
         /// ボタン表示・非表示切替
         /// </summary>
-        private void switchButtonView(bool flg)
+        private void SwitchButtonView(bool flg)
         {
             this.btnEdit.Enabled = flg;
             this.btnView.Enabled = flg;
@@ -62,23 +62,23 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnSearch_Click(object sender, EventArgs e)
+        private void BtnSearch_Click(object sender, EventArgs e)
         {
             OleDbIf db = new OleDbIf();
             try
             {
-                db.connect();
+                db.Connect();
                 // 表示するレコードを取得し、DataGridViewに関連付ける
                 string strTable = this.m_strInitId.Equals(CommonConstants.BUMON) ? "M_DEPT" : "M_EMP";
                 string strSql = String.Format("SELECT * FROM {0} WHERE FLG_ACTIVE='Y'", strTable);
-                this.dgv.DataSource = db.executeSql(strSql);
-                setDgvHeaderText(dgv);
+                this.dgv.DataSource = db.ExecuteSql(strSql);
+                SetDgvHeaderText(dgv);
                 // ボタン活性化
-                if (this.dgv.RowCount != 0) switchButtonView(true);
+                if (this.dgv.RowCount != 0) SwitchButtonView(true);
             }
             finally
             {
-                db.disconnect();
+                db.Disconnect();
             }
         }
 
@@ -86,7 +86,7 @@ namespace MembersListManagementProgram
         /// DataGridViewのHeaderText変更
         /// </summary>
         /// <param name="dgv"></param>
-        private void setDgvHeaderText(DataGridView dgv)
+        private void SetDgvHeaderText(DataGridView dgv)
         {
             int i = 0;
             this.dgv.Columns[i].ReadOnly = true;
@@ -129,9 +129,9 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnCreate_Click(object sender, EventArgs e)
+        private void BtnCreate_Click(object sender, EventArgs e)
         {
-            showDialog(CommonConstants.CREATE_MODE, sender, e);
+            ShowDialog(CommonConstants.CREATE_MODE, sender, e);
         }
 
         /// <summary>
@@ -139,10 +139,10 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnEdit_Click(object sender, EventArgs e)
+        private void BtnEdit_Click(object sender, EventArgs e)
         {
-            string[] args = makeParams();
-            showDialog(CommonConstants.UPDATE_MODE, sender, e, args[0], args[1]);
+            string[] args = MakeParams();
+            ShowDialog(CommonConstants.UPDATE_MODE, sender, e, args[0], args[1]);
         }
 
         /// <summary>
@@ -150,17 +150,17 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnView_Click(object sender, EventArgs e)
+        private void BtnView_Click(object sender, EventArgs e)
         {
-            string[] args = makeParams();
-            showDialog(CommonConstants.VIEW_MODE, sender, e, args[0], args[1]);
+            string[] args = MakeParams();
+            ShowDialog(CommonConstants.VIEW_MODE, sender, e, args[0], args[1]);
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        private string[] makeParams()
+        private string[] MakeParams()
         {
             BindingManagerBase bm = dgv.BindingContext[dgv.DataSource, dgv.DataMember];
             DataRowView drv = (DataRowView)bm.Current;
@@ -186,7 +186,7 @@ namespace MembersListManagementProgram
         /// <param name="sender"></param>
         /// <param name="e"></param>
         /// <param name="args"></param>
-        private void showDialog(string mode, object sender, EventArgs e, params string[] args)
+        private void ShowDialog(string mode, object sender, EventArgs e, params string[] args)
         {
             if (this.m_strInitId.Equals(CommonConstants.BUMON))
             {
@@ -194,7 +194,7 @@ namespace MembersListManagementProgram
                 DepartmentMasterEditForm f = new DepartmentMasterEditForm(mode, args);
                 f.MdiParent = this.MdiParent;
                 f.Show();
-                if (f.DialogResult == DialogResult.OK && this.dgv.RowCount != 0) btnSearch_Click(sender, e);
+                if (f.DialogResult == DialogResult.OK && this.dgv.RowCount != 0) BtnSearch_Click(sender, e);
             }
             else
             {
@@ -202,7 +202,7 @@ namespace MembersListManagementProgram
                 MembersMasterEditForm f = new MembersMasterEditForm(mode, args);
                 f.MdiParent = this.MdiParent;
                 f.Show();
-                if (f.DialogResult == DialogResult.OK && this.dgv.RowCount != 0) btnSearch_Click(sender, e);
+                if (f.DialogResult == DialogResult.OK && this.dgv.RowCount != 0) BtnSearch_Click(sender, e);
             }
         }
 
@@ -211,7 +211,7 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnClose_Click(object sender, EventArgs e)
+        private void BtnClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
@@ -221,7 +221,7 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnUpdate_Click(object sender, EventArgs e)
+        private void BtnUpdate_Click(object sender, EventArgs e)
         {
             OleDbIf db = new OleDbIf();
             try
@@ -268,24 +268,22 @@ namespace MembersListManagementProgram
                                 row["TXT_TEL", DataRowVersion.Current].ToString(),
                                 row["TXT_FAX", DataRowVersion.Current].ToString(),
                                 row["TXT_REM", DataRowVersion.Current].ToString(),
-                                row["CD_UPDATE", DataRowVersion.Current].ToString(),
                                 f.txtUserName.Text, cd_co, cd_emp);
                         }
                         lst.Add(strSql);
                     }
                 }
                 // SQL実行
-                db.connect();
-                db.beginTransaction();
+                db.Connect();
                 foreach (string s in lst)
                 {
-                    db.executeSql(strSql);
+                    db.ExecuteSql(s);
                 }
-                db.commitTransaction();
+                BtnSearch_Click(sender, e);
             }
             finally
             {
-                db.disconnect();
+                db.Disconnect();
             }
         }
     }

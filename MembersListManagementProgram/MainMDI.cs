@@ -11,7 +11,7 @@ namespace MembersListManagementProgram
         public MainMDI()
         {
             InitializeComponent();
-            login();
+            Login();
         }
 
         /// <summary>
@@ -19,7 +19,7 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void finishToolStripMenuItem_Click(object sender, EventArgs e)
+        private void FinishToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // 保有してるすべての MDI 子フォームを取得する
             Form[] hMdiChildren = this.MdiChildren;
@@ -30,13 +30,13 @@ namespace MembersListManagementProgram
                 hMdiChild.Close();
             }
             // ログイン画面表示
-            login();
+            Login();
         }
 
         /// <summary>
         /// ログイン画面表示
         /// </summary>
-        private void login()
+        private void Login()
         {
             LoginForm f = new LoginForm();
             f.MdiParent = this;

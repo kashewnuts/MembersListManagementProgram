@@ -40,7 +40,7 @@
             this.btnDept.TabIndex = 0;
             this.btnDept.Text = "部門マスタ";
             this.btnDept.UseVisualStyleBackColor = true;
-            this.btnDept.Click += new System.EventHandler(this.btnDept_Click);
+            this.btnDept.Click += new System.EventHandler(this.BtnDept_Click);
             // 
             // btnEmp
             // 
@@ -50,7 +50,7 @@
             this.btnEmp.TabIndex = 1;
             this.btnEmp.Text = "社員マスタ";
             this.btnEmp.UseVisualStyleBackColor = true;
-            this.btnEmp.Click += new System.EventHandler(this.btnEmp_Click);
+            this.btnEmp.Click += new System.EventHandler(this.BtnEmp_Click);
             // 
             // MenuForm
             // 

@@ -35,7 +35,7 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnDept_Click(object sender, EventArgs e)
+        private void BtnDept_Click(object sender, EventArgs e)
         {
             MasterInitForm f = new MasterInitForm(CommonConstants.BUMON);
             f.MdiParent = this.MdiParent;
@@ -47,7 +47,7 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnEmp_Click(object sender, EventArgs e)
+        private void BtnEmp_Click(object sender, EventArgs e)
         {
             MasterInitForm f = new MasterInitForm(CommonConstants.SYAIN);
             f.MdiParent = this.MdiParent;

@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace MembersListManagementProgram
 {
-    class OleDbIf
+    class OleDbIf : IDisposable
     {
         private OleDbConnection _conn = null;
         private OleDbTransaction _trn = null;
@@ -16,7 +16,7 @@ namespace MembersListManagementProgram
         /// <summary>
         /// DB接続
         /// </summary>
-        public void connect()
+        public void Connect()
         {
             try
             {
@@ -36,7 +36,7 @@ namespace MembersListManagementProgram
         /// <summary>
         /// DB切断
         /// </summary>
-        public void disconnect()
+        public void Disconnect()
         {
             try
             {
@@ -53,7 +53,7 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="strSql"></param>
         /// <returns></returns>
-        public DataTable executeSql(String strSql)
+        public DataTable ExecuteSql(String strSql)
         {
             DataTable dt = new DataTable();
             try
@@ -76,7 +76,7 @@ namespace MembersListManagementProgram
         /// トランザクション開始
         /// </summary>
         /// <remarks></remarks>
-        public void beginTransaction()
+        public void BeginTransaction()
         {
             try
             {
@@ -92,7 +92,7 @@ namespace MembersListManagementProgram
         /// コミット
         /// </summary>
         /// <remarks></remarks>
-        public void commitTransaction()
+        public void CommitTransaction()
         {
             try
             {
@@ -115,7 +115,7 @@ namespace MembersListManagementProgram
         /// ロールバック
         /// </summary>
         /// <remarks></remarks>
-        public void rollbackTransaction()
+        public void RollbackTransaction()
         {
             try
             {
@@ -135,12 +135,35 @@ namespace MembersListManagementProgram
         }
 
         /// <summary>
+        /// オブジェクトを破棄
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// オブジェクトを破棄
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                // 管理（managed）リソースの破棄処理をここに記述します。 
+            }
+            // 非管理（unmanaged）リソースの破棄処理をここに記述します。
+            Disconnect();
+        }
+
+        /// <summary>
         /// デストラクタ
         /// </summary>
         /// <remarks></remarks>
         ~OleDbIf()
         {
-            disconnect();
+            Dispose();
         }
     }
 }

@@ -27,7 +27,7 @@ namespace MembersListManagementProgram
         {
             InitializeComponent();
             this.m_strEditMode = strEditMode;
-            this.Text = getFormTitle();
+            this.Text = GetFormTitle();
             if (args.Count() == 2)
             {
                 this.m_strPrimaryKey1 = args[0];
@@ -44,16 +44,16 @@ namespace MembersListManagementProgram
         {
             this.WindowState = FormWindowState.Maximized;
             // ボタン表示・非表示切り替え
-            switchVisibleButton();
+            SwitchVisibleButton();
             // 編集、参照ボタン押下時時データ取得
-            if (!this.m_strEditMode.Equals(CommonConstants.CREATE_MODE)) excuteSearch();
+            if (!this.m_strEditMode.Equals(CommonConstants.CREATE_MODE)) ExcuteSearch();
         }
 
         /// <summary>
         /// タイトル取得
         /// </summary>
         /// <returns></returns>
-        private string getFormTitle()
+        private string GetFormTitle()
         {
             if (this.m_strEditMode.Equals(CommonConstants.CREATE_MODE)) return "社員マスタ新規作成画面";
             else if (this.m_strEditMode.Equals(CommonConstants.UPDATE_MODE)) return "社員マスタ編集画面";
@@ -63,7 +63,7 @@ namespace MembersListManagementProgram
         /// <summary>
         /// ボタン表示・非表示切替
         /// </summary>
-        private void switchVisibleButton()
+        private void SwitchVisibleButton()
         {
             if (this.m_strEditMode.Equals(CommonConstants.CREATE_MODE))
             {
@@ -108,9 +108,9 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnRegister_Click(object sender, EventArgs e)
+        private void BtnRegister_Click(object sender, EventArgs e)
         {
-            excuteSql(getSqlString());
+            ExcuteSql(GetSqlString());
         }
 
         /// <summary>
@@ -118,10 +118,10 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void BtnDelete_Click(object sender, EventArgs e)
         {
             MainMDI parentForm = (MainMDI)this.MdiParent;
-            excuteSql(
+            ExcuteSql(
                 String.Format("UPDATE M_EMP SET SET CD_UPDATE='{0}', DTM_UPDATE=SYSDATE, FLG_ACTIVE='N' WHERE CD_CO='{1}' AND CD_EMP='{2}'",
                 parentForm.txtUserName.Text, m_strPrimaryKey1, m_strPrimaryKey2));
         }
@@ -131,7 +131,7 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
         }
@@ -139,16 +139,14 @@ namespace MembersListManagementProgram
         /// <summary>
         /// 検索
         /// </summary>
-        private void excuteSearch()
+        private void ExcuteSearch()
         {
             OleDbIf db = new OleDbIf();
             try
             {
-                db.connect();
-                db.beginTransaction();
+                db.Connect();
                 string strSql = "SELECT CD_CO, CD_EMP, NM_EMP, TXT_PASSWD, CD_DEPT, TXT_ZIP, TXT_ADDR1, TXT_ADDR2, TXT_ADDR3, TXT_TEL, TXT_FAX, TXT_REM FROM M_EMP WHERE CD_CO='{0}' AND CD_EMP='{1}'";
-                DataTable tbl = db.executeSql(String.Format(strSql, this.m_strPrimaryKey1, this.m_strPrimaryKey2));
-                db.commitTransaction();
+                DataTable tbl = db.ExecuteSql(String.Format(strSql, this.m_strPrimaryKey1, this.m_strPrimaryKey2));
 
                 int i = 0;
                 this.txtCd_Co.Text = tbl.Rows[0][i++].ToString();
@@ -166,7 +164,7 @@ namespace MembersListManagementProgram
             }
             finally
             {
-                db.disconnect();
+                db.Disconnect();
             }
         }
 
@@ -174,18 +172,18 @@ namespace MembersListManagementProgram
         /// SQL実行
         /// </summary>
         /// <param name="strSql"></param>
-        private void excuteSql(string strSql)
+        private void ExcuteSql(string strSql)
         {
             OleDbIf db = new OleDbIf();
             try
             {
-                db.connect();
-                db.executeSql(strSql);
+                db.Connect();
+                db.ExecuteSql(strSql);
                 this.Close();
             }
             finally
             {
-                db.disconnect();
+                db.Disconnect();
             }
         }
 
@@ -193,7 +191,7 @@ namespace MembersListManagementProgram
         /// SQL文取得
         /// </summary>
         /// <returns></returns>
-        private string getSqlString()
+        private string GetSqlString()
         {
             string strSql = null;
             MainMDI f = (MainMDI)this.MdiParent;

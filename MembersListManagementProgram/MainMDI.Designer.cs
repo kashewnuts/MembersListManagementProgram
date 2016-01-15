@@ -55,7 +55,7 @@
             this.finishToolStripMenuItem.Name = "finishToolStripMenuItem";
             this.finishToolStripMenuItem.Size = new System.Drawing.Size(44, 25);
             this.finishToolStripMenuItem.Text = "新規";
-            this.finishToolStripMenuItem.Click += new System.EventHandler(this.finishToolStripMenuItem_Click);
+            this.finishToolStripMenuItem.Click += new System.EventHandler(this.FinishToolStripMenuItem_Click);
             // 
             // txtUserName
             // 

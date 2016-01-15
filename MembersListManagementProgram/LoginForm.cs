@@ -25,9 +25,9 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnLlogin_Click(object sender, EventArgs e)
+        private void BtnLlogin_Click(object sender, EventArgs e)
         {
-            if (excuteSearch())
+            if (ExcuteSearch())
             {
                 // 親フォーム(MDIフォーム)にログインユーザー名をセット
                 MainMDI parentForm = (MainMDI)this.MdiParent;
@@ -47,16 +47,16 @@ namespace MembersListManagementProgram
         /// 検索
         /// </summary>
         /// <returns></returns>
-        public bool excuteSearch()
+        public bool ExcuteSearch()
         {
             bool bResult = false;
             OleDbIf db = new OleDbIf();
 
             try
             {
-                db.connect();
+                db.Connect();
                 string strSql = "SELECT * FROM M_EMP WHERE CD_CO='{0}' AND CD_EMP='{1}' AND TXT_PASSWD='{2}' AND FLG_ACTIVE='Y'";
-                DataTable tbl = db.executeSql(String.Format(strSql, txtCd_Co.Text, txtCd_Emp.Text, txtTxt_Passwd.Text));
+                DataTable tbl = db.ExecuteSql(String.Format(strSql, txtCd_Co.Text, txtCd_Emp.Text, txtTxt_Passwd.Text));
                 bResult = (tbl.Rows.Count > 0) ? true : false;
                 if (bResult)
                 {
@@ -65,7 +65,7 @@ namespace MembersListManagementProgram
             }
             finally
             {
-                db.disconnect();
+                db.Disconnect();
             }
             return bResult;
         }
