@@ -80,13 +80,17 @@ namespace MembersListManagementProgram
 
             // 表示するレコードをDataViewに取得し、DataGridViewに関連付ける
             dv = new DataView(ds.Tables[strTable], "", "", DataViewRowState.CurrentRows);
-            this.dgv.DataSource = dv;
+            this.dgv.DataSource = ds.Tables[strTable];
             setDgvHeaderText(dgv);
 
             // ボタン活性化
             if (this.dgv.RowCount != 0) switchButtonView(true);
         }
 
+        /// <summary>
+        /// DataGridViewのHeaderText変更
+        /// </summary>
+        /// <param name="dgv"></param>
         private void setDgvHeaderText(DataGridView dgv)
         {
             int i = 0;
@@ -216,6 +220,7 @@ namespace MembersListManagementProgram
         /// <param name="e"></param>
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            OleDbIf db = new OleDbIf();
             string strSql = null;
             string cd_co, cd_dept, cd_emp;
             MainMDI f = (MainMDI)this.MdiParent;
