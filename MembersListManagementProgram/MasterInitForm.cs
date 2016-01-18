@@ -61,8 +61,7 @@ namespace MembersListManagementProgram
         /// <param name="e"></param>
         private void BtnSearch_Click(object sender, EventArgs e)
         {
-            OleDbIf db = new OleDbIf();
-            try
+            using (OleDbIf db = new OleDbIf())
             {
                 db.Connect();
                 // 表示するレコードを取得し、DataGridViewに関連付ける
@@ -72,10 +71,6 @@ namespace MembersListManagementProgram
                 SetDgvHeaderText(dgv);
                 // ボタン活性化
                 if (this.dgv.RowCount != 0) SwitchButtonView(true);
-            }
-            finally
-            {
-                db.Disconnect();
             }
         }
 
@@ -220,8 +215,7 @@ namespace MembersListManagementProgram
         /// <param name="e"></param>
         private void BtnUpdate_Click(object sender, EventArgs e)
         {
-            OleDbIf db = new OleDbIf();
-            try
+            using (OleDbIf db = new OleDbIf())
             {
                 string strSql = null;
                 string cd_co, cd_dept, cd_emp;
@@ -277,10 +271,6 @@ namespace MembersListManagementProgram
                     db.ExecuteSql(s);
                 }
                 BtnSearch_Click(sender, e);
-            }
-            finally
-            {
-                db.Disconnect();
             }
         }
     }

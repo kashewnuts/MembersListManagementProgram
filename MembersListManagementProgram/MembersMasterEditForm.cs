@@ -137,8 +137,7 @@ namespace MembersListManagementProgram
         /// </summary>
         private void ExcuteSearch()
         {
-            OleDbIf db = new OleDbIf();
-            try
+            using (OleDbIf db = new OleDbIf())
             {
                 db.Connect();
                 string strSql = "SELECT CD_CO, CD_EMP, NM_EMP, TXT_PASSWD, CD_DEPT, TXT_ZIP, TXT_ADDR1, TXT_ADDR2, TXT_ADDR3, TXT_TEL, TXT_FAX, TXT_REM FROM M_EMP WHERE CD_CO='{0}' AND CD_EMP='{1}'";
@@ -158,10 +157,6 @@ namespace MembersListManagementProgram
                 this.txtTxt_Fax.Text = (tbl.Rows[0][i] == null) ? null : tbl.Rows[0][i++].ToString();
                 this.txtTxt_Rem.Text = (tbl.Rows[0][i] == null) ? null : tbl.Rows[0][i++].ToString();
             }
-            finally
-            {
-                db.Disconnect();
-            }
         }
 
         /// <summary>
@@ -170,16 +165,11 @@ namespace MembersListManagementProgram
         /// <param name="strSql"></param>
         private void ExcuteSql(string strSql)
         {
-            OleDbIf db = new OleDbIf();
-            try
+            using (OleDbIf db = new OleDbIf())
             {
                 db.Connect();
                 db.ExecuteSql(strSql);
                 this.Close();
-            }
-            finally
-            {
-                db.Disconnect();
             }
         }
 
