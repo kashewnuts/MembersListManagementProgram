@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
-using System.Data.OleDb;
 using System.Windows.Forms;
 
 namespace MembersListManagementProgram
