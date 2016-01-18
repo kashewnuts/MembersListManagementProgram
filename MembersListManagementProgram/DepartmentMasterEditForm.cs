@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Configuration;
 using System.Data;
-using System.Data.Common;
-using System.Data.OleDb;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -122,22 +119,18 @@ namespace MembersListManagementProgram
         /// </summary>
         private void ExcuteSearch()
         {
-            OleDbIf db = new OleDbIf();
-            try
+            using (OdbcIf db = new OdbcIf())
             {
+                // DB処理
                 db.Connect();
                 string strSql = "SELECT CD_CO, CD_DEPT, NM_DEPT, TXT_REM FROM M_DEPT WHERE CD_CO='{0}' AND CD_DEPT='{1}'";
                 DataTable tbl = db.ExecuteSql(String.Format(strSql, this.m_strPrimaryKey1, this.m_strPrimaryKey2));
-
+                // テキストボックスに値セット
                 int i = 0;
                 this.txtCd_Co.Text = tbl.Rows[0][i++].ToString();
                 this.txtCd_Dept.Text = tbl.Rows[0][i++].ToString();
                 this.txtNm_Dept.Text = tbl.Rows[0][i++].ToString();
                 this.txtTxt_Rem.Text = (tbl.Rows[0][i] == null) ? null : tbl.Rows[0][i++].ToString();
-            }
-            finally
-            {
-                db.Disconnect();
             }
         }
 
@@ -147,16 +140,11 @@ namespace MembersListManagementProgram
         /// <param name="strSql"></param>
         private void ExcuteSql(string strSql)
         {
-            OleDbIf db = new OleDbIf();
-            try
+            using (OdbcIf db = new OdbcIf())
             {
                 db.Connect();
                 db.ExecuteSql(strSql);
                 this.Close();
-            }
-            finally
-            {
-                db.Disconnect();
             }
         }
 

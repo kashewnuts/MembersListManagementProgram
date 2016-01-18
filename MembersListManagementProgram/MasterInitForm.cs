@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
-using System.Data.Common;
-using System.Data.OleDb;
 using System.Windows.Forms;
 
 namespace MembersListManagementProgram
@@ -64,7 +61,7 @@ namespace MembersListManagementProgram
         /// <param name="e"></param>
         private void BtnSearch_Click(object sender, EventArgs e)
         {
-            OleDbIf db = new OleDbIf();
+            OdbcIf db = new OdbcIf();
             try
             {
                 db.Connect();
@@ -223,8 +220,7 @@ namespace MembersListManagementProgram
         /// <param name="e"></param>
         private void BtnUpdate_Click(object sender, EventArgs e)
         {
-            OleDbIf db = new OleDbIf();
-            try
+            using (OdbcIf db = new OdbcIf())
             {
                 string strSql = null;
                 string cd_co, cd_dept, cd_emp;
@@ -280,10 +276,6 @@ namespace MembersListManagementProgram
                     db.ExecuteSql(s);
                 }
                 BtnSearch_Click(sender, e);
-            }
-            finally
-            {
-                db.Disconnect();
             }
         }
     }
