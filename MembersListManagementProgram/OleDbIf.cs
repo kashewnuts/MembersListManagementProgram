@@ -1,14 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Data.Odbc;
+using System.Data.Common;
+using System.Data.OleDb;
+using System.Windows.Forms;
 
 namespace MembersListManagementProgram
 {
-    class OdbcIf : IDisposable
+    class OleDbIf : IDisposable
     {
-        private OdbcConnection _conn = null;
-        private OdbcTransaction _trn = null;
+        private OleDbConnection _conn = null;
+        private OleDbTransaction _trn = null;
 
         /// <summary>
         /// DB接続
@@ -19,7 +22,7 @@ namespace MembersListManagementProgram
             {
                 if (_conn == null)
                 {
-                    _conn = new OdbcConnection();
+                    _conn = new OleDbConnection();
                 }
                 _conn.ConnectionString = ConfigurationManager.ConnectionStrings["MembersListManagementProgram.Properties.Settings.ConnectionString"].ConnectionString;
                 _conn.Open();
@@ -55,8 +58,8 @@ namespace MembersListManagementProgram
             DataTable dt = new DataTable();
             try
             {
-                OdbcCommand cmd = new OdbcCommand(strSql, _conn);
-                OdbcDataAdapter adp = new OdbcDataAdapter(cmd);
+                OleDbCommand cmd = new OleDbCommand(strSql, _conn);
+                OleDbDataAdapter adp = new OleDbDataAdapter(cmd);
                 adp.Fill(dt);
                 adp.Dispose();
                 cmd.Dispose();
@@ -158,7 +161,7 @@ namespace MembersListManagementProgram
         /// デストラクタ
         /// </summary>
         /// <remarks></remarks>
-        ~OdbcIf()
+        ~OleDbIf()
         {
             Dispose();
         }

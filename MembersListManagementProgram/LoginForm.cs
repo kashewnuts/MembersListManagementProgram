@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
+using System.Data.OleDb;
 using System.Windows.Forms;
 
 namespace MembersListManagementProgram
@@ -47,7 +50,9 @@ namespace MembersListManagementProgram
         public bool ExcuteSearch()
         {
             bool bResult = false;
-            using (OdbcIf db = new OdbcIf())
+            OleDbIf db = new OleDbIf();
+
+            try
             {
                 db.Connect();
                 string strSql = "SELECT * FROM M_EMP WHERE CD_CO='{0}' AND CD_EMP='{1}' AND TXT_PASSWD='{2}' AND FLG_ACTIVE='Y'";
@@ -57,6 +62,10 @@ namespace MembersListManagementProgram
                 {
                     strUserName = tbl.Rows[0]["nm_emp"].ToString();
                 }
+            }
+            finally
+            {
+                db.Disconnect();
             }
             return bResult;
         }
