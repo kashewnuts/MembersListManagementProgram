@@ -67,6 +67,7 @@
             // txtCd_Co
             // 
             this.txtCd_Co.Location = new System.Drawing.Point(91, 34);
+            this.txtCd_Co.MaxLength = 30;
             this.txtCd_Co.Name = "txtCd_Co";
             this.txtCd_Co.Size = new System.Drawing.Size(193, 19);
             this.txtCd_Co.TabIndex = 3;
@@ -74,6 +75,7 @@
             // txtCd_Emp
             // 
             this.txtCd_Emp.Location = new System.Drawing.Point(91, 62);
+            this.txtCd_Emp.MaxLength = 30;
             this.txtCd_Emp.Name = "txtCd_Emp";
             this.txtCd_Emp.Size = new System.Drawing.Size(193, 19);
             this.txtCd_Emp.TabIndex = 4;
@@ -81,6 +83,7 @@
             // txtTxt_Passwd
             // 
             this.txtTxt_Passwd.Location = new System.Drawing.Point(91, 90);
+            this.txtTxt_Passwd.MaxLength = 30;
             this.txtTxt_Passwd.Name = "txtTxt_Passwd";
             this.txtTxt_Passwd.PasswordChar = '*';
             this.txtTxt_Passwd.Size = new System.Drawing.Size(193, 19);

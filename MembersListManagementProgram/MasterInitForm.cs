@@ -149,25 +149,21 @@ namespace MembersListManagementProgram
         }
 
         /// <summary>
-        /// 
+        /// 選択した行の主キーの値を設定
         /// </summary>
         /// <returns></returns>
         private string[] MakeParams()
         {
+            // 選択している行を取得
             BindingManagerBase bm = dgv.BindingContext[dgv.DataSource, dgv.DataMember];
             DataRowView drv = (DataRowView)bm.Current;
             DataRow row = drv.Row;
 
+            // 主キーの値を設定
             string[] args = new string[2];
+            string strRow = (this.m_strInitId.Equals(CommonConstants.BUMON)) ? "CD_DEPT" : "CD_EMP";
             args[0] = row["CD_CO", DataRowVersion.Original].ToString();
-            if (this.m_strInitId.Equals(CommonConstants.BUMON))
-            {
-                args[1] = (row["CD_DEPT", DataRowVersion.Original] != null) ? row["CD_DEPT", DataRowVersion.Original].ToString() : null;
-            }
-            else
-            {
-                args[1] = (row["CD_EMP", DataRowVersion.Original] != null) ? row["CD_EMP", DataRowVersion.Original].ToString() : null;
-            }
+            args[1] = (row[strRow, DataRowVersion.Original] != null) ? row[strRow, DataRowVersion.Original].ToString() : null;
             return args;
         }
 
