@@ -19,7 +19,7 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void FinishToolStripMenuItem_Click(object sender, EventArgs e)
+        private void finishToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // 保有してるすべての MDI 子フォームを取得する
             Form[] hMdiChildren = this.MdiChildren;
@@ -29,6 +29,7 @@ namespace MembersListManagementProgram
             {
                 hMdiChild.Close();
             }
+            this.lblUserName.Text = "サインイン";
             // ログイン画面表示
             Login();
         }

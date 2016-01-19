@@ -25,7 +25,7 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MembersListManagementForm_Load(object sender, EventArgs e)
+        private void MenuForm_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
         }
@@ -35,9 +35,9 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BtnDept_Click(object sender, EventArgs e)
+        private void btnDept_Click(object sender, EventArgs e)
         {
-            MasterInitForm f = new MasterInitForm(CommonConstants.BUMON);
+            ListViewForm f = new ListViewForm(CommonConstants.BUMON);
             f.MdiParent = this.MdiParent;
             f.Show();
         }
@@ -47,9 +47,9 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BtnEmp_Click(object sender, EventArgs e)
+        private void btnEmp_Click(object sender, EventArgs e)
         {
-            MasterInitForm f = new MasterInitForm(CommonConstants.SYAIN);
+            ListViewForm f = new ListViewForm(CommonConstants.SYAIN);
             f.MdiParent = this.MdiParent;
             f.Show();
         }

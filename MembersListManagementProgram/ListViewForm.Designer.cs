@@ -1,6 +1,6 @@
 ﻿namespace MembersListManagementProgram
 {
-    partial class MasterInitForm
+    partial class ListViewForm
     {
         /// <summary>
         /// Required designer variable.
@@ -47,7 +47,7 @@
             this.btnSearch.TabIndex = 0;
             this.btnSearch.Text = "検索";
             this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // btnCreate
             // 
@@ -58,7 +58,7 @@
             this.btnCreate.TabIndex = 1;
             this.btnCreate.Text = "新規作成";
             this.btnCreate.UseVisualStyleBackColor = true;
-            this.btnCreate.Click += new System.EventHandler(this.BtnCreate_Click);
+            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
             // 
             // btnEdit
             // 
@@ -69,7 +69,7 @@
             this.btnEdit.TabIndex = 2;
             this.btnEdit.Text = "編集";
             this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.BtnEdit_Click);
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnView
             // 
@@ -80,7 +80,7 @@
             this.btnView.TabIndex = 3;
             this.btnView.Text = "参照";
             this.btnView.UseVisualStyleBackColor = true;
-            this.btnView.Click += new System.EventHandler(this.BtnView_Click);
+            this.btnView.Click += new System.EventHandler(this.btnView_Click);
             // 
             // btnClose
             // 
@@ -91,7 +91,7 @@
             this.btnClose.TabIndex = 4;
             this.btnClose.Text = "終了";
             this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // dgv
             // 
@@ -116,7 +116,7 @@
             this.btnUpdate.TabIndex = 6;
             this.btnUpdate.Text = "更新";
             this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.BtnUpdate_Click);
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // MasterInitForm
             // 
@@ -133,7 +133,7 @@
             this.Controls.Add(this.btnSearch);
             this.Name = "MasterInitForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Load += new System.EventHandler(this.MasterInitForm_Load);
+            this.Load += new System.EventHandler(this.ListViewForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.ResumeLayout(false);
 

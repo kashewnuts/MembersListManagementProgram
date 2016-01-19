@@ -40,7 +40,7 @@
             this.btnDept.TabIndex = 0;
             this.btnDept.Text = "部門マスタ";
             this.btnDept.UseVisualStyleBackColor = true;
-            this.btnDept.Click += new System.EventHandler(this.BtnDept_Click);
+            this.btnDept.Click += new System.EventHandler(this.btnDept_Click);
             // 
             // btnEmp
             // 
@@ -50,7 +50,7 @@
             this.btnEmp.TabIndex = 1;
             this.btnEmp.Text = "社員マスタ";
             this.btnEmp.UseVisualStyleBackColor = true;
-            this.btnEmp.Click += new System.EventHandler(this.BtnEmp_Click);
+            this.btnEmp.Click += new System.EventHandler(this.btnEmp_Click);
             // 
             // MenuForm
             // 
@@ -63,7 +63,7 @@
             this.Name = "MenuForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "メニュー";
-            this.Load += new System.EventHandler(this.MembersListManagementForm_Load);
+            this.Load += new System.EventHandler(this.MenuForm_Load);
             this.ResumeLayout(false);
 
         }

@@ -31,10 +31,10 @@
             this.components = new System.ComponentModel.Container();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.finishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.txtUserName = new System.Windows.Forms.ToolStripTextBox();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.lblUserName = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -42,11 +42,10 @@
             // menuStrip
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.finishToolStripMenuItem,
-            this.txtUserName});
+            this.finishToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1008, 29);
+            this.menuStrip.Size = new System.Drawing.Size(1008, 26);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "MenuStrip";
             // 
@@ -55,16 +54,7 @@
             this.finishToolStripMenuItem.Name = "finishToolStripMenuItem";
             this.finishToolStripMenuItem.Size = new System.Drawing.Size(44, 25);
             this.finishToolStripMenuItem.Text = "新規";
-            this.finishToolStripMenuItem.Click += new System.EventHandler(this.FinishToolStripMenuItem_Click);
-            // 
-            // txtUserName
-            // 
-            this.txtUserName.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.txtUserName.Enabled = false;
-            this.txtUserName.Name = "txtUserName";
-            this.txtUserName.ReadOnly = true;
-            this.txtUserName.Size = new System.Drawing.Size(100, 25);
-            this.txtUserName.Text = "サインイン";
+            this.finishToolStripMenuItem.Click += new System.EventHandler(this.finishToolStripMenuItem_Click);
             // 
             // statusStrip
             // 
@@ -82,11 +72,24 @@
             this.toolStripStatusLabel.Size = new System.Drawing.Size(32, 18);
             this.toolStripStatusLabel.Text = "状態";
             // 
+            // lblUserName
+            // 
+            this.lblUserName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblUserName.AutoSize = true;
+            this.lblUserName.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblUserName.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblUserName.Location = new System.Drawing.Point(935, 4);
+            this.lblUserName.Name = "lblUserName";
+            this.lblUserName.Size = new System.Drawing.Size(68, 18);
+            this.lblUserName.TabIndex = 4;
+            this.lblUserName.Text = "サインイン";
+            // 
             // MainMDI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 730);
+            this.Controls.Add(this.lblUserName);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip);
             this.IsMdiContainer = true;
@@ -105,13 +108,12 @@
         }
         #endregion
 
-
-        private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.ToolStripMenuItem finishToolStripMenuItem;
-        public System.Windows.Forms.ToolStripTextBox txtUserName;
+        public System.Windows.Forms.MenuStrip menuStrip;
+        public System.Windows.Forms.Label lblUserName;
     }
 }
 

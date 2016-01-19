@@ -18,17 +18,38 @@ namespace MembersListManagementProgram
         }
 
         /// <summary>
+        /// Load Event Handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+            // 会社コード設定
+            using (OleDbIf db = new OleDbIf())
+            {
+                //表示される値はDataTableのNAME列
+                cmbCdCo.DisplayMember = "NM_CO_SHORT";
+                //対応する値はDataTableのID列
+                cmbCdCo.ValueMember = "CD_CO";
+                // DB処理
+                db.Connect();
+                DataTable tbl = db.ExecuteSql("SELECT CD_CO, NM_CO_SHORT FROM M_CO WHERE FLG_ACTIVE='Y'");
+                cmbCdCo.DataSource = tbl;
+            }
+        }
+
+        /// <summary>
         /// Login
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BtnLlogin_Click(object sender, EventArgs e)
+        private void btnLlogin_Click(object sender, EventArgs e)
         {
             if (ExcuteSearch())
             {
                 // 親フォーム(MDIフォーム)にログインユーザー名をセット
                 MainMDI parentForm = (MainMDI)this.MdiParent;
-                parentForm.txtUserName.Text = strUserName;
+                parentForm.lblUserName.Text = strUserName;
                 // メニュー画面表示
                 MenuForm f = new MenuForm(txtCd_Emp.Text);
                 f.MdiParent = this.MdiParent;
@@ -51,7 +72,7 @@ namespace MembersListManagementProgram
             {
                 db.Connect();
                 string strSql = "SELECT * FROM M_EMP WHERE CD_CO='{0}' AND CD_EMP='{1}' AND TXT_PASSWD='{2}' AND FLG_ACTIVE='Y'";
-                DataTable tbl = db.ExecuteSql(String.Format(strSql, txtCd_Co.Text, txtCd_Emp.Text, txtTxt_Passwd.Text));
+                DataTable tbl = db.ExecuteSql(String.Format(strSql, cmbCdCo.SelectedValue.ToString(), txtCd_Emp.Text, txtTxt_Passwd.Text));
                 bResult = (tbl.Rows.Count > 0) ? true : false;
                 if (bResult)
                 {

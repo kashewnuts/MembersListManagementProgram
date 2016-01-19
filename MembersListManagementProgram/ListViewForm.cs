@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace MembersListManagementProgram
 {
-    public partial class MasterInitForm : Form
+    public partial class ListViewForm : Form
     {
         /// <summary>
         /// プロパティ
@@ -16,7 +16,7 @@ namespace MembersListManagementProgram
         /// 初期化処理
         /// </summary>
         /// <param name="strInitId"></param>
-        public MasterInitForm(string strInitId)
+        public ListViewForm(string strInitId)
         {
             InitializeComponent();
             this.m_strInitId = strInitId;
@@ -30,9 +30,18 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MasterInitForm_Load(object sender, EventArgs e)
+        private void ListViewForm_Load(object sender, EventArgs e)
         {
+            // 画面サイズ指定
             this.WindowState = FormWindowState.Maximized;
+            // 
+            this.Activated += ListViewForm_Activated;
+        }
+
+        // 
+        void ListViewForm_Activated(object sender, EventArgs e)
+        {
+            if (dgv.RowCount > 0) btnSearch_Click(sender, e);
         }
 
         /// <summary>
@@ -59,7 +68,7 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BtnSearch_Click(object sender, EventArgs e)
+        private void btnSearch_Click(object sender, EventArgs e)
         {
             using (OleDbIf db = new OleDbIf())
             {
@@ -121,9 +130,9 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BtnCreate_Click(object sender, EventArgs e)
+        private void btnCreate_Click(object sender, EventArgs e)
         {
-            ShowDialog(CommonConstants.CREATE_MODE, sender, e);
+            ShowDialog(CommonConstants.CREATE_MODE);
         }
 
         /// <summary>
@@ -131,10 +140,10 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BtnEdit_Click(object sender, EventArgs e)
+        private void btnEdit_Click(object sender, EventArgs e)
         {
             string[] args = MakeParams();
-            ShowDialog(CommonConstants.UPDATE_MODE, sender, e, args[0], args[1]);
+            ShowDialog(CommonConstants.UPDATE_MODE, args[0], args[1]);
         }
 
         /// <summary>
@@ -142,10 +151,10 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BtnView_Click(object sender, EventArgs e)
+        private void btnView_Click(object sender, EventArgs e)
         {
             string[] args = MakeParams();
-            ShowDialog(CommonConstants.VIEW_MODE, sender, e, args[0], args[1]);
+            ShowDialog(CommonConstants.VIEW_MODE, args[0], args[1]);
         }
 
         /// <summary>
@@ -174,23 +183,21 @@ namespace MembersListManagementProgram
         /// <param name="sender"></param>
         /// <param name="e"></param>
         /// <param name="args"></param>
-        private void ShowDialog(string mode, object sender, EventArgs e, params string[] args)
+        private void ShowDialog(string mode, params string[] args)
         {
             if (this.m_strInitId.Equals(CommonConstants.BUMON))
             {
                 // 部門管理画面処理
-                DepartmentMasterEditForm f = new DepartmentMasterEditForm(mode, args);
+                DepartmentEditForm f = new DepartmentEditForm(mode, args);
                 f.MdiParent = this.MdiParent;
                 f.Show();
-                if (f.DialogResult == DialogResult.OK && this.dgv.RowCount != 0) BtnSearch_Click(sender, e);
             }
             else
             {
                 // 社員管理画面処理
-                MembersMasterEditForm f = new MembersMasterEditForm(mode, args);
+                MembersEditForm f = new MembersEditForm(mode, args);
                 f.MdiParent = this.MdiParent;
                 f.Show();
-                if (f.DialogResult == DialogResult.OK && this.dgv.RowCount != 0) BtnSearch_Click(sender, e);
             }
         }
 
@@ -199,7 +206,7 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BtnClose_Click(object sender, EventArgs e)
+        private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
@@ -209,7 +216,7 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BtnUpdate_Click(object sender, EventArgs e)
+        private void btnUpdate_Click(object sender, EventArgs e)
         {
             using (OleDbIf db = new OleDbIf())
             {
@@ -235,7 +242,7 @@ namespace MembersListManagementProgram
                                 row["CD_DEPT", DataRowVersion.Current].ToString(),
                                 row["NM_DEPT", DataRowVersion.Current].ToString(),
                                 row["TXT_REM", DataRowVersion.Current].ToString(),
-                                f.txtUserName.Text, cd_co, cd_dept);
+                                f.lblUserName.Text, cd_co, cd_dept);
                         }
                         else
                         {
@@ -255,7 +262,7 @@ namespace MembersListManagementProgram
                                 row["TXT_TEL", DataRowVersion.Current].ToString(),
                                 row["TXT_FAX", DataRowVersion.Current].ToString(),
                                 row["TXT_REM", DataRowVersion.Current].ToString(),
-                                f.txtUserName.Text, cd_co, cd_emp);
+                                f.lblUserName.Text, cd_co, cd_emp);
                         }
                         lst.Add(strSql);
                     }
@@ -266,7 +273,7 @@ namespace MembersListManagementProgram
                 {
                     db.ExecuteSql(s);
                 }
-                BtnSearch_Click(sender, e);
+                btnSearch_Click(sender, e);
             }
         }
     }
