@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
 
@@ -121,7 +122,24 @@ namespace MembersListManagementProgram
         /// <param name="e"></param>
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            ExcuteSql(GetSqlString());
+            DataTable tbl = new DataTable();
+            using (OleDbIf db = new OleDbIf())
+            {
+                db.Connect();
+                StringBuilder sb = new StringBuilder();
+                sb.Append("SELECT * FROM M_DEPT WHERE CD_CO='{0}' AND CD_DEPT='{1}'");
+                string strSql = sb.ToString();
+                tbl = db.ExecuteSql(String.Format(strSql, this.cmbCdCo.SelectedValue, this.txtCd_Dept.Text));
+            }
+            // 一意性エラーチェック
+            if (tbl.Rows.Count > 0)
+            {
+                MessageBox.Show("既に登録されています。", "通知");
+            }
+            else
+            {
+                ExcuteSql(GetSqlString());
+            }
         }
 
         /// <summary>
