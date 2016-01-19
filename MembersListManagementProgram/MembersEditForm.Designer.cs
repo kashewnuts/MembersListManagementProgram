@@ -173,7 +173,7 @@
             this.txtCd_Emp.MaxLength = 30;
             this.txtCd_Emp.Name = "txtCd_Emp";
             this.txtCd_Emp.Size = new System.Drawing.Size(196, 19);
-            this.txtCd_Emp.TabIndex = 13;
+            this.txtCd_Emp.TabIndex = 2;
             // 
             // txtNm_Emp
             // 
@@ -181,7 +181,7 @@
             this.txtNm_Emp.MaxLength = 100;
             this.txtNm_Emp.Name = "txtNm_Emp";
             this.txtNm_Emp.Size = new System.Drawing.Size(443, 19);
-            this.txtNm_Emp.TabIndex = 14;
+            this.txtNm_Emp.TabIndex = 3;
             // 
             // txtTxt_Passwd
             // 
@@ -190,7 +190,7 @@
             this.txtTxt_Passwd.Name = "txtTxt_Passwd";
             this.txtTxt_Passwd.PasswordChar = '*';
             this.txtTxt_Passwd.Size = new System.Drawing.Size(196, 19);
-            this.txtTxt_Passwd.TabIndex = 15;
+            this.txtTxt_Passwd.TabIndex = 4;
             // 
             // txtCd_Dept
             // 
@@ -198,7 +198,7 @@
             this.txtCd_Dept.MaxLength = 30;
             this.txtCd_Dept.Name = "txtCd_Dept";
             this.txtCd_Dept.Size = new System.Drawing.Size(60, 19);
-            this.txtCd_Dept.TabIndex = 16;
+            this.txtCd_Dept.TabIndex = 5;
             // 
             // txtTxt_Zip
             // 
@@ -206,7 +206,7 @@
             this.txtTxt_Zip.MaxLength = 30;
             this.txtTxt_Zip.Name = "txtTxt_Zip";
             this.txtTxt_Zip.Size = new System.Drawing.Size(196, 19);
-            this.txtTxt_Zip.TabIndex = 17;
+            this.txtTxt_Zip.TabIndex = 8;
             // 
             // txtTxt_Addr1
             // 
@@ -214,7 +214,7 @@
             this.txtTxt_Addr1.MaxLength = 100;
             this.txtTxt_Addr1.Name = "txtTxt_Addr1";
             this.txtTxt_Addr1.Size = new System.Drawing.Size(443, 19);
-            this.txtTxt_Addr1.TabIndex = 18;
+            this.txtTxt_Addr1.TabIndex = 9;
             // 
             // txtTxt_Addr2
             // 
@@ -222,7 +222,7 @@
             this.txtTxt_Addr2.MaxLength = 100;
             this.txtTxt_Addr2.Name = "txtTxt_Addr2";
             this.txtTxt_Addr2.Size = new System.Drawing.Size(443, 19);
-            this.txtTxt_Addr2.TabIndex = 19;
+            this.txtTxt_Addr2.TabIndex = 10;
             // 
             // txtTxt_Addr3
             // 
@@ -230,7 +230,7 @@
             this.txtTxt_Addr3.MaxLength = 100;
             this.txtTxt_Addr3.Name = "txtTxt_Addr3";
             this.txtTxt_Addr3.Size = new System.Drawing.Size(443, 19);
-            this.txtTxt_Addr3.TabIndex = 20;
+            this.txtTxt_Addr3.TabIndex = 11;
             // 
             // txtTxt_Tel
             // 
@@ -238,7 +238,7 @@
             this.txtTxt_Tel.MaxLength = 30;
             this.txtTxt_Tel.Name = "txtTxt_Tel";
             this.txtTxt_Tel.Size = new System.Drawing.Size(196, 19);
-            this.txtTxt_Tel.TabIndex = 21;
+            this.txtTxt_Tel.TabIndex = 12;
             // 
             // txtTxt_Fax
             // 
@@ -246,7 +246,7 @@
             this.txtTxt_Fax.MaxLength = 30;
             this.txtTxt_Fax.Name = "txtTxt_Fax";
             this.txtTxt_Fax.Size = new System.Drawing.Size(196, 19);
-            this.txtTxt_Fax.TabIndex = 22;
+            this.txtTxt_Fax.TabIndex = 13;
             // 
             // txtTxt_Rem
             // 
@@ -255,7 +255,7 @@
             this.txtTxt_Rem.Multiline = true;
             this.txtTxt_Rem.Name = "txtTxt_Rem";
             this.txtTxt_Rem.Size = new System.Drawing.Size(480, 114);
-            this.txtTxt_Rem.TabIndex = 23;
+            this.txtTxt_Rem.TabIndex = 14;
             // 
             // btnCancel
             // 
@@ -299,21 +299,21 @@
             this.cmbCdCo.Location = new System.Drawing.Point(92, 20);
             this.cmbCdCo.Name = "cmbCdCo";
             this.cmbCdCo.Size = new System.Drawing.Size(196, 20);
-            this.cmbCdCo.TabIndex = 33;
+            this.cmbCdCo.TabIndex = 1;
             // 
             // txtNm_Dept
             // 
             this.txtNm_Dept.Location = new System.Drawing.Point(158, 108);
             this.txtNm_Dept.Name = "txtNm_Dept";
             this.txtNm_Dept.Size = new System.Drawing.Size(377, 19);
-            this.txtNm_Dept.TabIndex = 34;
+            this.txtNm_Dept.TabIndex = 6;
             // 
             // btnDept
             // 
             this.btnDept.Location = new System.Drawing.Point(539, 106);
             this.btnDept.Name = "btnDept";
             this.btnDept.Size = new System.Drawing.Size(33, 23);
-            this.btnDept.TabIndex = 35;
+            this.btnDept.TabIndex = 7;
             this.btnDept.Text = "...";
             this.btnDept.UseVisualStyleBackColor = true;
             this.btnDept.Click += new System.EventHandler(this.btnDept_Click);

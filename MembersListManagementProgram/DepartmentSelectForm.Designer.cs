@@ -57,7 +57,7 @@
             this.dgv.ReadOnly = true;
             this.dgv.RowTemplate.Height = 21;
             this.dgv.Size = new System.Drawing.Size(739, 419);
-            this.dgv.TabIndex = 0;
+            this.dgv.TabIndex = 10;
             // 
             // btnSearch
             // 
@@ -65,7 +65,7 @@
             this.btnSearch.Location = new System.Drawing.Point(687, 28);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
-            this.btnSearch.TabIndex = 1;
+            this.btnSearch.TabIndex = 3;
             this.btnSearch.Text = "検索";
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
@@ -84,14 +84,14 @@
             this.txtCd_Dept.Location = new System.Drawing.Point(85, 30);
             this.txtCd_Dept.Name = "txtCd_Dept";
             this.txtCd_Dept.Size = new System.Drawing.Size(100, 19);
-            this.txtCd_Dept.TabIndex = 3;
+            this.txtCd_Dept.TabIndex = 1;
             // 
             // txtNm_Dept
             // 
             this.txtNm_Dept.Location = new System.Drawing.Point(191, 30);
             this.txtNm_Dept.Name = "txtNm_Dept";
             this.txtNm_Dept.Size = new System.Drawing.Size(305, 19);
-            this.txtNm_Dept.TabIndex = 4;
+            this.txtNm_Dept.TabIndex = 2;
             // 
             // btnClose
             // 
@@ -110,12 +110,12 @@
             this.btnSelectDept.Location = new System.Drawing.Point(687, 58);
             this.btnSelectDept.Name = "btnSelectDept";
             this.btnSelectDept.Size = new System.Drawing.Size(75, 23);
-            this.btnSelectDept.TabIndex = 6;
+            this.btnSelectDept.TabIndex = 4;
             this.btnSelectDept.Text = "選択";
             this.btnSelectDept.UseVisualStyleBackColor = true;
             this.btnSelectDept.Click += new System.EventHandler(this.btnSelectDept_Click);
             // 
-            // DepartmentListForm
+            // DepartmentSelectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -128,7 +128,7 @@
             this.Controls.Add(this.lblCd_Dept);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.dgv);
-            this.Name = "DepartmentListForm";
+            this.Name = "DepartmentSelectForm";
             this.Text = "部門一覧表示画面";
             this.Load += new System.EventHandler(this.DepartmentSelectForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();

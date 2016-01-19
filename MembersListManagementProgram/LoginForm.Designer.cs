@@ -78,7 +78,7 @@
             this.txtCd_Emp.MaxLength = 30;
             this.txtCd_Emp.Name = "txtCd_Emp";
             this.txtCd_Emp.Size = new System.Drawing.Size(193, 19);
-            this.txtCd_Emp.TabIndex = 4;
+            this.txtCd_Emp.TabIndex = 2;
             // 
             // txtTxt_Passwd
             // 
@@ -87,7 +87,7 @@
             this.txtTxt_Passwd.Name = "txtTxt_Passwd";
             this.txtTxt_Passwd.PasswordChar = '*';
             this.txtTxt_Passwd.Size = new System.Drawing.Size(193, 19);
-            this.txtTxt_Passwd.TabIndex = 5;
+            this.txtTxt_Passwd.TabIndex = 3;
             // 
             // btnLogin
             // 
@@ -97,7 +97,7 @@
             this.btnLogin.Location = new System.Drawing.Point(133, 153);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(75, 23);
-            this.btnLogin.TabIndex = 6;
+            this.btnLogin.TabIndex = 4;
             this.btnLogin.Text = "ログイン";
             this.btnLogin.UseVisualStyleBackColor = true;
             this.btnLogin.Click += new System.EventHandler(this.btnLlogin_Click);
@@ -111,7 +111,7 @@
             this.cmbCdCo.Location = new System.Drawing.Point(91, 34);
             this.cmbCdCo.Name = "cmbCdCo";
             this.cmbCdCo.Size = new System.Drawing.Size(193, 20);
-            this.cmbCdCo.TabIndex = 7;
+            this.cmbCdCo.TabIndex = 1;
             this.cmbCdCo.ValueMember = "CD_CO";
             // 
             // mCOBindingSource

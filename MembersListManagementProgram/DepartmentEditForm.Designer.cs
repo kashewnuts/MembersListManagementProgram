@@ -65,7 +65,7 @@
             this.btnCansel.Location = new System.Drawing.Point(477, 407);
             this.btnCansel.Name = "btnCansel";
             this.btnCansel.Size = new System.Drawing.Size(75, 23);
-            this.btnCansel.TabIndex = 16;
+            this.btnCansel.TabIndex = 17;
             this.btnCansel.Text = "キャンセル";
             this.btnCansel.UseVisualStyleBackColor = true;
             this.btnCansel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -76,7 +76,7 @@
             this.btnRegister.Location = new System.Drawing.Point(397, 407);
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(75, 23);
-            this.btnRegister.TabIndex = 15;
+            this.btnRegister.TabIndex = 16;
             this.btnRegister.Text = "登録";
             this.btnRegister.UseVisualStyleBackColor = true;
             this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
@@ -96,7 +96,7 @@
             this.txtTxt_Rem.Multiline = true;
             this.txtTxt_Rem.Name = "txtTxt_Rem";
             this.txtTxt_Rem.Size = new System.Drawing.Size(480, 200);
-            this.txtTxt_Rem.TabIndex = 13;
+            this.txtTxt_Rem.TabIndex = 14;
             // 
             // lblCd_Co
             // 
@@ -113,7 +113,7 @@
             this.btnDelete.Location = new System.Drawing.Point(13, 406);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(75, 23);
-            this.btnDelete.TabIndex = 14;
+            this.btnDelete.TabIndex = 15;
             this.btnDelete.Text = "削除";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -125,14 +125,14 @@
             this.cmbCdCo.Location = new System.Drawing.Point(82, 30);
             this.cmbCdCo.Name = "cmbCdCo";
             this.cmbCdCo.Size = new System.Drawing.Size(480, 20);
-            this.cmbCdCo.TabIndex = 17;
+            this.cmbCdCo.TabIndex = 10;
             // 
             // btnDept
             // 
             this.btnDept.Location = new System.Drawing.Point(529, 57);
             this.btnDept.Name = "btnDept";
             this.btnDept.Size = new System.Drawing.Size(33, 23);
-            this.btnDept.TabIndex = 20;
+            this.btnDept.TabIndex = 13;
             this.btnDept.Text = "...";
             this.btnDept.UseVisualStyleBackColor = true;
             this.btnDept.Click += new System.EventHandler(this.btnDept_Click);
@@ -145,7 +145,7 @@
             this.txtCd_Dept.Size = new System.Drawing.Size(66, 19);
             this.txtCd_Dept.TabIndex = 11;
             // 
-            // DepartmentMasterEditForm
+            // DepartmentEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -162,7 +162,7 @@
             this.Controls.Add(this.btnCansel);
             this.Controls.Add(this.lblTxt_Rem);
             this.Controls.Add(this.lblCd_Dept);
-            this.Name = "DepartmentMasterEditForm";
+            this.Name = "DepartmentEditForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "部門マスタ新規作成画面";
             this.Load += new System.EventHandler(this.DepartmentEditForm_Load);
