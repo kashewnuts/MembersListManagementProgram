@@ -79,18 +79,17 @@ namespace MembersListManagementProgram
                 string strTable = this.m_strInitId.Equals(CommonConstants.BUMON) ? "M_DEPT" : "M_EMP";
                 string strSql = String.Format("SELECT * FROM {0} WHERE FLG_ACTIVE='Y'", strTable);
                 this.dgv.DataSource = db.ExecuteSql(strSql);
-                SetDgvHeaderText(dgv);
-                SetDgvMaxInput(dgv);
+                SetDgvProperties(dgv);
                 // ボタン活性化
                 if (this.dgv.RowCount != 0) SwitchButtonView(true);
             }
         }
 
         /// <summary>
-        /// DataGridViewのHeaderText変更
+        /// DataGridViewのプロパティ変更
         /// </summary>
         /// <param name="dgv"></param>
-        private void SetDgvHeaderText(DataGridView dgv)
+        private void SetDgvProperties(DataGridView dgv)
         {
             int i = 0;
             this.dgv.Columns[i].ReadOnly = true;
@@ -126,12 +125,6 @@ namespace MembersListManagementProgram
             this.dgv.Columns[i++].HeaderText = "最終更新日";
             this.dgv.Columns[i].ReadOnly = true;
             this.dgv.Columns[i++].HeaderText = "有効フラグ";
-        }
-
-
-        private void SetDgvMaxInput(DataGridView dgv)
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>
