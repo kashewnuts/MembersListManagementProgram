@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Text;
 using System.Windows.Forms;
 
 namespace MembersListManagementProgram
@@ -34,14 +35,20 @@ namespace MembersListManagementProgram
         {
             // 画面サイズ指定
             this.WindowState = FormWindowState.Maximized;
-            // 
+            // Form Active時処理
             this.Activated += ListViewForm_Activated;
             // KeyEvent処理
             this.KeyPress += ListViewForm_KeyPress;
+            // 
+            this.KeyDown += ListViewForm_KeyDown;
         }
 
-        // 
-        void ListViewForm_Activated(object sender, EventArgs e)
+        /// <summary>
+        /// Form Active時処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ListViewForm_Activated(object sender, EventArgs e)
         {
             if (dgv.RowCount > 0) btnSearch_Click(sender, e);
         }
@@ -52,7 +59,7 @@ namespace MembersListManagementProgram
         /// <returns></returns>
         private string GetFormTitle()
         {
-            return this.m_strInitId.Equals(CommonConstants.BUMON) ? "部門マスタ管理画面" : "社員マスタ管理画面";
+            return this.m_strInitId.Equals(CommonConstants.MasterMode.BUMON) ? "部門マスタ管理画面" : "社員マスタ管理画面";
         }
 
         /// <summary>
@@ -76,9 +83,20 @@ namespace MembersListManagementProgram
             {
                 db.Connect();
                 // 表示するレコードを取得し、DataGridViewに関連付ける
-                string strTable = this.m_strInitId.Equals(CommonConstants.BUMON) ? "M_DEPT" : "M_EMP";
-                string strSql = String.Format("SELECT * FROM {0} WHERE FLG_ACTIVE='Y'", strTable);
-                this.dgv.DataSource = db.ExecuteSql(strSql);
+                StringBuilder sb = new StringBuilder();
+                if (this.m_strInitId.Equals(CommonConstants.MasterMode.BUMON))
+                {
+                    sb.Append("SELECT * FROM M_DEPT WHERE FLG_ACTIVE='Y'");
+                }
+                else
+                {
+                    sb.Append("SELECT ME.CD_CO, ME.CD_EMP, ME.NM_EMP, ME.TXT_PASSWD, ME.CD_DEPT, ME.TXT_ZIP, ME.TXT_ADDR1, ME.TXT_ADDR2, ME.TXT_ADDR3, ME.TXT_TEL, ME.TXT_FAX, ME.TXT_REM, ME.CD_CREATE, ME.DTM_CREATE, ME.CD_UPDATE, ME.DTM_UPDATE, ME.FLG_ACTIVE");
+                    sb.Append("  FROM M_EMP ME");
+                    sb.Append(" INNER JOIN M_DEPT MD");
+                    sb.Append("    ON ME.CD_CO = MD.CD_CO AND ME.CD_DEPT = MD.CD_DEPT AND ME.FLG_ACTIVE = MD.FLG_ACTIVE");
+                    sb.Append(" WHERE ME.FLG_ACTIVE='Y'");
+                }
+                this.dgv.DataSource = db.ExecuteSql(sb.ToString());
                 SetDgvProperties(dgv);
                 // ボタン活性化
                 if (this.dgv.RowCount != 0) SwitchButtonView(true);
@@ -94,7 +112,7 @@ namespace MembersListManagementProgram
             int i = 0;
             this.dgv.Columns[i].ReadOnly = true;
             this.dgv.Columns[i++].HeaderText = "会社コード";
-            if (this.m_strInitId.Equals(CommonConstants.BUMON))
+            if (this.m_strInitId.Equals(CommonConstants.MasterMode.BUMON))
             {
                 this.dgv.Columns[i].ReadOnly = true;
                 this.dgv.Columns[i++].HeaderText = "部門コード";
@@ -125,6 +143,48 @@ namespace MembersListManagementProgram
             this.dgv.Columns[i++].HeaderText = "最終更新日";
             this.dgv.Columns[i].ReadOnly = true;
             this.dgv.Columns[i++].HeaderText = "有効フラグ";
+
+            // Validation処理
+            this.dgv.CellValidating += dgv_CellValidating;
+        }
+
+        /// <summary>
+        /// Validation処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgv_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            // エラーメッセージテキスト初期化
+            dgv.Rows[e.RowIndex].ErrorText = "";
+            // 検証する必要がある列名取得
+            string strColumnName = dgv.Columns[e.ColumnIndex].DataPropertyName;
+            // 最大桁数設定
+            int nMaximumNumberOfDigits = 0;
+            if (strColumnName.Equals("TXT_REM"))
+            {
+                nMaximumNumberOfDigits = 500;
+            }
+            else if (strColumnName.Equals("NM_DEPT")
+                || strColumnName.Equals("NM_EMP")
+                || strColumnName.Equals("TXT_ADDR1")
+                || strColumnName.Equals("TXT_ADDR2")
+                || strColumnName.Equals("TXT_ADDR3"))
+            {
+                nMaximumNumberOfDigits = 100;
+            }
+            else
+            {
+                nMaximumNumberOfDigits = 30;
+            }
+            // 最大桁数チェック
+            Encoding sjisEnc = Encoding.GetEncoding("Shift_JIS");
+            int nByteLength = sjisEnc.GetByteCount(e.FormattedValue.ToString());
+            if (nByteLength > nMaximumNumberOfDigits)
+            {
+                e.Cancel = true;
+                dgv.Rows[e.RowIndex].ErrorText = "入力できる桁数を超えています。";
+            }
         }
 
         /// <summary>
@@ -134,7 +194,7 @@ namespace MembersListManagementProgram
         /// <param name="e"></param>
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            ShowDialog(CommonConstants.CREATE_MODE);
+            ShowDialog(CommonConstants.EditMode.CREATE_MODE);
         }
 
         /// <summary>
@@ -145,7 +205,7 @@ namespace MembersListManagementProgram
         private void btnEdit_Click(object sender, EventArgs e)
         {
             string[] args = MakeParams();
-            ShowDialog(CommonConstants.UPDATE_MODE, args[0], args[1]);
+            ShowDialog(CommonConstants.EditMode.UPDATE_MODE, args[0], args[1]);
         }
 
         /// <summary>
@@ -156,7 +216,7 @@ namespace MembersListManagementProgram
         private void btnView_Click(object sender, EventArgs e)
         {
             string[] args = MakeParams();
-            ShowDialog(CommonConstants.VIEW_MODE, args[0], args[1]);
+            ShowDialog(CommonConstants.EditMode.VIEW_MODE, args[0], args[1]);
         }
 
         /// <summary>
@@ -172,7 +232,7 @@ namespace MembersListManagementProgram
 
             // 主キーの値を設定
             string[] args = new string[2];
-            string strRow = (this.m_strInitId.Equals(CommonConstants.BUMON)) ? "CD_DEPT" : "CD_EMP";
+            string strRow = (this.m_strInitId.Equals(CommonConstants.MasterMode.BUMON)) ? "CD_DEPT" : "CD_EMP";
             args[0] = row["CD_CO", DataRowVersion.Original].ToString();
             args[1] = (row[strRow, DataRowVersion.Original] != null) ? row[strRow, DataRowVersion.Original].ToString() : null;
             return args;
@@ -187,7 +247,7 @@ namespace MembersListManagementProgram
         /// <param name="args"></param>
         private void ShowDialog(string mode, params string[] args)
         {
-            if (this.m_strInitId.Equals(CommonConstants.BUMON))
+            if (this.m_strInitId.Equals(CommonConstants.MasterMode.BUMON))
             {
                 // 部門管理画面処理
                 DepartmentEditForm f = new DepartmentEditForm(mode, args);
@@ -235,7 +295,7 @@ namespace MembersListManagementProgram
                     if (row.RowState != DataRowState.Unchanged)
                     {
                         cd_co = row["CD_CO", DataRowVersion.Original].ToString();
-                        if (this.m_strInitId.Equals(CommonConstants.BUMON))
+                        if (this.m_strInitId.Equals(CommonConstants.MasterMode.BUMON))
                         {
                             cd_dept = (row["CD_DEPT", DataRowVersion.Original] != null) ? row["CD_DEPT", DataRowVersion.Original].ToString() : null;
                             strSql = "UPDATE M_DEPT SET CD_CO='{0}', CD_DEPT='{1}', NM_DEPT='{2}', TXT_REM='{3}', CD_UPDATE='{4}', DTM_UPDATE=SYSDATE, FLG_ACTIVE='Y' WHERE CD_CO='{5}' AND CD_DEPT='{6}'";
@@ -297,12 +357,26 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void ListViewForm_KeyPress(object sender, KeyPressEventArgs e)
+        private void ListViewForm_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Escape)
             {
                 this.Close();
             }
+        }
+
+        private void ListViewForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Ctrl+Tab押下時処理
+            if (e.Control && e.KeyValue == 17)
+            {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
+            //if (e.KeyCode == Keys.ControlKey || e.KeyCode == Keys.Tab)
+            //{
+            //    e.Handled = true;
+            //}
         }
     }
 }

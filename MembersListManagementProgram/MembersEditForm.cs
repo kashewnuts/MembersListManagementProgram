@@ -50,7 +50,7 @@ namespace MembersListManagementProgram
             // 会社コード取得
             cmbCdCo.DataSource = GetCdCo();
             // 編集、参照ボタン押下時時データ取得
-            if (!this.m_strEditMode.Equals(CommonConstants.CREATE_MODE)) ExcuteSearch();
+            if (!this.m_strEditMode.Equals(CommonConstants.EditMode.CREATE_MODE)) ExcuteSearch();
             // 部門コード変更時部門名取得
             txtCd_Dept.LostFocus += txtCd_Dept_LostFocus;
             // 部門コード一覧画面で部門変更時、値反映
@@ -66,8 +66,8 @@ namespace MembersListManagementProgram
         /// <returns></returns>
         private string GetFormTitle()
         {
-            if (this.m_strEditMode.Equals(CommonConstants.CREATE_MODE)) return "社員マスタ新規作成画面";
-            else if (this.m_strEditMode.Equals(CommonConstants.UPDATE_MODE)) return "社員マスタ編集画面";
+            if (this.m_strEditMode.Equals(CommonConstants.EditMode.CREATE_MODE)) return "社員マスタ新規作成画面";
+            else if (this.m_strEditMode.Equals(CommonConstants.EditMode.UPDATE_MODE)) return "社員マスタ編集画面";
             else return "社員マスタ参照画面";
         }
 
@@ -76,11 +76,11 @@ namespace MembersListManagementProgram
         /// </summary>
         private void SwitchVisibleButton()
         {
-            if (this.m_strEditMode.Equals(CommonConstants.CREATE_MODE))
+            if (this.m_strEditMode.Equals(CommonConstants.EditMode.CREATE_MODE))
             {
                 this.Controls.Remove(this.btnDelete);
             }
-            else if (this.m_strEditMode.Equals(CommonConstants.VIEW_MODE))
+            else if (this.m_strEditMode.Equals(CommonConstants.EditMode.VIEW_MODE))
             {
                 // ボタン処理
                 this.Controls.Remove(this.btnRegister);
@@ -153,7 +153,7 @@ namespace MembersListManagementProgram
                 tbl = db.ExecuteSql(String.Format(strSql, this.cmbCdCo.SelectedValue, this.txtCd_Emp.Text));
             }
             // 一意性エラーチェック
-            if (this.m_strEditMode.Equals(CommonConstants.CREATE_MODE) && tbl.Rows.Count > 0)
+            if (this.m_strEditMode.Equals(CommonConstants.EditMode.CREATE_MODE) && tbl.Rows.Count > 0)
             {
                 MessageBox.Show("既に登録されています。", "通知");
             }
@@ -258,14 +258,14 @@ namespace MembersListManagementProgram
         {
             string strSql = null;
             MainMDI f = (MainMDI)this.MdiParent;
-            if (this.m_strEditMode.Equals(CommonConstants.CREATE_MODE))
+            if (this.m_strEditMode.Equals(CommonConstants.EditMode.CREATE_MODE))
             {
                 strSql = "INSERT INTO M_EMP VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', SYSDATE, '{13}', SYSDATE, 'Y')";
                 strSql = String.Format(
                     strSql, cmbCdCo.SelectedValue, txtCd_Emp.Text, txtNm_Emp.Text, txtTxt_Passwd.Text, txtCd_Dept.Text, txtTxt_Zip.Text,
                     txtTxt_Addr1.Text, txtTxt_Addr2.Text, txtTxt_Addr3.Text, txtTxt_Tel.Text, txtTxt_Fax.Text, txtTxt_Rem.Text, f.lblUserName.Text, f.lblUserName.Text);
             }
-            else if (this.m_strEditMode.Equals(CommonConstants.UPDATE_MODE))
+            else if (this.m_strEditMode.Equals(CommonConstants.EditMode.UPDATE_MODE))
             {
                 strSql = "UPDATE M_EMP SET CD_CO='{0}', CD_EMP='{1}', NM_EMP='{2}', TXT_PASSWD='{3}', CD_DEPT='{4}', TXT_ZIP='{5}', TXT_ADDR1='{6}', TXT_ADDR2='{7}', TXT_ADDR3='{8}', TXT_TEL='{9}', TXT_FAX='{10}', TXT_REM='{11}', CD_UPDATE='{12}', DTM_UPDATE=SYSDATE, FLG_ACTIVE='Y' WHERE CD_CO='{13}' AND CD_EMP='{14}'";
                 strSql = String.Format(
