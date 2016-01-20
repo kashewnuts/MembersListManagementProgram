@@ -53,7 +53,7 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void LoginForm_KeyPress(object sender, KeyPressEventArgs e)
+        private void LoginForm_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Escape)
             {

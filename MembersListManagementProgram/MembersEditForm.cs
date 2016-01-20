@@ -319,7 +319,7 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void MembersEditForm_Activated(object sender, EventArgs e)
+        private void MembersEditForm_Activated(object sender, EventArgs e)
         {
             if (m_strCd_Dept != null && !"".Equals(m_strCd_Dept)) txtCd_Dept.Text = m_strCd_Dept;
             if (m_strNm_Dept != null && !"".Equals(m_strNm_Dept)) txtNm_Dept.Text = m_strNm_Dept;
@@ -330,7 +330,7 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void MembersEditForm_KeyPress(object sender, KeyPressEventArgs e)
+        private void MembersEditForm_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Escape
                 && DialogResult.Yes == MessageBox.Show("終了しますか？", "通知", MessageBoxButtons.YesNo))

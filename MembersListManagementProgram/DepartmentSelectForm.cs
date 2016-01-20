@@ -50,7 +50,7 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void txtCd_Dept_LostFocus(object sender, EventArgs e)
+        private void txtCd_Dept_LostFocus(object sender, EventArgs e)
         {
             if ("".Equals(txtCd_Dept.Text))
             {
@@ -116,7 +116,7 @@ namespace MembersListManagementProgram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void DepartmentListForm_FormClosed(object sender, FormClosedEventArgs e)
+        private void DepartmentListForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             // 選択している行の値を設定
             if (dgv.SelectedCells.Count > 0)
