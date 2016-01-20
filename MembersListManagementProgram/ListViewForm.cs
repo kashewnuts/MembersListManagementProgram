@@ -36,6 +36,8 @@ namespace MembersListManagementProgram
             this.WindowState = FormWindowState.Maximized;
             // 
             this.Activated += ListViewForm_Activated;
+            // KeyEvent処理
+            this.KeyPress += ListViewForm_KeyPress;
         }
 
         // 
@@ -274,6 +276,19 @@ namespace MembersListManagementProgram
                     db.ExecuteSql(s);
                 }
                 btnSearch_Click(sender, e);
+            }
+        }
+
+        /// <summary>
+        /// KeyEvent処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void ListViewForm_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Escape)
+            {
+                this.Close();
             }
         }
     }

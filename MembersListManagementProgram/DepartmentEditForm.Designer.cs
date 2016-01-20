@@ -162,6 +162,7 @@
             this.Controls.Add(this.btnCansel);
             this.Controls.Add(this.lblTxt_Rem);
             this.Controls.Add(this.lblCd_Dept);
+            this.KeyPreview = true;
             this.Name = "DepartmentEditForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "部門マスタ新規作成画面";

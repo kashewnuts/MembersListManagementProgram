@@ -52,7 +52,7 @@
             // finishToolStripMenuItem
             // 
             this.finishToolStripMenuItem.Name = "finishToolStripMenuItem";
-            this.finishToolStripMenuItem.Size = new System.Drawing.Size(44, 25);
+            this.finishToolStripMenuItem.Size = new System.Drawing.Size(44, 22);
             this.finishToolStripMenuItem.Text = "新規";
             this.finishToolStripMenuItem.Click += new System.EventHandler(this.finishToolStripMenuItem_Click);
             // 
@@ -93,6 +93,7 @@
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip);
             this.IsMdiContainer = true;
+            this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip;
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "MainMDI";

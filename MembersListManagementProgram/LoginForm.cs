@@ -25,6 +25,16 @@ namespace MembersListManagementProgram
         private void LoginForm_Load(object sender, EventArgs e)
         {
             // 会社コード設定
+            GetCd_Co();
+            // KeyEvent処理
+            this.KeyPress += LoginForm_KeyPress;
+        }
+
+        /// <summary>
+        /// 会社コード指定
+        /// </summary>
+        private void GetCd_Co()
+        {
             using (OleDbIf db = new OleDbIf())
             {
                 //表示される値はDataTableのNAME列
@@ -35,6 +45,19 @@ namespace MembersListManagementProgram
                 db.Connect();
                 DataTable tbl = db.ExecuteSql("SELECT CD_CO, NM_CO_SHORT FROM M_CO WHERE FLG_ACTIVE='Y'");
                 cmbCdCo.DataSource = tbl;
+            }
+        }
+
+        /// <summary>
+        /// KeyEvent処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void LoginForm_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Escape)
+            {
+                this.Close();
             }
         }
 

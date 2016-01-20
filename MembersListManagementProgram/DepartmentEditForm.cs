@@ -57,6 +57,8 @@ namespace MembersListManagementProgram
             txtCd_Dept.LostFocus += txtCd_Dept_LostFocus;
             // 部門コード一覧画面で部門変更時、値反映
             this.Activated += DepartmentEditForm_Activated;
+            // KeyEvent処理
+            this.KeyPress += DepartmentEditForm_KeyPress;
         }
 
         /// <summary>
@@ -265,6 +267,19 @@ namespace MembersListManagementProgram
             DepartmentSelectForm f = new DepartmentSelectForm(this.cmbCdCo.SelectedValue.ToString(), this);
             f.MdiParent = this.MdiParent;
             f.Show();
+        }
+
+        /// <summary>
+        /// KeyEvent処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DepartmentEditForm_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Escape)
+            {
+                this.Close();
+            }
         }
     }
 }

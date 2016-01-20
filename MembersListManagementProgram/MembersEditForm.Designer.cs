@@ -353,6 +353,7 @@
             this.Controls.Add(this.lblNm_Emp);
             this.Controls.Add(this.lblCd_Emp);
             this.Controls.Add(this.lblCd_Co);
+            this.KeyPreview = true;
             this.Name = "MembersEditForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "社員新規作成画面";

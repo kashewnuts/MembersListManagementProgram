@@ -49,6 +49,8 @@ namespace MembersListManagementProgram
             txtCd_Dept.LostFocus += txtCd_Dept_LostFocus;
             // 画面を閉じる際に部門コード、部門名の値設定
             this.FormClosed += DepartmentListForm_FormClosed;
+            // KeyEvent処理
+            this.KeyPress += DepartmentSelectForm_KeyPress;
         }
 
         /// <summary>
@@ -152,6 +154,19 @@ namespace MembersListManagementProgram
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        /// <summary>
+        /// KeyEvent処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DepartmentSelectForm_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Escape)
+            {
+                this.Close();
+            }
         }
     }
 }

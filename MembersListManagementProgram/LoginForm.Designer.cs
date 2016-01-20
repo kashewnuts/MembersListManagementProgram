@@ -146,6 +146,7 @@
             this.Controls.Add(this.lblCd_Co);
             this.Controls.Add(this.lblTxt_Passwd);
             this.Controls.Add(this.lblCd_Emp);
+            this.KeyPreview = true;
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";

@@ -128,6 +128,7 @@
             this.Controls.Add(this.lblCd_Dept);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.dgv);
+            this.KeyPreview = true;
             this.Name = "DepartmentSelectForm";
             this.Text = "部門一覧表示画面";
             this.Load += new System.EventHandler(this.DepartmentSelectForm_Load);
