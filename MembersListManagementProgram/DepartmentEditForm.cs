@@ -59,6 +59,8 @@ namespace MembersListManagementProgram
             this.Activated += DepartmentEditForm_Activated;
             // KeyEvent処理
             this.KeyPress += DepartmentEditForm_KeyPress;
+            // FormClosing処理
+            this.FormClosing += DepartmentEditForm_FormClosing;
         }
 
         /// <summary>
@@ -279,6 +281,20 @@ namespace MembersListManagementProgram
             if (e.KeyChar == (char)Keys.Escape)
             {
                 this.Close();
+            }
+        }
+
+        /// <summary>
+        /// FormClosing処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void DepartmentEditForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!this.m_strEditMode.Equals(CommonConstants.VIEW_MODE) && 
+                DialogResult.No == MessageBox.Show("終了しますか？", "通知", MessageBoxButtons.YesNo))
+            {
+                e.Cancel = true;
             }
         }
     }
