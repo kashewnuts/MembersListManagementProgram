@@ -57,8 +57,6 @@ namespace MembersListManagementProgram
             this.Activated += MembersEditForm_Activated;
             // KeyEvent処理
             this.KeyPress += MembersEditForm_KeyPress;
-            // FormClosing処理
-            this.FormClosing += MembersEditForm_FormClosing;
 
         }
 
@@ -155,7 +153,7 @@ namespace MembersListManagementProgram
                 tbl = db.ExecuteSql(String.Format(strSql, this.cmbCdCo.SelectedValue, this.txtCd_Emp.Text));
             }
             // 一意性エラーチェック
-            if (tbl.Rows.Count > 0)
+            if (this.m_strEditMode.Equals(CommonConstants.CREATE_MODE) && tbl.Rows.Count > 0)
             {
                 MessageBox.Show("既に登録されています。", "通知");
             }
@@ -185,7 +183,10 @@ namespace MembersListManagementProgram
         /// <param name="e"></param>
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            if (DialogResult.No != MessageBox.Show("終了しますか？", "通知", MessageBoxButtons.YesNo))
+            {
+                this.Close();
+            }
         }
 
         /// <summary>
@@ -235,6 +236,7 @@ namespace MembersListManagementProgram
                 db.BeginTransaction();
                 db.ExecuteSql(strSql);
                 db.CommitTransaction();
+                MessageBox.Show("処理が完了しました。", "通知");
             }
             catch (Exception)
             {
@@ -323,23 +325,10 @@ namespace MembersListManagementProgram
         /// <param name="e"></param>
         void MembersEditForm_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Escape)
+            if (e.KeyChar == (char)Keys.Escape
+                && DialogResult.No != MessageBox.Show("終了しますか？", "通知", MessageBoxButtons.YesNo))
             {
                 this.Close();
-            }
-        }
-
-        /// <summary>
-        /// FormClosing処理
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void MembersEditForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (!this.m_strEditMode.Equals(CommonConstants.VIEW_MODE) &&
-                DialogResult.No == MessageBox.Show("終了しますか？", "通知", MessageBoxButtons.YesNo))
-            {
-                e.Cancel = true;
             }
         }
 

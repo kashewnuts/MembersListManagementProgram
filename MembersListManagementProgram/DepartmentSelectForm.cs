@@ -132,16 +132,16 @@ namespace MembersListManagementProgram
                 if (dParentForm != null)
                 {
                     // 部門コード設定
-                    dParentForm.m_strCd_Dept = dgv.CurrentRow.Cells[0].Value.ToString();
+                    dParentForm.m_strCd_Dept = dgv.CurrentRow.Cells[1].Value.ToString();
                     // 部門名設定
-                    dParentForm.m_strNm_Dept = dgv.CurrentRow.Cells[1].Value.ToString();
+                    dParentForm.m_strNm_Dept = dgv.CurrentRow.Cells[2].Value.ToString();
                 }
                 if (mParentForm != null)
                 {
                     // 部門コード設定
-                    mParentForm.m_strCd_Dept = dgv.CurrentRow.Cells[0].Value.ToString();
+                    mParentForm.m_strCd_Dept = dgv.CurrentRow.Cells[1].Value.ToString();
                     // 部門名設定
-                    mParentForm.m_strNm_Dept = dgv.CurrentRow.Cells[1].Value.ToString();
+                    mParentForm.m_strNm_Dept = dgv.CurrentRow.Cells[2].Value.ToString();
                 }
             }
         }

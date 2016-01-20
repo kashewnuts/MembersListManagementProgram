@@ -57,8 +57,6 @@ namespace MembersListManagementProgram
             txtCd_Dept.LostFocus += txtCd_Dept_LostFocus;
             // KeyEvent処理
             this.KeyPress += DepartmentEditForm_KeyPress;
-            // FormClosing処理
-            this.FormClosing += DepartmentEditForm_FormClosing;
         }
 
         /// <summary>
@@ -163,7 +161,10 @@ namespace MembersListManagementProgram
         /// <param name="e"></param>
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            if (DialogResult.No != MessageBox.Show("終了しますか？", "通知", MessageBoxButtons.YesNo))
+            {
+                this.Close();
+            }
         }
 
         /// <summary>
@@ -264,23 +265,10 @@ namespace MembersListManagementProgram
         /// <param name="e"></param>
         private void DepartmentEditForm_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Escape)
+            if (e.KeyChar == (char)Keys.Escape
+                && DialogResult.No != MessageBox.Show("終了しますか？", "通知", MessageBoxButtons.YesNo))
             {
                 this.Close();
-            }
-        }
-
-        /// <summary>
-        /// FormClosing処理
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void DepartmentEditForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (!this.m_strEditMode.Equals(CommonConstants.VIEW_MODE) &&
-                DialogResult.No == MessageBox.Show("終了しますか？", "通知", MessageBoxButtons.YesNo))
-            {
-                e.Cancel = true;
             }
         }
     }
