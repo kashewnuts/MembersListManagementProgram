@@ -7,7 +7,15 @@ namespace MembersListManagementProgram
 {
     class OleDbIf : IDisposable
     {
+        /// <summary>
+        /// SQLコネクション
+        /// </summary>
         private OleDbConnection _conn = null;
+
+        /// <summary>
+        /// トランザクション・オブジェクト
+        /// </summary>
+        /// <remarks></remarks>
         private OleDbTransaction _trn = null;
 
         /// <summary>
@@ -37,7 +45,7 @@ namespace MembersListManagementProgram
         {
             try
             {
-                if (_conn != null) _conn.Close();
+                _conn.Close();
             }
             catch (Exception ex)
             {
@@ -55,7 +63,7 @@ namespace MembersListManagementProgram
             DataTable dt = new DataTable();
             try
             {
-                OleDbCommand cmd = new OleDbCommand(strSql, _conn);
+                OleDbCommand cmd = new OleDbCommand(strSql, _conn, _trn);
                 OleDbDataAdapter adp = new OleDbDataAdapter(cmd);
                 adp.Fill(dt);
                 adp.Dispose();

@@ -278,6 +278,7 @@ namespace MembersListManagementProgram
                     db.ExecuteSql(s);
                 }
                 db.CommitTransaction();
+                MessageBox.Show("登録を完了しました。", "通知");
             }
             catch (Exception)
             {
