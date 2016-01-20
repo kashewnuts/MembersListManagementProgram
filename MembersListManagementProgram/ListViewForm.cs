@@ -220,7 +220,8 @@ namespace MembersListManagementProgram
         /// <param name="e"></param>
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            using (OleDbIf db = new OleDbIf())
+            OleDbIf db = new OleDbIf();
+            try
             {
                 string strSql = null;
                 string cd_co, cd_dept, cd_emp;
@@ -271,11 +272,22 @@ namespace MembersListManagementProgram
                 }
                 // SQL実行
                 db.Connect();
+                db.BeginTransaction();
                 foreach (string s in lst)
                 {
                     db.ExecuteSql(s);
                 }
+                db.CommitTransaction();
+            }
+            catch (Exception)
+            {
+                db.RollbackTransaction();
+                MessageBox.Show("登録に失敗しました。", "通知");
+            }
+            finally
+            {
                 btnSearch_Click(sender, e);
+                db.Dispose();
             }
         }
 

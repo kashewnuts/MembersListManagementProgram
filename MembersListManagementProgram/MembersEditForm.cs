@@ -228,11 +228,23 @@ namespace MembersListManagementProgram
         /// <param name="strSql"></param>
         private void ExcuteSql(string strSql)
         {
-            using (OleDbIf db = new OleDbIf())
+            OleDbIf db = new OleDbIf();
+            try
             {
                 db.Connect();
+                db.BeginTransaction();
                 db.ExecuteSql(strSql);
+                db.CommitTransaction();
+            }
+            catch (Exception)
+            {
+                db.RollbackTransaction();
+                MessageBox.Show("登録に失敗しました。", "通知");
+            }
+            finally
+            {
                 this.Close();
+                db.Dispose();
             }
         }
 

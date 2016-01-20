@@ -136,7 +136,7 @@ namespace MembersListManagementProgram
                 tbl = db.ExecuteSql(String.Format(strSql, this.cmbCdCo.SelectedValue, this.txtCd_Dept.Text));
             }
             // 一意性エラーチェック
-            if (tbl.Rows.Count > 0)
+            if (this.m_strEditMode.Equals(CommonConstants.CREATE_MODE) && tbl.Rows.Count > 0)
             {
                 MessageBox.Show("既に登録されています。", "通知");
             }
@@ -194,11 +194,23 @@ namespace MembersListManagementProgram
         /// <param name="strSql"></param>
         private void ExcuteSql(string strSql)
         {
-            using (OleDbIf db = new OleDbIf())
+            OleDbIf db = new OleDbIf();
+            try
             {
                 db.Connect();
+                db.BeginTransaction();
                 db.ExecuteSql(strSql);
+                db.CommitTransaction();
+            }
+            catch (Exception)
+            {
+                db.RollbackTransaction();
+                MessageBox.Show("登録に失敗しました。", "通知");
+            }
+            finally
+            {
                 this.Close();
+                db.Dispose();
             }
         }
 
@@ -291,7 +303,7 @@ namespace MembersListManagementProgram
         /// <param name="e"></param>
         void DepartmentEditForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!this.m_strEditMode.Equals(CommonConstants.VIEW_MODE) && 
+            if (!this.m_strEditMode.Equals(CommonConstants.VIEW_MODE) &&
                 DialogResult.No == MessageBox.Show("終了しますか？", "通知", MessageBoxButtons.YesNo))
             {
                 e.Cancel = true;
