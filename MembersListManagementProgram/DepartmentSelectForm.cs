@@ -43,8 +43,6 @@ namespace MembersListManagementProgram
         /// <param name="e"></param>
         private void DepartmentSelectForm_Load(object sender, EventArgs e)
         {
-            // 画面サイズ指定
-            this.WindowState = FormWindowState.Maximized;
             // 部門コード変更時部門名取得
             txtCd_Dept.LostFocus += txtCd_Dept_LostFocus;
             // 画面を閉じる際に部門コード、部門名の値設定

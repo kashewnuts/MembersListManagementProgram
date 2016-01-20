@@ -44,6 +44,7 @@ namespace MembersListManagementProgram
         /// <param name="e"></param>
         private void MembersEditForm_Load(object sender, EventArgs e)
         {
+            // 画面サイズ指定
             this.WindowState = FormWindowState.Maximized;
             // ボタン表示・非表示切り替え
             SwitchVisibleButton();
@@ -345,13 +346,12 @@ namespace MembersListManagementProgram
         /// <param name="e"></param>
         private void btnDept_Click(object sender, EventArgs e)
         {
-            DepartmentSelectForm f = new DepartmentSelectForm(this.cmbCdCo.SelectedValue.ToString(), this);
-            f.MdiParent = this.MdiParent;
-            f.Show();
-            //using (DepartmentSelectForm f = new DepartmentSelectForm(this.cmbCdCo.SelectedValue.ToString(), this))
-            //{
-            //    f.ShowDialog(this);
-            //}
+            using (DepartmentSelectForm f = new DepartmentSelectForm(this.cmbCdCo.SelectedValue.ToString(), this))
+            {
+                f.ShowDialog(this);
+            }
+            txtCd_Dept.Text = m_strCd_Dept;
+            txtNm_Dept.Text = m_strNm_Dept;
         }
     }
 }

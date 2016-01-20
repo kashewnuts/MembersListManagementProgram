@@ -130,6 +130,7 @@
             this.Controls.Add(this.dgv);
             this.KeyPreview = true;
             this.Name = "DepartmentSelectForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "部門一覧表示画面";
             this.Load += new System.EventHandler(this.DepartmentSelectForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
