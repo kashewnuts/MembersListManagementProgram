@@ -55,8 +55,6 @@ namespace MembersListManagementProgram
             if (!this.m_strEditMode.Equals(CommonConstants.CREATE_MODE)) ExcuteSearch();
             // 部門コード変更時部門名取得
             txtCd_Dept.LostFocus += txtCd_Dept_LostFocus;
-            // 部門コード一覧画面で部門変更時、値反映
-            this.Activated += DepartmentEditForm_Activated;
             // KeyEvent処理
             this.KeyPress += DepartmentEditForm_KeyPress;
             // FormClosing処理
@@ -94,7 +92,6 @@ namespace MembersListManagementProgram
                 this.txtNm_Dept.Enabled = false;
                 this.txtNm_Dept.ReadOnly = true;
                 this.txtNm_Dept.Enabled = false;
-                this.btnDept.Enabled = false;
                 this.txtTxt_Rem.ReadOnly = true;
                 this.txtTxt_Rem.Enabled = false;
             }
@@ -131,7 +128,7 @@ namespace MembersListManagementProgram
             {
                 db.Connect();
                 StringBuilder sb = new StringBuilder();
-                sb.Append("SELECT * FROM M_DEPT WHERE CD_CO='{0}' AND CD_DEPT='{1}'");
+                sb.AppendLine("SELECT * FROM M_DEPT WHERE CD_CO='{0}' AND CD_DEPT='{1}' AND FLG_ACTIVE='Y'");
                 string strSql = sb.ToString();
                 tbl = db.ExecuteSql(String.Format(strSql, this.cmbCdCo.SelectedValue, this.txtCd_Dept.Text));
             }
@@ -177,7 +174,7 @@ namespace MembersListManagementProgram
             using (OleDbIf db = new OleDbIf())
             {
                 db.Connect();
-                string strSql = "SELECT CD_CO, CD_DEPT, NM_DEPT, TXT_REM FROM M_DEPT WHERE CD_CO='{0}' AND CD_DEPT='{1}'";
+                string strSql = "SELECT CD_CO, CD_DEPT, NM_DEPT, TXT_REM FROM M_DEPT WHERE CD_CO='{0}' AND CD_DEPT='{1}' AND FLG_ACTIVE='Y'";
                 DataTable tbl = db.ExecuteSql(String.Format(strSql, this.m_strPrimaryKey1, this.m_strPrimaryKey2));
 
                 int i = 0;
@@ -252,35 +249,12 @@ namespace MembersListManagementProgram
                 using (OleDbIf db = new OleDbIf())
                 {
                     db.Connect();
-                    string strSql = "SELECT NM_DEPT FROM M_DEPT WHERE CD_CO='{0}' AND CD_DEPT='{1}'";
+                    string strSql = "SELECT NM_DEPT FROM M_DEPT WHERE CD_CO='{0}' AND CD_DEPT='{1}' AND FLG_ACTIVE='Y'";
                     DataTable tbl = db.ExecuteSql(String.Format(strSql, cmbCdCo.SelectedValue, txtCd_Dept.Text));
                     this.txtNm_Dept.Text = (tbl.Rows.Count > 0) ? tbl.Rows[0]["NM_DEPT"].ToString() : null;
                 }
 
             }
-        }
-
-        /// <summary>
-        /// 部門コード一覧画面で部門変更時、値反映
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void DepartmentEditForm_Activated(object sender, EventArgs e)
-        {
-            if (m_strCd_Dept != null && !"".Equals(m_strCd_Dept)) txtCd_Dept.Text = m_strCd_Dept;
-            if (m_strNm_Dept != null && !"".Equals(m_strNm_Dept)) txtNm_Dept.Text = m_strNm_Dept;
-        }
-
-        /// <summary>
-        /// 部門一覧画面表示
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnDept_Click(object sender, EventArgs e)
-        {
-            DepartmentSelectForm f = new DepartmentSelectForm(this.cmbCdCo.SelectedValue.ToString(), this);
-            f.MdiParent = this.MdiParent;
-            f.Show();
         }
 
         /// <summary>

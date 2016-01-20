@@ -150,7 +150,7 @@ namespace MembersListManagementProgram
             {
                 db.Connect();
                 StringBuilder sb = new StringBuilder();
-                sb.Append("SELECT * FROM M_EMP WHERE CD_CO='{0}' AND CD_EMP='{1}'");
+                sb.AppendLine("SELECT * FROM M_EMP WHERE CD_CO='{0}' AND CD_EMP='{1}' AND FLG_ACTIVE='Y'");
                 string strSql = sb.ToString();
                 tbl = db.ExecuteSql(String.Format(strSql, this.cmbCdCo.SelectedValue, this.txtCd_Emp.Text));
             }
@@ -197,11 +197,11 @@ namespace MembersListManagementProgram
             {
                 db.Connect();
                 StringBuilder sb = new StringBuilder();
-                sb.Append("SELECT ME.CD_CO, ME.CD_EMP, ME.NM_EMP, ME.TXT_PASSWD, ME.CD_DEPT, MD.NM_DEPT, ME.TXT_ZIP, ME.TXT_ADDR1, ME.TXT_ADDR2, ME.TXT_ADDR3, ME.TXT_TEL, ME.TXT_FAX, ME.TXT_REM ");
-                sb.Append("  FROM M_EMP ME");
-                sb.Append(" INNER JOIN M_DEPT MD");
-                sb.Append("    ON ME.CD_CO = MD.CD_CO AND ME.CD_DEPT = MD.CD_DEPT");
-                sb.Append(" WHERE ME.CD_CO='{0}' AND ME.CD_EMP='{1}'");
+                sb.AppendLine("SELECT ME.CD_CO, ME.CD_EMP, ME.NM_EMP, ME.TXT_PASSWD, ME.CD_DEPT, MD.NM_DEPT, ME.TXT_ZIP, ME.TXT_ADDR1, ME.TXT_ADDR2, ME.TXT_ADDR3, ME.TXT_TEL, ME.TXT_FAX, ME.TXT_REM ");
+                sb.AppendLine("  FROM M_EMP ME");
+                sb.AppendLine(" INNER JOIN M_DEPT MD");
+                sb.AppendLine("    ON ME.CD_CO = MD.CD_CO AND ME.CD_DEPT = MD.CD_DEPT AND ME.FLG_ACTIVE = MD.FLG_ACTIVE");
+                sb.AppendLine(" WHERE ME.CD_CO='{0}' AND ME.CD_EMP='{1}' AND ME.FLG_ACTIVE='Y'");
                 string strSql = sb.ToString();
                 DataTable tbl = db.ExecuteSql(String.Format(strSql, this.m_strPrimaryKey1, this.m_strPrimaryKey2));
 
@@ -293,10 +293,10 @@ namespace MembersListManagementProgram
                 {
                     db.Connect();
                     StringBuilder sb = new StringBuilder();
-                    sb.Append("SELECT MD.NM_DEPT FROM M_EMP ME");
-                    sb.Append(" INNER JOIN M_DEPT MD ");
-                    sb.Append("    ON ME.CD_CO = MD.CD_CO AND ME.CD_DEPT = MD.CD_DEPT");
-                    sb.Append(" WHERE ME.CD_CO='{0}' AND ME.CD_EMP='{1}'");
+                    sb.AppendLine("SELECT MD.NM_DEPT FROM M_EMP ME");
+                    sb.AppendLine(" INNER JOIN M_DEPT MD ");
+                    sb.AppendLine("    ON ME.CD_CO = MD.CD_CO AND ME.CD_DEPT = MD.CD_DEPT AND ME.FLG_ACTIVE = MD.FLG_ACTIVE");
+                    sb.AppendLine(" WHERE ME.CD_CO='{0}' AND ME.CD_EMP='{1}' AND ME.FLG_ACTIVE='Y'");
                     string strSql = sb.ToString();
                     DataTable tbl = db.ExecuteSql(String.Format(strSql, cmbCdCo.SelectedValue, txtCd_Emp.Text));
                     this.txtNm_Dept.Text = (tbl.Rows.Count > 0) ? tbl.Rows[0]["NM_DEPT"].ToString() : null;

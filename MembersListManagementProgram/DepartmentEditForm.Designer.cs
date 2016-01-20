@@ -37,7 +37,6 @@
             this.lblCd_Co = new System.Windows.Forms.Label();
             this.btnDelete = new System.Windows.Forms.Button();
             this.cmbCdCo = new System.Windows.Forms.ComboBox();
-            this.btnDept = new System.Windows.Forms.Button();
             this.txtCd_Dept = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
@@ -86,7 +85,7 @@
             this.txtNm_Dept.Location = new System.Drawing.Point(154, 59);
             this.txtNm_Dept.MaxLength = 100;
             this.txtNm_Dept.Name = "txtNm_Dept";
-            this.txtNm_Dept.Size = new System.Drawing.Size(369, 19);
+            this.txtNm_Dept.Size = new System.Drawing.Size(408, 19);
             this.txtNm_Dept.TabIndex = 12;
             // 
             // txtTxt_Rem
@@ -127,16 +126,6 @@
             this.cmbCdCo.Size = new System.Drawing.Size(480, 20);
             this.cmbCdCo.TabIndex = 10;
             // 
-            // btnDept
-            // 
-            this.btnDept.Location = new System.Drawing.Point(529, 57);
-            this.btnDept.Name = "btnDept";
-            this.btnDept.Size = new System.Drawing.Size(33, 23);
-            this.btnDept.TabIndex = 13;
-            this.btnDept.Text = "...";
-            this.btnDept.UseVisualStyleBackColor = true;
-            this.btnDept.Click += new System.EventHandler(this.btnDept_Click);
-            // 
             // txtCd_Dept
             // 
             this.txtCd_Dept.Location = new System.Drawing.Point(82, 59);
@@ -151,7 +140,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 442);
             this.ControlBox = false;
-            this.Controls.Add(this.btnDept);
             this.Controls.Add(this.cmbCdCo);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.lblCd_Co);
@@ -183,7 +171,6 @@
         private System.Windows.Forms.Label lblCd_Co;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.ComboBox cmbCdCo;
-        private System.Windows.Forms.Button btnDept;
         private System.Windows.Forms.TextBox txtCd_Dept;
     }
 }

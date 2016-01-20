@@ -70,7 +70,7 @@ namespace MembersListManagementProgram
                 using (OleDbIf db = new OleDbIf())
                 {
                     db.Connect();
-                    string strSql = "SELECT NM_DEPT FROM M_DEPT WHERE CD_CO='{0}' AND CD_DEPT='{1}'";
+                    string strSql = "SELECT NM_DEPT FROM M_DEPT WHERE CD_CO='{0}' AND CD_DEPT='{1}' AND FLG_ACTIVE='Y'";
                     DataTable tbl = db.ExecuteSql(String.Format(strSql, this.m_strCd_Co, txtCd_Dept.Text));
                     this.txtNm_Dept.Text = (tbl.Rows.Count > 0) ? tbl.Rows[0]["NM_DEPT"].ToString() : null;
                 }
@@ -88,7 +88,7 @@ namespace MembersListManagementProgram
             {
                 // DB処理
                 db.Connect();
-                string strSql = "SELECT CD_CO, CD_DEPT, NM_DEPT, TXT_REM FROM M_DEPT WHERE CD_CO='{0}'";
+                string strSql = "SELECT CD_CO, CD_DEPT, NM_DEPT, TXT_REM FROM M_DEPT WHERE CD_CO='{0}' AND FLG_ACTIVE='Y'";
                 if (!"".Equals(this.txtCd_Dept.Text)) strSql += String.Format("AND CD_DEPT='{0}'", this.txtCd_Dept.Text);
                 dgv.DataSource = db.ExecuteSql(String.Format(strSql, this.m_strCd_Co));
                 // DataGridViewのHeaderText変更

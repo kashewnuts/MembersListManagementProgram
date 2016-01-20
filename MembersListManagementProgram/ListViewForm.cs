@@ -80,6 +80,7 @@ namespace MembersListManagementProgram
                 string strSql = String.Format("SELECT * FROM {0} WHERE FLG_ACTIVE='Y'", strTable);
                 this.dgv.DataSource = db.ExecuteSql(strSql);
                 SetDgvHeaderText(dgv);
+                SetDgvMaxInput(dgv);
                 // ボタン活性化
                 if (this.dgv.RowCount != 0) SwitchButtonView(true);
             }
@@ -125,6 +126,12 @@ namespace MembersListManagementProgram
             this.dgv.Columns[i++].HeaderText = "最終更新日";
             this.dgv.Columns[i].ReadOnly = true;
             this.dgv.Columns[i++].HeaderText = "有効フラグ";
+        }
+
+
+        private void SetDgvMaxInput(DataGridView dgv)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
