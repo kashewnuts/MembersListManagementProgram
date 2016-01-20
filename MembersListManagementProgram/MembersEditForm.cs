@@ -159,7 +159,10 @@ namespace MembersListManagementProgram
             }
             else
             {
-                ExcuteSql(GetSqlString());
+                if (DialogResult.Yes == MessageBox.Show("登録します。よろしいですか？", "通知", MessageBoxButtons.YesNo))
+                {
+                    ExcuteSql(GetSqlString());
+                }
             }
         }
 
@@ -170,10 +173,13 @@ namespace MembersListManagementProgram
         /// <param name="e"></param>
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            MainMDI parentForm = (MainMDI)this.MdiParent;
-            ExcuteSql(
-                String.Format("UPDATE M_EMP SET CD_UPDATE='{0}', DTM_UPDATE=SYSDATE, FLG_ACTIVE='N' WHERE CD_CO='{1}' AND CD_EMP='{2}'",
-                parentForm.lblUserName.Text, m_strPrimaryKey1, m_strPrimaryKey2));
+            if (DialogResult.Yes == MessageBox.Show("削除します。よろしいですか？", "通知", MessageBoxButtons.YesNo))
+            {
+                MainMDI parentForm = (MainMDI)this.MdiParent;
+                ExcuteSql(
+                    String.Format("UPDATE M_EMP SET CD_UPDATE='{0}', DTM_UPDATE=SYSDATE, FLG_ACTIVE='N' WHERE CD_CO='{1}' AND CD_EMP='{2}'",
+                    parentForm.lblUserName.Text, m_strPrimaryKey1, m_strPrimaryKey2));
+            }
         }
 
         /// <summary>
@@ -183,7 +189,7 @@ namespace MembersListManagementProgram
         /// <param name="e"></param>
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            if (DialogResult.No != MessageBox.Show("終了しますか？", "通知", MessageBoxButtons.YesNo))
+            if (DialogResult.Yes == MessageBox.Show("終了しますか？", "通知", MessageBoxButtons.YesNo))
             {
                 this.Close();
             }
@@ -241,7 +247,7 @@ namespace MembersListManagementProgram
             catch (Exception)
             {
                 db.RollbackTransaction();
-                MessageBox.Show("登録に失敗しました。", "通知");
+                MessageBox.Show("処理に失敗しました。", "通知");
             }
             finally
             {
@@ -326,7 +332,7 @@ namespace MembersListManagementProgram
         void MembersEditForm_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Escape
-                && DialogResult.No != MessageBox.Show("終了しますか？", "通知", MessageBoxButtons.YesNo))
+                && DialogResult.Yes == MessageBox.Show("終了しますか？", "通知", MessageBoxButtons.YesNo))
             {
                 this.Close();
             }
@@ -342,6 +348,10 @@ namespace MembersListManagementProgram
             DepartmentSelectForm f = new DepartmentSelectForm(this.cmbCdCo.SelectedValue.ToString(), this);
             f.MdiParent = this.MdiParent;
             f.Show();
+            //using (DepartmentSelectForm f = new DepartmentSelectForm(this.cmbCdCo.SelectedValue.ToString(), this))
+            //{
+            //    f.ShowDialog(this);
+            //}
         }
     }
 }

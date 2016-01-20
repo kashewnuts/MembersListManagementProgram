@@ -328,15 +328,18 @@ namespace MembersListManagementProgram
                         lst.Add(strSql);
                     }
                 }
-                // SQL実行
-                db.Connect();
-                db.BeginTransaction();
-                foreach (string s in lst)
+                if (DialogResult.Yes == MessageBox.Show("登録します。よろしいですか？", "通知", MessageBoxButtons.YesNo))
                 {
-                    db.ExecuteSql(s);
+                    // SQL実行
+                    db.Connect();
+                    db.BeginTransaction();
+                    foreach (string s in lst)
+                    {
+                        db.ExecuteSql(s);
+                    }
+                    db.CommitTransaction();
+                    MessageBox.Show("登録を完了しました。", "通知");
                 }
-                db.CommitTransaction();
-                MessageBox.Show("登録を完了しました。", "通知");
             }
             catch (Exception)
             {

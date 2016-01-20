@@ -124,10 +124,10 @@ namespace MembersListManagementProgram
             DataTable tbl = new DataTable();
             using (OleDbIf db = new OleDbIf())
             {
-                db.Connect();
                 StringBuilder sb = new StringBuilder();
                 sb.AppendLine("SELECT * FROM M_DEPT WHERE CD_CO='{0}' AND CD_DEPT='{1}' AND FLG_ACTIVE='Y'");
                 string strSql = sb.ToString();
+                db.Connect();
                 tbl = db.ExecuteSql(String.Format(strSql, this.cmbCdCo.SelectedValue, this.txtCd_Dept.Text));
             }
             // 一意性エラーチェック
@@ -137,7 +137,10 @@ namespace MembersListManagementProgram
             }
             else
             {
-                ExcuteSql(GetSqlString());
+                if (DialogResult.Yes == MessageBox.Show("登録します。よろしいですか？", "通知", MessageBoxButtons.YesNo))
+                {
+                    ExcuteSql(GetSqlString());
+                }
             }
         }
 
@@ -148,10 +151,13 @@ namespace MembersListManagementProgram
         /// <param name="e"></param>
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            MainMDI parentForm = (MainMDI)this.MdiParent;
-            ExcuteSql(
-                String.Format("UPDATE M_DEPT SET CD_UPDATE='{0}', DTM_UPDATE=SYSDATE, FLG_ACTIVE='N' WHERE CD_CO='{1}' AND CD_DEPT='{2}'",
-                parentForm.lblUserName.Text, m_strPrimaryKey1, m_strPrimaryKey2));
+            if (DialogResult.Yes == MessageBox.Show("削除します。よろしいですか？", "通知", MessageBoxButtons.YesNo))
+            {
+                MainMDI parentForm = (MainMDI)this.MdiParent;
+                ExcuteSql(
+                    String.Format("UPDATE M_DEPT SET CD_UPDATE='{0}', DTM_UPDATE=SYSDATE, FLG_ACTIVE='N' WHERE CD_CO='{1}' AND CD_DEPT='{2}'",
+                    parentForm.lblUserName.Text, m_strPrimaryKey1, m_strPrimaryKey2));
+            }
         }
 
         /// <summary>
@@ -161,7 +167,7 @@ namespace MembersListManagementProgram
         /// <param name="e"></param>
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            if (DialogResult.No != MessageBox.Show("終了しますか？", "通知", MessageBoxButtons.YesNo))
+            if (DialogResult.Yes == MessageBox.Show("終了しますか？", "通知", MessageBoxButtons.YesNo))
             {
                 this.Close();
             }
@@ -199,6 +205,7 @@ namespace MembersListManagementProgram
                 db.BeginTransaction();
                 db.ExecuteSql(strSql);
                 db.CommitTransaction();
+                MessageBox.Show("処理が完了しました。", "通知");
             }
             catch (Exception)
             {
@@ -266,7 +273,7 @@ namespace MembersListManagementProgram
         private void DepartmentEditForm_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Escape
-                && DialogResult.No != MessageBox.Show("終了しますか？", "通知", MessageBoxButtons.YesNo))
+                && DialogResult.Yes == MessageBox.Show("終了しますか？", "通知", MessageBoxButtons.YesNo))
             {
                 this.Close();
             }
