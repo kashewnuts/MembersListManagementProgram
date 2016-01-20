@@ -43,5 +43,21 @@ namespace MembersListManagementProgram
             f.MdiParent = this;
             f.Show();
         }
+
+        /// <summary>
+        /// コマンド キーを処理
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="keyData"></param>
+        /// <returns></returns>
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            // Ctrl+Tabキー押下時Formの切替処理をしない
+            if ((keyData & Keys.Tab) == Keys.Tab && (keyData & Keys.Control) == Keys.Control)
+            {
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
     }
 }

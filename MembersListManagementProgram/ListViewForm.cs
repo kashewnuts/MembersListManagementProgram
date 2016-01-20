@@ -39,8 +39,6 @@ namespace MembersListManagementProgram
             this.Activated += ListViewForm_Activated;
             // KeyEvent処理
             this.KeyPress += ListViewForm_KeyPress;
-            // 
-            this.KeyDown += ListViewForm_KeyDown;
         }
 
         /// <summary>
@@ -363,20 +361,6 @@ namespace MembersListManagementProgram
             {
                 this.Close();
             }
-        }
-
-        private void ListViewForm_KeyDown(object sender, KeyEventArgs e)
-        {
-            // Ctrl+Tab押下時処理
-            if (e.Control && e.KeyValue == 17)
-            {
-                e.Handled = true;
-                e.SuppressKeyPress = true;
-            }
-            //if (e.KeyCode == Keys.ControlKey || e.KeyCode == Keys.Tab)
-            //{
-            //    e.Handled = true;
-            //}
         }
     }
 }
