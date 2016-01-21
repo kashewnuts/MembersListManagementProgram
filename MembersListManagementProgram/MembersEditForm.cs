@@ -123,7 +123,7 @@ namespace MembersListManagementProgram
         private DataTable GetCdCo()
         {
             // 会社コード設定
-            using (OleDbIf db = new OleDbIf())
+            using (var db = new OleDbIf())
             {
                 //表示される値はDataTableのNAME列
                 cmbCdCo.DisplayMember = "NM_CO_SHORT";
@@ -145,10 +145,10 @@ namespace MembersListManagementProgram
         private void btnRegister_Click(object sender, EventArgs e)
         {
             DataTable tbl = new DataTable();
-            using (OleDbIf db = new OleDbIf())
+            using (var db = new OleDbIf())
             {
                 db.Connect();
-                StringBuilder sb = new StringBuilder();
+                var sb = new StringBuilder();
                 sb.AppendLine("SELECT * FROM M_EMP WHERE CD_CO='{0}' AND CD_EMP='{1}' AND FLG_ACTIVE='Y'");
                 string strSql = sb.ToString();
                 tbl = db.ExecuteSql(String.Format(strSql, this.cmbCdCo.SelectedValue, this.txtCd_Emp.Text));
@@ -201,10 +201,10 @@ namespace MembersListManagementProgram
         /// </summary>
         private void ExcuteSearch()
         {
-            using (OleDbIf db = new OleDbIf())
+            using (var db = new OleDbIf())
             {
                 db.Connect();
-                StringBuilder sb = new StringBuilder();
+                var sb = new StringBuilder();
                 sb.AppendLine("SELECT ME.CD_CO, ME.CD_EMP, ME.NM_EMP, ME.TXT_PASSWD, ME.CD_DEPT, MD.NM_DEPT, ME.TXT_ZIP, ME.TXT_ADDR1, ME.TXT_ADDR2, ME.TXT_ADDR3, ME.TXT_TEL, ME.TXT_FAX, ME.TXT_REM ");
                 sb.AppendLine("  FROM M_EMP ME");
                 sb.AppendLine(" INNER JOIN M_DEPT MD");
@@ -236,7 +236,7 @@ namespace MembersListManagementProgram
         /// <param name="strSql"></param>
         private void ExcuteSql(string strSql)
         {
-            OleDbIf db = new OleDbIf();
+            var db = new OleDbIf();
             try
             {
                 db.Connect();
@@ -298,10 +298,10 @@ namespace MembersListManagementProgram
             else
             {
                 // TODO: 毎回SQLを投げるとネットワーク的によろしくないので、どこかに値を保持しておきたい。
-                using (OleDbIf db = new OleDbIf())
+                using (var db = new OleDbIf())
                 {
                     db.Connect();
-                    StringBuilder sb = new StringBuilder();
+                    var sb = new StringBuilder();
                     sb.AppendLine("SELECT MD.NM_DEPT FROM M_EMP ME");
                     sb.AppendLine(" INNER JOIN M_DEPT MD ");
                     sb.AppendLine("    ON ME.CD_CO = MD.CD_CO AND ME.CD_DEPT = MD.CD_DEPT AND ME.FLG_ACTIVE = MD.FLG_ACTIVE");
@@ -346,7 +346,7 @@ namespace MembersListManagementProgram
         /// <param name="e"></param>
         private void btnDept_Click(object sender, EventArgs e)
         {
-            using (DepartmentSelectForm f = new DepartmentSelectForm(this.cmbCdCo.SelectedValue.ToString(), this))
+            using (var f = new DepartmentSelectForm(this.cmbCdCo.SelectedValue.ToString(), this))
             {
                 f.ShowDialog(this);
             }

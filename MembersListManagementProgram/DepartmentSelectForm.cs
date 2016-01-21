@@ -59,7 +59,7 @@ namespace MembersListManagementProgram
             else
             {
                 // TODO: 毎回SQLを投げるとネットワーク的によろしくないので、どこかに値を保持しておきたい。
-                using (OleDbIf db = new OleDbIf())
+                using (var db = new OleDbIf())
                 {
                     db.Connect();
                     string strSql = "SELECT NM_DEPT FROM M_DEPT WHERE CD_CO='{0}' AND CD_DEPT='{1}' AND FLG_ACTIVE='Y'";
@@ -76,7 +76,7 @@ namespace MembersListManagementProgram
         /// <param name="e"></param>
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            using (OleDbIf db = new OleDbIf())
+            using (var db = new OleDbIf())
             {
                 // DB処理
                 db.Connect();

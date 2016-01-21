@@ -35,7 +35,7 @@ namespace MembersListManagementProgram
         /// </summary>
         private void GetCd_Co()
         {
-            using (OleDbIf db = new OleDbIf())
+            using (var db = new OleDbIf())
             {
                 //表示される値はDataTableのNAME列
                 cmbCdCo.DisplayMember = "NM_CO_SHORT";
@@ -74,7 +74,7 @@ namespace MembersListManagementProgram
                 MainMDI parentForm = (MainMDI)this.MdiParent;
                 parentForm.lblUserName.Text = strUserName;
                 // メニュー画面表示
-                MenuForm f = new MenuForm(txtCd_Emp.Text);
+                var f = new MenuForm(txtCd_Emp.Text);
                 f.MdiParent = this.MdiParent;
                 f.Show();
             }
@@ -91,7 +91,7 @@ namespace MembersListManagementProgram
         public bool ExcuteSearch()
         {
             bool bResult = false;
-            using (OleDbIf db = new OleDbIf())
+            using (var db = new OleDbIf())
             {
                 db.Connect();
                 string strSql = "SELECT * FROM M_EMP WHERE CD_CO='{0}' AND CD_EMP='{1}' AND TXT_PASSWD='{2}' AND FLG_ACTIVE='Y'";

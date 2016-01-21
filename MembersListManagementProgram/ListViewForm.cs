@@ -77,11 +77,11 @@ namespace MembersListManagementProgram
         /// <param name="e"></param>
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            using (OleDbIf db = new OleDbIf())
+            using (var db = new OleDbIf())
             {
                 db.Connect();
                 // 表示するレコードを取得し、DataGridViewに関連付ける
-                StringBuilder sb = new StringBuilder();
+                var sb = new StringBuilder();
                 if (this.m_strInitId.Equals(CommonConstants.MasterMode.BUMON))
                 {
                     sb.Append("SELECT * FROM M_DEPT WHERE FLG_ACTIVE='Y'");
@@ -248,14 +248,14 @@ namespace MembersListManagementProgram
             if (this.m_strInitId.Equals(CommonConstants.MasterMode.BUMON))
             {
                 // 部門管理画面処理
-                DepartmentEditForm f = new DepartmentEditForm(mode, args);
+                var f = new DepartmentEditForm(mode, args);
                 f.MdiParent = this.MdiParent;
                 f.Show();
             }
             else
             {
                 // 社員管理画面処理
-                MembersEditForm f = new MembersEditForm(mode, args);
+                var f = new MembersEditForm(mode, args);
                 f.MdiParent = this.MdiParent;
                 f.Show();
             }
@@ -278,14 +278,14 @@ namespace MembersListManagementProgram
         /// <param name="e"></param>
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            OleDbIf db = new OleDbIf();
+            var db = new OleDbIf();
             try
             {
                 string strSql = null;
                 string cd_co, cd_dept, cd_emp;
                 MainMDI f = (MainMDI)this.MdiParent;
                 DataTable tbl = (DataTable)this.dgv.DataSource;
-                List<string> lst = new List<string>();
+                var lst = new List<string>();
 
                 // 編集された行をコミットする
                 foreach (DataRow row in tbl.Rows)

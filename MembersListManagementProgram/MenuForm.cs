@@ -37,7 +37,7 @@ namespace MembersListManagementProgram
         /// <param name="e"></param>
         private void btnDept_Click(object sender, EventArgs e)
         {
-            ListViewForm f = new ListViewForm(CommonConstants.MasterMode.BUMON);
+            var f = new ListViewForm(CommonConstants.MasterMode.BUMON);
             f.MdiParent = this.MdiParent;
             f.Show();
         }
@@ -49,7 +49,7 @@ namespace MembersListManagementProgram
         /// <param name="e"></param>
         private void btnEmp_Click(object sender, EventArgs e)
         {
-            ListViewForm f = new ListViewForm(CommonConstants.MasterMode.SYAIN);
+            var f = new ListViewForm(CommonConstants.MasterMode.SYAIN);
             f.MdiParent = this.MdiParent;
             f.Show();
         }

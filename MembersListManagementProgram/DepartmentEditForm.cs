@@ -101,7 +101,7 @@ namespace MembersListManagementProgram
         private DataTable GetCdCo()
         {
             // 会社コード設定
-            using (OleDbIf db = new OleDbIf())
+            using (var db = new OleDbIf())
             {
                 //表示される値はDataTableのNAME列
                 cmbCdCo.DisplayMember = "NM_CO_SHORT";
@@ -122,9 +122,9 @@ namespace MembersListManagementProgram
         private void btnRegister_Click(object sender, EventArgs e)
         {
             DataTable tbl = new DataTable();
-            using (OleDbIf db = new OleDbIf())
+            using (var db = new OleDbIf())
             {
-                StringBuilder sb = new StringBuilder();
+                var sb = new StringBuilder();
                 sb.AppendLine("SELECT * FROM M_DEPT WHERE CD_CO='{0}' AND CD_DEPT='{1}' AND FLG_ACTIVE='Y'");
                 string strSql = sb.ToString();
                 db.Connect();
@@ -178,7 +178,7 @@ namespace MembersListManagementProgram
         /// </summary>
         private void ExcuteSearch()
         {
-            using (OleDbIf db = new OleDbIf())
+            using (var db = new OleDbIf())
             {
                 db.Connect();
                 string strSql = "SELECT CD_CO, CD_DEPT, NM_DEPT, TXT_REM FROM M_DEPT WHERE CD_CO='{0}' AND CD_DEPT='{1}' AND FLG_ACTIVE='Y'";
@@ -198,7 +198,7 @@ namespace MembersListManagementProgram
         /// <param name="strSql"></param>
         private void ExcuteSql(string strSql)
         {
-            OleDbIf db = new OleDbIf();
+            var db = new OleDbIf();
             try
             {
                 db.Connect();
@@ -254,7 +254,7 @@ namespace MembersListManagementProgram
             else
             {
                 // TODO: 毎回SQLを投げるとネットワーク的によろしくないので、どこかに値を保持しておきたい。
-                using (OleDbIf db = new OleDbIf())
+                using (var db = new OleDbIf())
                 {
                     db.Connect();
                     string strSql = "SELECT NM_DEPT FROM M_DEPT WHERE CD_CO='{0}' AND CD_DEPT='{1}' AND FLG_ACTIVE='Y'";
