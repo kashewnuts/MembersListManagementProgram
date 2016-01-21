@@ -71,7 +71,7 @@ namespace MembersListManagementProgram
             if (ExcuteSearch())
             {
                 // 親フォーム(MDIフォーム)にログインユーザー名をセット
-                MainMDI parentForm = (MainMDI)this.MdiParent;
+                var parentForm = this.MdiParent as MainMDI;
                 parentForm.lblUserName.Text = strUserName;
                 // メニュー画面表示
                 var f = new MenuForm(txtCd_Emp.Text);

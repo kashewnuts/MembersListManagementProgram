@@ -225,7 +225,7 @@ namespace MembersListManagementProgram
         {
             // 選択している行を取得
             BindingManagerBase bm = dgv.BindingContext[dgv.DataSource, dgv.DataMember];
-            DataRowView drv = (DataRowView)bm.Current;
+            var drv = bm.Current as DataRowView;
             DataRow row = drv.Row;
 
             // 主キーの値を設定
@@ -283,8 +283,8 @@ namespace MembersListManagementProgram
             {
                 string strSql = null;
                 string cd_co, cd_dept, cd_emp;
-                MainMDI f = (MainMDI)this.MdiParent;
-                DataTable tbl = (DataTable)this.dgv.DataSource;
+                var f = this.MdiParent as MainMDI;
+                var tbl = this.dgv.DataSource as DataTable;
                 var lst = new List<string>();
 
                 // 編集された行をコミットする

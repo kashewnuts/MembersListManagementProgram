@@ -153,7 +153,7 @@ namespace MembersListManagementProgram
         {
             if (DialogResult.Yes == MessageBox.Show("削除します。よろしいですか？", "通知", MessageBoxButtons.YesNo))
             {
-                MainMDI parentForm = (MainMDI)this.MdiParent;
+                var parentForm = this.MdiParent as MainMDI;
                 ExcuteSql(
                     String.Format("UPDATE M_DEPT SET CD_UPDATE='{0}', DTM_UPDATE=SYSDATE, FLG_ACTIVE='N' WHERE CD_CO='{1}' AND CD_DEPT='{2}'",
                     parentForm.lblUserName.Text, m_strPrimaryKey1, m_strPrimaryKey2));
@@ -226,7 +226,7 @@ namespace MembersListManagementProgram
         private string GetSqlString()
         {
             string strSql = null;
-            MainMDI f = (MainMDI)this.MdiParent;
+            var f = this.MdiParent as MainMDI;
             if (this.m_strEditMode.Equals(CommonConstants.EditMode.CREATE_MODE))
             {
                 strSql = "INSERT INTO M_DEPT VALUES('{0}', '{1}', '{2}', '{3}', '{4}', SYSDATE, '{5}', SYSDATE, 'Y')";

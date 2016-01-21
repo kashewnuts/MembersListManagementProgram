@@ -39,7 +39,7 @@ namespace MembersListManagementProgram
         /// </summary>
         private void Login()
         {
-            LoginForm f = new LoginForm();
+            var f = new LoginForm();
             f.MdiParent = this;
             f.Show();
         }

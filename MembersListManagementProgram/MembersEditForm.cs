@@ -264,7 +264,7 @@ namespace MembersListManagementProgram
         private string GetSqlString()
         {
             string strSql = null;
-            MainMDI f = (MainMDI)this.MdiParent;
+            var f = this.MdiParent as MainMDI;
             if (this.m_strEditMode.Equals(CommonConstants.EditMode.CREATE_MODE))
             {
                 strSql = "INSERT INTO M_EMP VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', SYSDATE, '{13}', SYSDATE, 'Y')";
