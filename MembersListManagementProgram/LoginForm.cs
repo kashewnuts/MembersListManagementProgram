@@ -94,12 +94,12 @@ namespace MembersListManagementProgram
             using (var db = new OleDbIf())
             {
                 db.Connect();
-                string strSql = "SELECT * FROM M_EMP WHERE CD_CO='{0}' AND CD_EMP='{1}' AND TXT_PASSWD='{2}' AND FLG_ACTIVE='Y'";
+                string strSql = "SELECT NM_EMP FROM M_EMP WHERE CD_CO='{0}' AND CD_EMP='{1}' AND TXT_PASSWD='{2}' AND FLG_ACTIVE='Y'";
                 DataTable tbl = db.ExecuteSql(String.Format(strSql, cmbCdCo.SelectedValue.ToString(), txtCd_Emp.Text, txtTxt_Passwd.Text));
                 bResult = (tbl.Rows.Count > 0) ? true : false;
                 if (bResult)
                 {
-                    strUserName = tbl.Rows[0]["nm_emp"].ToString();
+                    strUserName = tbl.Rows[0]["NM_EMP"].ToString();
                 }
             }
             return bResult;

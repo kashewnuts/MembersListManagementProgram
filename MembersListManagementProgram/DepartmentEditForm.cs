@@ -125,7 +125,7 @@ namespace MembersListManagementProgram
             using (var db = new OleDbIf())
             {
                 var sb = new StringBuilder();
-                sb.AppendLine("SELECT * FROM M_DEPT WHERE CD_CO='{0}' AND CD_DEPT='{1}' AND FLG_ACTIVE='Y'");
+                sb.AppendLine("SELECT COUNT(*) FROM M_DEPT WHERE CD_CO='{0}' AND CD_DEPT='{1}' AND FLG_ACTIVE='Y'");
                 string strSql = sb.ToString();
                 db.Connect();
                 tbl = db.ExecuteSql(String.Format(strSql, this.cmbCdCo.SelectedValue, this.txtCd_Dept.Text));
