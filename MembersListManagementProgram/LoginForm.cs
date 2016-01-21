@@ -25,7 +25,7 @@ namespace MembersListManagementProgram
 		private void LoginForm_Load(object sender, EventArgs e)
 		{
 			// 会社コード設定
-			GetCd_Co();
+			cmbCdCo.DataSource = GetCd_Co();
 			// KeyEvent処理
 			this.KeyPress += LoginForm_KeyPress;
 		}
@@ -33,7 +33,7 @@ namespace MembersListManagementProgram
 		/// <summary>
 		/// 会社コード指定
 		/// </summary>
-		private void GetCd_Co()
+		private DataTable GetCd_Co()
 		{
 			using (var db = new OleDbIf())
 			{
@@ -44,7 +44,7 @@ namespace MembersListManagementProgram
 				// DB処理
 				db.Connect();
 				DataTable tbl = db.ExecuteSql("SELECT CD_CO, NM_CO_SHORT FROM M_CO WHERE FLG_ACTIVE='Y'");
-				cmbCdCo.DataSource = tbl;
+				return tbl;
 			}
 		}
 
@@ -97,10 +97,7 @@ namespace MembersListManagementProgram
 				string strSql = "SELECT NM_EMP FROM M_EMP WHERE CD_CO='{0}' AND CD_EMP='{1}' AND TXT_PASSWD='{2}' AND FLG_ACTIVE='Y'";
 				DataTable tbl = db.ExecuteSql(String.Format(strSql, cmbCdCo.SelectedValue.ToString(), txtCd_Emp.Text, txtTxt_Passwd.Text));
 				bResult = (tbl.Rows.Count > 0) ? true : false;
-				if (bResult)
-				{
-					strUserName = tbl.Rows[0]["NM_EMP"].ToString();
-				}
+				strUserName = (bResult) ? tbl.Rows[0]["NM_EMP"].ToString() : null;
 			}
 			return bResult;
 		}

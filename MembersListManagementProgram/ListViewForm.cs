@@ -332,10 +332,7 @@ namespace MembersListManagementProgram
 					// SQL実行
 					db.Connect();
 					db.BeginTransaction();
-					foreach (string s in lst)
-					{
-						db.ExecuteSql(s);
-					}
+					lst.ForEach(n => db.ExecuteSql(n));
 					db.CommitTransaction();
 					MessageBox.Show("登録を完了しました。", "通知");
 				}

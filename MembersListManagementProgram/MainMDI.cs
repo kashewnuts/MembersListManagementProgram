@@ -25,12 +25,10 @@ namespace MembersListManagementProgram
 			Form[] hMdiChildren = this.MdiChildren;
 
 			// すべての MDI 子フォームを閉じる
-			foreach (Form hMdiChild in hMdiChildren)
-			{
-				hMdiChild.Close();
-			}
-			this.lblUserName.Text = "サインイン";
+			Array.ForEach(hMdiChildren, c => c.Close());
+
 			// ログイン画面表示
+			this.lblUserName.Text = "サインイン";
 			Login();
 		}
 
