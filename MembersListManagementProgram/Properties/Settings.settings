@@ -2,13 +2,13 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MembersListManagementProgram.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="ConnectionString" Type="(Connection string)" Scope="Application">
-      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+	<Setting Name="ConnectionString" Type="(Connection string)" Scope="Application">
+	  <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
   &lt;ConnectionString&gt;Provider=MSDAORA;Data Source=ORA112;Persist Security Info=True;User ID=TASK;Password=TASK&lt;/ConnectionString&gt;
   &lt;ProviderName&gt;System.Data.OracleClient&lt;/ProviderName&gt;
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Provider=MSDAORA;Data Source=ORA112;Persist Security Info=True;User ID=TASK;Password=TASK</Value>
-    </Setting>
+	  <Value Profile="(Default)">Provider=MSDAORA;Data Source=ORA112;Persist Security Info=True;User ID=TASK;Password=TASK</Value>
+	</Setting>
   </Settings>
 </SettingsFile>
