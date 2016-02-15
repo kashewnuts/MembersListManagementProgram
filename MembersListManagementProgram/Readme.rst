@@ -1,0 +1,1 @@
+﻿Windows Form Applicationに慣れるために、C#/Oracleで作成。
